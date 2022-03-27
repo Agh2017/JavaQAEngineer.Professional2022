@@ -5,6 +5,8 @@ import components.FavouriteCourses;
 import extensions.UIExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import pages.MainPage;
 
@@ -15,8 +17,10 @@ public class FavouriteCourseTile_Test {
   public WebDriver driver;
 
   @Test
-  public void click_favourite_course_tile() {
-    new MainPage(driver).open();
+  public void click_favourite_course_tile() throws InterruptedException {
+    new MainPage(driver)
+            .open()
+            .closePopup();
 
     new FavouriteCourses(driver)
         .clickLessonItem()
