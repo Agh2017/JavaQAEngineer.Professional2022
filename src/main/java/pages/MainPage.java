@@ -1,7 +1,6 @@
 package pages;
 
 import annotations.UrlPrefix;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,7 +19,7 @@ public class MainPage extends AnyPageAbs<MainPage> {
 
 
     public MainPage closePopup() {
-        FluentWait fluentWait = new FluentWait(driver);
+        FluentWait<WebDriver> fluentWait = new FluentWait<>(driver);
         fluentWait.until(ExpectedConditions.elementToBeClickable(popupCookie));
         popupCookie.click();
         return new MainPage(driver);
