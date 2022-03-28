@@ -2,6 +2,7 @@ package listeners;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.WebDriverEventListener;
+import pages.MainPage;
 
 public class MouseListener implements WebDriverEventListener {
 
@@ -80,7 +81,7 @@ public class MouseListener implements WebDriverEventListener {
     ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='3px solid red'", element);
   }
 
-  @Override //TODO что делать со слушателем, если элемент после клика перерисовывается?
+  @Override //TODO что делать со слушателем afterClickOn, если элемент после клика перерисовывается?
   public void afterClickOn(WebElement element, WebDriver driver) {
     try {
       ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='3px solid green'", element);

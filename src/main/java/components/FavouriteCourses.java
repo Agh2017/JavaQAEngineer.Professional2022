@@ -7,6 +7,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.Lessons;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class FavouriteCourses extends AnyComponentAbs<FavouriteCourses> {
   }
 
   public Lessons clickLessonItem() {
+    ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", lessons.get(0));
     lessons.get(0).click();
     return new Lessons(driver);
 

@@ -2,3 +2,4 @@
 
 // Прокрутка страницы до видимого элемента
 ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", popupCookie);
+((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", lessons.get(0)); // list
