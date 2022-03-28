@@ -1,0 +1,4 @@
+
+
+// Прокрутка страницы до видимого элемента
+((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", popupCookie);

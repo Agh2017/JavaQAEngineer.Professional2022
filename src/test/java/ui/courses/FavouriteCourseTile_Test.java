@@ -13,18 +13,18 @@ import pages.MainPage;
 @ExtendWith(UIExtension.class)
 public class FavouriteCourseTile_Test {
 
-    @Driver
-    public WebDriver driver;
+  @Driver
+  public WebDriver driver;
 
-    @Test
-    public void click_favourite_course_tile() {
-        new MainPage(driver)
-                .open()
-                .closePopup();
+  @Test
+  public void click_favourite_course_tile() {
+    new MainPage(driver)
+            .open()
+            .closePopup();
 
-        new FavouriteCourses(driver)
-                .clickLessonItem()
-                .getPageTitle();
-    }
+    new FavouriteCourses(driver)
+            .clickLessonItem()
+            .getPageTitle();
+  }
 
 }

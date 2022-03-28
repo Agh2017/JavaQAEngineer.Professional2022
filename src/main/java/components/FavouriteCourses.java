@@ -14,17 +14,17 @@ import java.util.List;
 @Component("//*[contains(@class, 'container-lessons')]/div[text()='Популярные курсы']//following-sibling::div")
 public class FavouriteCourses extends AnyComponentAbs<FavouriteCourses> {
 
-    @FindBy(css = "div.lessons > a:nth-child(1)")
-    private List<WebElement> lessons;
+  @FindBy(css = "div.lessons > a:nth-child(1)")
+  private List<WebElement> lessons;
 
-    public FavouriteCourses(WebDriver driver) {
-        super(driver);
-    }
+  public FavouriteCourses(WebDriver driver) {
+    super(driver);
+  }
 
-    public Lessons clickLessonItem() {
-        lessons.get(0).click();
-        return new Lessons(driver);
+  public Lessons clickLessonItem() {
+    lessons.get(0).click();
+    return new Lessons(driver);
 
-    }
+  }
 
 }
