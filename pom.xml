@@ -13,7 +13,8 @@
         <selenium.java.version>3.141.59</selenium.java.version>
         <junit.version>5.8.1</junit.version>
         <faker.version>1.0.1</faker.version>
-<!--        <project.build.sourceEncoding>cp1251</project.build.sourceEncoding>-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <forkCount>1</forkCount>
         <reuseForks>true</reuseForks>
         <parallel>all</parallel>

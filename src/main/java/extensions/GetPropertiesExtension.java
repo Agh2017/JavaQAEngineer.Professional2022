@@ -7,24 +7,18 @@ import java.util.Properties;
 
 
 public class GetPropertiesExtension {
-  protected static FileInputStream fileInputStream;
-  protected static Properties PROPERTIES;
+
+  protected final static Properties PROPERTIES = new Properties();
+  private static FileInputStream fileInputStream;
 
   static {
     try {
-      File f2 = new File("src\\test\\resources\\any.properties");
-      fileInputStream = new FileInputStream(f2);
-      PROPERTIES = new Properties();
+      File file = new File("src\\main\\resources\\specialSelectors");
+      fileInputStream = new FileInputStream(file);
       PROPERTIES.load(fileInputStream);
+      fileInputStream.close();
     } catch (IOException e) {
       e.printStackTrace();
-    } finally {
-      if (fileInputStream != null)
-        try {
-          fileInputStream.close();
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
     }
   }
 
