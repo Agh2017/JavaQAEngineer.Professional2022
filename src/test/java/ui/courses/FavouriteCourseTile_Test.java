@@ -18,9 +18,10 @@ public class FavouriteCourseTile_Test {
 
   @Test
   public void click_favourite_course_tile() {
+    String selector = "button[class='js-cookie-accept cookies__button']";
     new MainPage(driver)
             .open()
-            .closePopup();
+            .closeCookiePopup(selector); //закрываем попап чтобы не мешал кликать по цели
 
     new FavouriteCourses(driver)
             .clickLessonItem()

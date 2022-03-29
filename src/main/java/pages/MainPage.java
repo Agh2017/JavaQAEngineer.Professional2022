@@ -20,14 +20,13 @@ public class MainPage extends AnyPageAbs<MainPage> {
     super(driver);
   }
 
-  public void closeCookiePopup() { //не возвращаем "mainpage" чтобы не было бага в логе от "findbugs-maven-plugin:3.0.5"
-
-    WebElement popupCookie = driver.findElement(By
-            .cssSelector("button[class='js-cookie-accept cookies__button']")); //не используем PF так как элемент инициализируется позже страницы
+  public void closeCookiePopup(String selector) {
+    WebElement popupCookieCloseButton = driver.findElement(By
+            .cssSelector(selector)); //не используем PF так как элемент поздно инициализируется
     standartWaiter.waitForCondition(ExpectedConditions
-            .attributeToBeNotEmpty(popupCookie, "name")); //использовано вместо tread.sleep(500);
+            .attributeToBeNotEmpty(popupCookieCloseButton, "name")); //использовано вместо tread.sleep(500);
 
-    popupCookie.click();
+    popupCookieCloseButton.click();
 
   }
 }
