@@ -1,5 +1,9 @@
+//Scroll vertically down by 1000 pixels
+((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
 
+// scroll till the bottom of the page
+((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
 
-// Прокрутка страницы до видимого элемента
-((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", popupCookie);
-((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", lessons.get(0)); // list
+//This will scroll the page Horizontally till the element is found (in full view)
+((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();",Element );
+

@@ -3,7 +3,7 @@ package waiters;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
 /**
- * Интерфейс стандартного набора ожиданий
+ * Представлен интерфейс стандартного набора ожиданий
  * @author Pavel Balahonov <p.balahonov@corp.mail.ru>
  */
 
