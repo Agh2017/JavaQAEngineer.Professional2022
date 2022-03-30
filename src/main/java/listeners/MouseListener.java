@@ -2,10 +2,6 @@ package listeners;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.WebDriverEventListener;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.MainPage;
-import waiters.StandartWaiter;
 
 public class MouseListener implements WebDriverEventListener {
 
@@ -87,13 +83,12 @@ public class MouseListener implements WebDriverEventListener {
   @Override
   public void afterClickOn(WebElement element, WebDriver driver) {
 
-    //TODO что делать со слушателем afterClickOn, если элемент после клика не находится?
-  //    try {
-  //      ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='3px solid green'", element);
-  //    } catch (Exception e) {
-  //      System.out.println("Listener afterClickOn: Probably the Element" + element + "is not Attached to the DOM");
-  //      e.printStackTrace();
-  //    }
+    try {
+      ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='3px solid green'", element);
+    } catch (Exception e) {
+      System.out.println("Listener afterClickOn: Probably the Element" + element + "is not Attached to the DOM");
+      e.printStackTrace();
+    }
 
   }
 

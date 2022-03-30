@@ -42,7 +42,7 @@
      - mvn test -Pdevelop -Dbrowser=firefox
      - mvn test -Pproduction -Dbrowser=chrome
      - mvn test -Pproduction -Dbrowser=firefox
-     - mvn test -Pdemo -Dbrowser=safary
+     - mvn test -Pdemo -Dbrowser=safari
 
        Licensing
        ---------
