@@ -8,17 +8,23 @@ import java.util.Properties;
 
 public class GetPropertiesExtension {
 
-  protected final static Properties PROPERTIES = new Properties();
   private static FileInputStream fileInputStream;
+  private final static Properties PROPERTIES = new Properties();
 
   static {
     try {
-      File file = new File("src\\main\\resources\\specialSelectors");
+      File file = new File("src\\test\\resources\\specialSelectors");
       fileInputStream = new FileInputStream(file);
       PROPERTIES.load(fileInputStream);
-      fileInputStream.close();
     } catch (IOException e) {
       e.printStackTrace();
+    } finally {
+      if (fileInputStream != null)
+        try {
+          fileInputStream.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
     }
   }
 
