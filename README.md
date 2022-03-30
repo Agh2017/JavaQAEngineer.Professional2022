@@ -37,21 +37,26 @@
 
   1. Открыть проект в среде разработки.
   2. Настроить maven и JAVA.
-  3. Запустить в командной строке тесты: mvn test -PtestProd -Dbrowser=chrome
+  3. Запустить в командной строке тесты предварительно указав тестовое окружение:
+     - mvn test -Pdevelop -Dbrowser=chrome
+     - mvn test -Pdevelop -Dbrowser=firefox
+     - mvn test -Pproduction -Dbrowser=chrome
+     - mvn test -Pproduction -Dbrowser=firefox
+     - mvn test -Pdemo -Dbrowser=safary
 
-  Licensing
-  ---------
+       Licensing
+       ---------
 
-  Please dont see the file called LICENSE.
+       Please dont see the file called LICENSE.
 
-  Maven URLS
-  ----------
+       Maven URLS
+       ----------
 
-  Home Page:          https://maven.apache.org/
-  Downloads:          https://maven.apache.org/download.html
-  Release Notes:      https://maven.apache.org/docs/history.html
-  Mailing Lists:      https://maven.apache.org/mailing-lists.html
-  Source Code:        https://gitbox.apache.org/repos/asf/maven.git
-  Issue Tracking:     https://issues.apache.org/jira/browse/MNG
-  Wiki:               https://cwiki.apache.org/confluence/display/MAVEN/
-  Available Plugins:  https://maven.apache.org/plugins/
+       Home Page:          https://maven.apache.org/
+       Downloads:          https://maven.apache.org/download.html
+       Release Notes:      https://maven.apache.org/docs/history.html
+       Mailing Lists:      https://maven.apache.org/mailing-lists.html
+       Source Code:        https://gitbox.apache.org/repos/asf/maven.git
+       Issue Tracking:     https://issues.apache.org/jira/browse/MNG
+       Wiki:               https://cwiki.apache.org/confluence/display/MAVEN/
+       Available Plugins:  https://maven.apache.org/plugins/

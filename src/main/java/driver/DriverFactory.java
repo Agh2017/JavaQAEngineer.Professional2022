@@ -1,7 +1,11 @@
 package driver;
 
 import driver.impl.ChromeWebDriver;
+import driver.impl.FFWebDriver;
+import driver.impl.SafariWebDriver;
 import exceptions.DriverTypeNotSupported;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.util.Locale;
@@ -15,6 +19,12 @@ public class DriverFactory implements IDriverFactory {
     switch (this.browserType) {
       case "chrome": {
         return new EventFiringWebDriver(new ChromeWebDriver().newDriver());
+      }
+      case "firefox": {
+        return new EventFiringWebDriver(new FFWebDriver().newDriver());
+      }
+      case "safari": {
+        return new EventFiringWebDriver(new SafariWebDriver().newDriver());
       }
       default:
         try {

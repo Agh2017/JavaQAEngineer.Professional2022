@@ -70,27 +70,24 @@
             <id>production</id>
             <properties>
                 <webdriver.base.url>https://otus.ru</webdriver.base.url>
-            </properties>
-        </profile>
-        <profile>
-            <id>testProd</id>
-            <properties>
-                <webdriver.base.url>https://test.otus.ru</webdriver.base.url>
+                <browser>firefox</browser>
                 <browser>chrome</browser>
-                <browser>FF</browser>
-                <browser>Safari</browser>
             </properties>
         </profile>
         <profile>
             <id>develop</id>
             <properties>
-                <webdriver.base.url>https://otus.ru</webdriver.base.url>
+                <webdriver.base.url>https://test.otus.ru</webdriver.base.url>
+                <browser>chrome</browser>
+                <browser>firefox</browser>
+                <browser>Safari</browser>
             </properties>
         </profile>
         <profile>
-            <id>testDev</id>
+            <id>demo</id>
             <properties>
-                <webdriver.base.url>https://test.otus.ru</webdriver.base.url>
+                <webdriver.base.url>https://otus.ru</webdriver.base.url>
+                <browser>Safari</browser>
             </properties>
         </profile>
     </profiles>
