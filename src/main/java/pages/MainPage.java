@@ -1,14 +1,15 @@
 package pages;
 
+import static org.assertj.core.api.Assertions.*;
+
 import annotations.UrlPrefix;
 import extensions.GetPropertiesExtension;
-import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import static org.assertj.core.api.Assertions.*;
+
 
 @UrlPrefix("/")
 public class MainPage extends AnyPageAbs<MainPage> {

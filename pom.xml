@@ -84,6 +84,7 @@
                 <webdriver.base.url>https://otus.ru</webdriver.base.url>
                 <browser>firefox</browser>
                 <browser>chrome</browser>
+                <browser>opera</browser>
             </properties>
         </profile>
         <profile>
@@ -92,6 +93,7 @@
                 <webdriver.base.url>https://test.otus.ru</webdriver.base.url>
                 <browser>chrome</browser>
                 <browser>firefox</browser>
+                <browser>opera</browser>
                 <browser>Safari</browser>
             </properties>
         </profile>
@@ -100,6 +102,7 @@
             <properties>
                 <webdriver.base.url>https://otus.ru</webdriver.base.url>
                 <browser>Safari</browser>
+                <browser>opera</browser>
             </properties>
         </profile>
     </profiles>

@@ -2,7 +2,6 @@ package base.page.tests;
 
 import annotations.Driver;
 import extensions.UIExtension;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +17,7 @@ public class MainPage_Test {
   public WebDriver driver;
 
   @BeforeEach
-  private void setUp(){
+  public void setUp(){
     mainPage = new MainPage(driver);
   }
 
@@ -28,6 +27,5 @@ public class MainPage_Test {
             .open()
             .checkH1ShouldBeSameAs();
   }
-
 
 }
