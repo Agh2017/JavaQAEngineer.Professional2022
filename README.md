@@ -19,7 +19,7 @@
   -------------------
 
   JDK:
-    1.8 or above 
+    11 or above 
   Memory:
     No minimum requirement.
   Disk:

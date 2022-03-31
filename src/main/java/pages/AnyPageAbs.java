@@ -5,7 +5,7 @@ import annotations.UrlPrefix;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-
+import static org.assertj.core.api.Assertions.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 

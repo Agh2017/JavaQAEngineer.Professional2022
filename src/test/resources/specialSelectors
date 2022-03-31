@@ -1,2 +1,0 @@
-   selectors
-closeCookiesPopup = button[class='js-cookie-accept cookies__button']

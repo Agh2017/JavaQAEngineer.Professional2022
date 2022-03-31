@@ -13,8 +13,7 @@ public class GetPropertiesExtension {
 
   static {
     try {
-      File file = new File("src\\test\\resources\\specialSelectors");
-      fileInputStream = new FileInputStream(file);
+      fileInputStream = new FileInputStream(new File("src\\test\\resources\\test.properties"));
       PROPERTIES.load(fileInputStream);
     } catch (IOException e) {
       e.printStackTrace();

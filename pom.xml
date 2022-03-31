@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
+        <assertj.core>3.22.0</assertj.core>
         <webdriver.manager.version>4.2.0</webdriver.manager.version>
         <selenium.java.version>3.141.59</selenium.java.version>
         <junit.version>5.8.1</junit.version>
@@ -24,7 +25,6 @@
         <perCoreThreadCount>false</perCoreThreadCount>
         <useUnlimitedThreads>true</useUnlimitedThreads>
         <thread.count>32</thread.count>
-
         <browser>chrome</browser>
         <webdriver.base.url>https://otus.ru</webdriver.base.url>
         <test.project.language>RU</test.project.language>
@@ -36,6 +36,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.core}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
@@ -62,6 +68,12 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>${junit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.22.0</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

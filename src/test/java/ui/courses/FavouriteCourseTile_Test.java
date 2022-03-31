@@ -5,8 +5,6 @@ import components.FavouriteCourses;
 import extensions.UIExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import pages.MainPage;
 
@@ -28,4 +26,8 @@ public class FavouriteCourseTile_Test {
             .getPageTitle();
   }
 
+  @Test
+  public void etest(){
+    System.out.println("!!!OK!!!");
+  }
 }
