@@ -2,6 +2,7 @@ package base.page.tests;
 
 import annotations.Driver;
 import extensions.UIExtension;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

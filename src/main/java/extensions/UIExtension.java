@@ -42,16 +42,15 @@ public class UIExtension implements BeforeEachCallback, AfterEachCallback {
 
     for (Field field : fields) {
       if (field.getType().getName().equals(WebDriver.class.getName())) {
-        AccessController.doPrivileged((PrivilegedAction<Void>)
-            () -> {
-              try {
-                field.setAccessible(true);
-                field.set(extensionContext.getTestInstance().get(), driver);
-              } catch (IllegalAccessException e) {
-                throw new Error(String.format("Could not access or set webdriver in field: %s - is this field public?", field), e);
-              }
-              return null;
-            }
+        AccessController.doPrivileged((PrivilegedAction<Void>) () -> {
+          try {
+            field.setAccessible(true);
+            field.set(extensionContext.getTestInstance().get(), driver);
+          } catch (IllegalAccessException e) {
+            throw new Error(String.format("Could not access or set webdriver in field: %s - is this field public?", field), e);
+          }
+          return null;
+        }
         );
       }
     }
@@ -59,9 +58,7 @@ public class UIExtension implements BeforeEachCallback, AfterEachCallback {
 
   @Override
   public void afterEach(ExtensionContext extensionContext) {
-    if(driver != null) {
-      driver.close();
-      driver.quit();
-    }
+    if (driver != null) driver.close();
+    if (driver != null) driver.quit();
   }
 }

@@ -12,6 +12,7 @@
         <assertj.core>3.22.0</assertj.core>
         <webdriver.manager.version>4.2.0</webdriver.manager.version>
         <selenium.java.version>3.141.59</selenium.java.version>
+        <!--<selenium.java.version>4.1.2</selenium.java.version>-->
         <junit.version>5.8.1</junit.version>
         <maven.checkstyle>3.1.0</maven.checkstyle>
         <junitBom.version>5.8.1</junitBom.version>
