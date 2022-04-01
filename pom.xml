@@ -38,6 +38,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>net.jcip</groupId>
+            <artifactId>jcip-annotations</artifactId>
+            <version>1.0</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>${assertj.core}</version>
@@ -73,7 +79,7 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.22.0</version>
+            <version>${assertj.core}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
@@ -83,30 +89,22 @@
             <id>production</id>
             <properties>
                 <webdriver.base.url>https://otus.ru</webdriver.base.url>
-                <browser>firefox</browser>
-                <browser>chrome</browser>
-                <browser>opera</browser>
             </properties>
         </profile>
         <profile>
             <id>develop</id>
             <properties>
                 <webdriver.base.url>https://test.otus.ru</webdriver.base.url>
-                <browser>chrome</browser>
-                <browser>firefox</browser>
-                <browser>opera</browser>
-                <browser>Safari</browser>
             </properties>
         </profile>
         <profile>
             <id>demo</id>
             <properties>
                 <webdriver.base.url>https://otus.ru</webdriver.base.url>
-                <browser>Safari</browser>
-                <browser>opera</browser>
             </properties>
         </profile>
     </profiles>
+
     <build>
         <plugins>
             <plugin>
@@ -159,7 +157,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
+            <!--<plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
                 <version>${findbugs.maven}</version>
@@ -174,12 +172,13 @@
                     <execution>
                         <id>analyze-compile</id>
                         <phase>compile</phase>
+                        goals: spotbugs:check
                         <goals>
                             <goal>check</goal>
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 

@@ -24,7 +24,7 @@ public abstract class CommonActions<T> {
     PageFactory.initElements(driver, this);
 
     standartWaiter = new StandartWaiter(driver);
-    actions = new Actions(driver);
+    this.actions = new Actions(driver);
   }
 
   protected BiConsumer<By, Predicate<? super WebElement>> clickElementByPredicate = (By locator, Predicate<? super WebElement> predicate) -> {

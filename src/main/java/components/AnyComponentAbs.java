@@ -27,7 +27,7 @@ public abstract class AnyComponentAbs<T> extends CommonActions<T> {
     if (component != null) {
       String value = component.value();
 
-      baseLocator = value;
+      setBaseLocator(value);
 
       if(value.startsWith("/")) {
         return By.xpath(value);
@@ -38,4 +38,7 @@ public abstract class AnyComponentAbs<T> extends CommonActions<T> {
     return null;
   }
 
+  public void setBaseLocator(String baseLocator) {
+    this.baseLocator = baseLocator;
+  }
 }
