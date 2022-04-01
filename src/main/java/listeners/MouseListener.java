@@ -84,6 +84,7 @@ public class MouseListener implements WebDriverEventListener {
   public void afterClickOn(WebElement element, WebDriver driver) {
 
     try {
+      
       ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='3px solid green'", element);
     } catch (Exception e) {
       System.out.println("Listener afterClickOn: Probably the Element" + element + "is not Attached to the DOM");

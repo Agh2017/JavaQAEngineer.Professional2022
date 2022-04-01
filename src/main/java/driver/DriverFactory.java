@@ -11,10 +11,20 @@ import java.util.Locale;
 
 public class DriverFactory implements IDriverFactory {
 
+  private static String browserName;
   private String browserType = System.getProperty("browser").toLowerCase(Locale.ROOT);
+
+  public static String getBrowserName() {
+    return browserName;
+  }
+
+  public void setBrowserName(String browser) {
+    browserName = browser;
+  }
 
   @Override
   public EventFiringWebDriver getDriver() {
+    setBrowserName(this.browserType);
     switch (this.browserType) {
       case "chrome": {
         return new EventFiringWebDriver(new ChromeWebDriver().newDriver());
