@@ -18,7 +18,7 @@ public class MainPage_Test {
   public WebDriver driver;
 
   @BeforeEach
-  public void setUp(){
+  public void setUp() {
     mainPage = new MainPage(driver);
   }
 
@@ -27,6 +27,15 @@ public class MainPage_Test {
     mainPage
             .open()
             .checkH1ShouldBeSameAs();
+  }
+
+  @Test
+  public void move_mouse_actions() {
+    mainPage
+            .open()
+            .moveMouseToTileCourse()
+            .clickMouse()
+            .open(); // возврат к предыдущему состоянию.
   }
 
 }
