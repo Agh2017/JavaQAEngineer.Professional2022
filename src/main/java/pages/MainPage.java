@@ -28,9 +28,6 @@ public class MainPage extends AnyPageAbs<MainPage> {
     super(driver);
   }
 
-  @FindBy(css = ".button_white")
-  WebElement buttonPickCourse;
-
   @FindBy(css = ".lessons__new-item-title,.lessons__new-item-title_with-bg")
   List<WebElement> allCoursesName;
 
@@ -70,11 +67,11 @@ public class MainPage extends AnyPageAbs<MainPage> {
   }
 
   public void clickMouse() {
+    standartWaiter.waitForCondition(ExpectedConditions
+            .elementToBeClickable(justCourse));
     actions
             .click(justCourse)
             .build().perform();
-    standartWaiter.waitForCondition(ExpectedConditions
-            .attributeToBeNotEmpty(justCourse, "name"));
   }
 
   public void searchNameCourse() {
@@ -85,26 +82,24 @@ public class MainPage extends AnyPageAbs<MainPage> {
             .map(TileOnMainPage::getTileName)
             .anyMatch(name -> name.contains(NAME_COURSE_FOR_SEARCH));
 
-    if (courseIsPresent) {
-      System.out.println("Курс: \"" + NAME_COURSE_FOR_SEARCH + "\" найден");
-    } else
-      System.out.println("Курс: \"" + NAME_COURSE_FOR_SEARCH + "\" не найден");
+    assert(courseIsPresent);
+
+    System.out.println("Курс: \"" + NAME_COURSE_FOR_SEARCH + "\" найден");
+
   }
 
   public void choiceCourseOnDate() {
 
     prepareCoursesData();
-
     getSourceDate();
-
     assert sourceDate != -1;
 
     String nameCourseStarts = "не найден";
-
     for (TileOnMainPage listTile : listTiles) {
       Object currentTile = listTile.getStartDate();
       if (currentTile.equals(String.valueOf(sourceDate))) nameCourseStarts = listTile.getTileName();
     }
+
     System.out.println("курс, стартующий позже всех: " + sourceDate + "  " + nameCourseStarts);
   }
 
@@ -118,9 +113,9 @@ public class MainPage extends AnyPageAbs<MainPage> {
                 return false;
               }
             })
-            .mapToInt(Integer::parseInt)// преобразоваваем в набор IntStream
+            .mapToInt(Integer::parseInt)
             .filter(data -> data > 0)
-            .reduce(((a, b) -> Math.max(a, b))).orElse(-1); // находим максимум
+            .reduce((Math::max)).orElse(-1); // если надо найти курс с минимальной датой используем Math::min
   }
 
   private void prepareCoursesData() {
@@ -130,7 +125,7 @@ public class MainPage extends AnyPageAbs<MainPage> {
       String courseDate = getDate(allCoursesDate.get(i).getText());
       TileOnMainPage tileOnMainPage = new TileOnMainPage(currentName,courseDate);
       listTiles.add(tileOnMainPage);
-      //System.out.println("Курс "+ tileOnMainPage.getTileName() + " стартует " + tileOnMainPage.getStartDate());
+      System.out.println("Курс "+ tileOnMainPage.getTileName() + " стартует " + tileOnMainPage.getStartDate());
     }
     assert allCoursesName.size() == allCoursesDate.size() && allCoursesDate.size() == listTiles.size();
   }

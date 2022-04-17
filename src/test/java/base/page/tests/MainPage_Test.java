@@ -36,7 +36,7 @@ public class MainPage_Test {
             .moveMouseToTileCourse()
             .clickMouse();
     mainPage
-            .open(); //TODO нужен ли возврат к предыдущему состоянию?
+            .open();
   }
 
   @Test
