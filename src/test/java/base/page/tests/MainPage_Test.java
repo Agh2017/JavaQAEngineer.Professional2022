@@ -40,13 +40,13 @@ public class MainPage_Test {
   }
 
   @Test
-  public void searchCourseForName(){
+  public void search_course_for_name(){
     mainPage.open()
             .searchNameCourse();
   }
 
   @Test
-  public void choiceCourseOnDate(){
+  public void choice_course_on_date(){
     mainPage.open()
             .choiceCourseOnDate();
   }

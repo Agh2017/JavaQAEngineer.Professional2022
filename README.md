@@ -19,16 +19,9 @@ Release Notes
 
 В тесте "move_mouse_actions" реализовано движение мыши и выбор курса при помощи библиотеки Actions.
 
-В тесте ""
+В тесте "search_course_for_name" реализован метод фильтр по названию курса.
 
-В тесте ""
-
-Метод фильтр по названию курса
-Метод выбора курса стартующего раньше всех / позже всех.
-реализация фильтра и reducera
-
-
-
+В тесте "choice_course_on_date" реализован метод выбора курса стартующего раньше всех / позже всех с использованием фильтра и редьюсера из библиотеки "Stream". 
 
 
 System Requirements
@@ -58,7 +51,7 @@ mvn test -Pproduction -Dbrowser=firefox
 Licensing
 ---------
 
-Please dont see the file called LICENSE.
+Please don't see the file called LICENSE.
 
 Maven URLS
 ----------
