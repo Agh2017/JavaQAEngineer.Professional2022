@@ -37,11 +37,18 @@ public class MainPage_Test {
             .clickMouse();
     mainPage
             .open(); //TODO нужен ли возврат к предыдущему состоянию?
-    try {
-      Thread.sleep(3000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+  }
+
+  @Test
+  public void searchCourseForName(){
+    mainPage.open()
+            .searchNameCourse();
+  }
+
+  @Test
+  public void choiceCourseOnDate(){
+    mainPage.open()
+            .choiceCourseOnDate();
   }
 
 }

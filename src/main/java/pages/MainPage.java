@@ -3,18 +3,39 @@ package pages;
 import static org.assertj.core.api.Assertions.*;
 
 import annotations.UrlPrefix;
-import extensions.GetPropertiesExtension;
+import components.TileOnMainPage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @UrlPrefix("/")
 public class MainPage extends AnyPageAbs<MainPage> {
 
+  private static final String YEAR = "2022";
+  private static final String REGEX_DATA = "(.*?(январ|феврал|март|апрел|ма|июн|июл|август|сентябр|октябр|ноябр|декабр))";
+  private static final String NAME_COURSE_FOR_SEARCH = "Специализация Administrator Linux";
+  private ArrayList<TileOnMainPage> listTiles = new ArrayList<>();
+  private int sourceDate = -1;
+
   public MainPage(WebDriver driver) {
     super(driver);
   }
+
+  @FindBy(css = ".button_white")
+  WebElement buttonPickCourse;
+
+  @FindBy(css = ".lessons__new-item-title,.lessons__new-item-title_with-bg")
+  List<WebElement> allCoursesName;
+
+  @FindBy(css = ".lessons__new-item-start, .lessons__new-item-time:not(span ~ div.lessons__new-item-time)")
+  List<WebElement> allCoursesDate;
 
   @FindBy(css = "H1")
   WebElement elementH1;
@@ -27,7 +48,6 @@ public class MainPage extends AnyPageAbs<MainPage> {
             .cssSelector("button[class='js-cookie-accept cookies__button']"));
     standartWaiter.waitForCondition(ExpectedConditions
             .attributeToBeNotEmpty(popupCookieCloseButton, "name"));
-
     popupCookieCloseButton.click();
   }
 
@@ -40,7 +60,6 @@ public class MainPage extends AnyPageAbs<MainPage> {
   public MainPage moveMouseToTileCourse() {
     JavascriptExecutor js = (JavascriptExecutor)driver;
     js.executeScript("window.scrollBy(0,600)");
-
     actions
             .moveToElement(justCourse)
             .clickAndHold()
@@ -54,8 +73,96 @@ public class MainPage extends AnyPageAbs<MainPage> {
     actions
             .click(justCourse)
             .build().perform();
-
     standartWaiter.waitForCondition(ExpectedConditions
             .attributeToBeNotEmpty(justCourse, "name"));
+  }
+
+  public void searchNameCourse() {
+
+    prepareCoursesData();
+
+    boolean courseIsPresent = listTiles.stream()
+            .map(TileOnMainPage::getTileName)
+            .anyMatch(name -> name.contains(NAME_COURSE_FOR_SEARCH));
+
+    if (courseIsPresent) {
+      System.out.println("Курс: \"" + NAME_COURSE_FOR_SEARCH + "\" найден");
+    } else
+      System.out.println("Курс: \"" + NAME_COURSE_FOR_SEARCH + "\" не найден");
+  }
+
+  public void choiceCourseOnDate() {
+
+    prepareCoursesData();
+
+    getSourceDate();
+
+    assert sourceDate != -1;
+
+    String nameCourseStarts = "не найден";
+
+    for (TileOnMainPage listTile : listTiles) {
+      Object currentTile = listTile.getStartDate();
+      if (currentTile.equals(String.valueOf(sourceDate))) nameCourseStarts = listTile.getTileName();
+    }
+    System.out.println("курс, стартующий позже всех: " + sourceDate + "  " + nameCourseStarts);
+  }
+
+  private int getSourceDate() {
+    return sourceDate = listTiles.stream()
+            .map(TileOnMainPage::getStartDate)
+            .filter(s -> {
+              try {
+                return !s.equals("");
+              } catch (Exception e) {
+                return false;
+              }
+            })
+            .mapToInt(Integer::parseInt)// преобразоваваем в набор IntStream
+            .filter(data -> data > 0)
+            .reduce(((a, b) -> Math.max(a, b))).orElse(-1); // находим максимум
+  }
+
+  private void prepareCoursesData() {
+
+    for (int i = 0; i < allCoursesName.size(); i++) {
+      String currentName = allCoursesName.get(i).getText();
+      String courseDate = getDate(allCoursesDate.get(i).getText());
+      TileOnMainPage tileOnMainPage = new TileOnMainPage(currentName,courseDate);
+      listTiles.add(tileOnMainPage);
+      //System.out.println("Курс "+ tileOnMainPage.getTileName() + " стартует " + tileOnMainPage.getStartDate());
+    }
+    assert allCoursesName.size() == allCoursesDate.size() && allCoursesDate.size() == listTiles.size();
+  }
+
+  private String getDate(String input) {
+
+    String[] months = {"январ", "феврал", "март", "апрел", "ма", "июн", "июл", "август", "сентябр", "октябр", "ноябр", "декабр"};
+    HashMap<String, String> h = new HashMap<String, String>();
+    for (int i = 1; i <= 12; i++) {
+      if (i<10) {
+        h.put(months[i - 1], "0"+ i);
+      } else h.put(months[i - 1], String.valueOf(i));
+    }
+
+    String currentDate = trimRegex(input, REGEX_DATA);
+    String currentDay = currentDate.replaceAll("[^[0-9][0-9]?]","");
+    String currentMonth = currentDate.replaceAll("(?i)[^а-я]", "");
+
+    if (h.containsKey(currentMonth)) {
+      currentMonth = YEAR+h.get(currentMonth);
+    } else currentMonth = "0";
+    return currentMonth + currentDay;
+  }
+
+  public String trimRegex(String input, String regex) {
+
+    String result = "";
+
+    Pattern pattern = Pattern.compile(regex);
+    Matcher matcher = pattern.matcher(input);
+    if (matcher.find()) result = matcher.group();
+
+    return result;
   }
 }

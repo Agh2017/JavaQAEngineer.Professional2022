@@ -5,6 +5,7 @@ driver\IDriverFactory.class
 driver\impl\ChromeWebDriver.class
 components\AnyComponentAbs.class
 components\popups\AnyPopupAbs.class
+components\TileOnMainPage.class
 extensions\GetPropertiesExtension.class
 pages\MainPage.class
 actions\CommonActions.class
