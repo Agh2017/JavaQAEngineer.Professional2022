@@ -50,15 +50,12 @@ public class MainPage extends AnyPageAbs<MainPage> {
     return new MainPage(driver);
   }
 
-  public MainPage clickMouse() {
+  public void clickMouse() {
     actions
             .click(justCourse)
             .build().perform();
-    try {
-      Thread.sleep(10000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    return new MainPage(driver);
+
+    standartWaiter.waitForCondition(ExpectedConditions
+            .attributeToBeNotEmpty(justCourse, "name"));
   }
 }

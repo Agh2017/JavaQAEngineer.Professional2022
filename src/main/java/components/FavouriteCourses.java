@@ -21,6 +21,10 @@ public class FavouriteCourses extends AnyComponentAbs<FavouriteCourses> {
   @FindBy(css = ".header2__logo-img")
   private WebElement mainPageSelector;
 
+  @FindBy(id = "categories_id")
+  private WebElement selectorForLighting;
+
+
   public FavouriteCourses(WebDriver driver) {
     super(driver);
   }
@@ -33,6 +37,8 @@ public class FavouriteCourses extends AnyComponentAbs<FavouriteCourses> {
     mainPageSelector.click();
     lessons.get(1).click();
     mainPageSelector.click();
+
+
 
     return new Lessons(driver);
 

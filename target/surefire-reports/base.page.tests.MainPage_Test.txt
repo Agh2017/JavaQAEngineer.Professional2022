@@ -1,14 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: base.page.tests.MainPage_Test
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 35.437 s <<< FAILURE! - in base.page.tests.MainPage_Test
-move_mouse_actions  Time elapsed: 15.723 s  <<< ERROR!
-org.openqa.selenium.interactions.MoveTargetOutOfBoundsException: 
-(643, 867) is out of bounds of viewport width (1304) and height (683)
-Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
-System info: host: 'АДМИН-ПК', ip: '192.168.0.103', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '16.0.1'
-Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 99.0.1, javascriptEnabled: true, moz:accessibilityChecks: false, moz:buildID: 20220411174855, moz:geckodriverVersion: 0.31.0, moz:headless: false, moz:processID: 8140, moz:profile: C:\Users\7272~1\AppData\Loc..., moz:shutdownTimeout: 60000, moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, platformVersion: 6.1, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
-Session ID: 9db87989-f6d6-45e9-878d-8f4ce96b99ac
-	at base.page.tests.MainPage_Test.move_mouse_actions(MainPage_Test.java:36)
-
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 46.968 s - in base.page.tests.MainPage_Test
