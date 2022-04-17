@@ -1,4 +1,6 @@
-              Учебный проект студента группы "qa-java-pro-2022-02"
+            
+README.MD
+
 
 Documentation
 -------------
@@ -29,12 +31,13 @@ Installing and Start
 --------------------
 
 1. Открыть проект в среде разработки.
-2. Настроить maven и JAVA.
+2. Настроить maven и JAVA, запустить команду "mvn compile".
 3. Запустить в командной строке тесты предварительно указав тестовое окружение:
+Например: 
+mvn test -Pproduction -Dbrowser=chrome 
+mvn test -Pproduction -Dbrowser=firefox
 
-   Например: mvn test -Pdevelop -Dbrowser=chrome
 
--
 Licensing
 ---------
 

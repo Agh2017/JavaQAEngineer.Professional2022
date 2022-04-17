@@ -26,7 +26,7 @@ public class MainPage extends AnyPageAbs<MainPage> {
 
   public void closeCookiePopup() {
     WebElement popupCookieCloseButton = driver.findElement(By
-            .cssSelector(GetPropertiesExtension.getProperty("closeCookiesPopup")));
+            .cssSelector("button[class='js-cookie-accept cookies__button']"));
     standartWaiter.waitForCondition(ExpectedConditions
             .attributeToBeNotEmpty(popupCookieCloseButton, "name"));
 
@@ -35,17 +35,22 @@ public class MainPage extends AnyPageAbs<MainPage> {
 
   public void checkH1ShouldBeSameAs() {
     String actualValue = elementH1.getText();
-    String expectedValue = GetPropertiesExtension.getProperty("H1mainPage");
+    String expectedValue = "Авторские онлайн‑курсы для профессионалов";
     assertThat(actualValue).isEqualTo(expectedValue);
   }
 
   public MainPage moveMouseToTileCourse() {
-    actions.moveByOffset(200, 200).moveToElement(justCourse).build().perform();
+    actions
+            .moveByOffset(200, 100)
+            .moveToElement(justCourse)
+            .build().perform();
     return new MainPage(driver);
   }
 
   public MainPage clickMouse() {
-    actions.click(justCourse).build().perform();
+    actions
+            .click(justCourse)
+            .build().perform();
     try {
       Thread.sleep(10000);
     } catch (InterruptedException e) {

@@ -24,7 +24,7 @@ public class FFWebDriver implements IDriver {
     firefoxOptions.addArguments("--ignore-certificate-errors");
     firefoxOptions.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
     firefoxOptions.setCapability(CapabilityType.VERSION, System.getProperty("browser.version", "firefox"));
-    firefoxOptions.setCapability("enableVNC", Boolean.parseBoolean(System.getProperty("enableVNC", "false")));
+    //firefoxOptions.setCapability("enableVNC", Boolean.parseBoolean(System.getProperty("enableVNC", "false")));
     firefoxOptions.setHeadless(HEADLESS);
 
     LoggingPreferences logPrefs = new LoggingPreferences();

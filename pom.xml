@@ -142,7 +142,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${maven.checkstyle}</version>
+                <version>3.1.0</version>
                 <configuration>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
                     <configLocation>${project.build.sourceDirectory}/../resources/checkstyle.xml</configLocation>
@@ -157,10 +157,10 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--<plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
-                <version>${findbugs.maven}</version>
+                <version>3.0.5</version>
                 <configuration>
                     <effort>Max</effort>
                     <threshold>Low</threshold>
@@ -172,13 +172,12 @@
                     <execution>
                         <id>analyze-compile</id>
                         <phase>compile</phase>
-                        goals: spotbugs:check
                         <goals>
                             <goal>check</goal>
                         </goals>
                     </execution>
                 </executions>
-            </plugin>-->
+            </plugin>
         </plugins>
     </build>
 
