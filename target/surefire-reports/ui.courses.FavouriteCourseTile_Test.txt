@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: ui.courses.FavouriteCourseTile_Test
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 17.675 s <<< FAILURE! - in ui.courses.FavouriteCourseTile_Test
+click_favourite_course_tile  Time elapsed: 17.646 s  <<< ERROR!
+java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+	at ui.courses.FavouriteCourseTile_Test.click_favourite_course_tile(FavouriteCourseTile_Test.java:22)
+

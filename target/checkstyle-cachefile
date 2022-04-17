@@ -1,0 +1,26 @@
+#Tue Mar 29 21:29:45 MSK 2022
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\components\\AnyComponentAbs.java=1648399587812
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\driver\\IDriverFactory.java=1637585295000
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\annotations\\Driver.java=1646907461000
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\components\\FavouriteCourses.java=1648495487283
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\driver\\DeleteMe.java=1648578297172
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\components\\popups\\IPopup.java=1646910258000
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\extensions\\GetPropertiesExtension.java=1648578297172
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\waiters\\StandartWaiter.java=1646907461000
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\annotations\\UrlPrefix.java=1637596165000
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\pages\\AnyPageAbs.java=1646921903000
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\extensions\\UIExtension.java=1646906275000
+configuration*?=5D50EB7529DE0B42E5DF82F150821D51F7B19F78
+C\:\\JavaQAEngineer.Professional2022\\src\\test\\java\\ui\\courses\\FavouriteCourseTile_Test.java=1648578562092
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\actions\\CommonActions.java=1648495487267
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\pages\\MainPage.java=1648578297177
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\annotations\\Component.java=1646910258000
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\driver\\impl\\IDriver.java=1637588739000
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\pages\\Lessons.java=1646939939000
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\driver\\impl\\ChromeWebDriver.java=1637588739000
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\listeners\\MouseListener.java=1648495487283
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\components\\popups\\AnyPopupAbs.java=1646921251000
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\driver\\DriverFactory.java=1646907461000
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\exceptions\\DriverTypeNotSupported.java=1637585295000
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\waiters\\WaiterInt.java=1648578297177
+C\:\\JavaQAEngineer.Professional2022\\src\\main\\java\\driver\\IDeleteMe.java=1648578297172
