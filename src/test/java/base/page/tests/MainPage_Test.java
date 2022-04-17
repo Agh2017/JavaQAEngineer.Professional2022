@@ -34,8 +34,14 @@ public class MainPage_Test {
     mainPage
             .open()
             .moveMouseToTileCourse()
-            .clickMouse()
-            .open(); // возврат к предыдущему состоянию.
+            .clickMouse();
+    mainPage
+            .open(); //TODO нужен ли возврат к предыдущему состоянию?
+    try {
+      Thread.sleep(3000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 
 }

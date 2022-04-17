@@ -42,8 +42,10 @@ public class MainPage extends AnyPageAbs<MainPage> {
     js.executeScript("window.scrollBy(0,600)");
 
     actions
-            .keyDown(Keys.CONTROL).sendKeys(Keys.END)
             .moveToElement(justCourse)
+            .clickAndHold()
+            .moveByOffset(0, 50) // scroll down
+            .release()
             .build().perform();
     return new MainPage(driver);
   }
