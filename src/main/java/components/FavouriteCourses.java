@@ -15,16 +15,25 @@ import java.util.List;
 @Component("//*[contains(@class, 'container-lessons')]/div[text()='Популярные курсы']//following-sibling::div")
 public class FavouriteCourses extends AnyComponentAbs<FavouriteCourses> {
 
-  @FindBy(css = "div.lessons > a:nth-child(1)")
+  @FindBy(css = "div.lessons > a:nth-child(odd)")
   private List<WebElement> lessons;
+
+  @FindBy(css = ".header2__logo-img")
+  private WebElement mainPageSelector;
 
   public FavouriteCourses(WebDriver driver) {
     super(driver);
   }
 
-  public Lessons clickLessonItem() {
+
+  public Lessons clickLessonItems() {
     ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", lessons.get(0));
+
     lessons.get(0).click();
+    mainPageSelector.click();
+    lessons.get(1).click();
+    mainPageSelector.click();
+
     return new Lessons(driver);
 
   }

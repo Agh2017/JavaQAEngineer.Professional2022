@@ -22,12 +22,7 @@ public class FavouriteCourseTile_Test {
             .closeCookiePopup(); //закрываем попап чтобы не мешал кликать по цели
 
     new FavouriteCourses(driver)
-            .clickLessonItem()
+            .clickLessonItems()
             .getPageTitle();
-  }
-
-  @Test
-  public void etest(){
-    System.out.println("!!!OK!!!");
   }
 }

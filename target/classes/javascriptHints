@@ -5,5 +5,4 @@
 ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
 
 //This will scroll the page Horizontally till the element is found (in full view)
-((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();",Element );
-
+je.executeScript("arguments[0].scrollIntoView(true);",element);
