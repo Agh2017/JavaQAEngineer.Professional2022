@@ -1,6 +1,7 @@
 package pages;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import annotations.UrlPrefix;
 import components.TileOnMainPage;
@@ -82,7 +83,7 @@ public class MainPage extends AnyPageAbs<MainPage> {
             .map(TileOnMainPage::getTileName)
             .anyMatch(name -> name.contains(NAME_COURSE_FOR_SEARCH));
 
-    assert(courseIsPresent);
+    assertTrue(courseIsPresent);
 
     System.out.println("Курс: \"" + NAME_COURSE_FOR_SEARCH + "\" найден");
 
@@ -92,7 +93,7 @@ public class MainPage extends AnyPageAbs<MainPage> {
 
     prepareCoursesData();
     getSourceDate();
-    assert sourceDate != -1;
+    assertTrue(sourceDate != -1);
 
     String nameCourseStarts = "не найден";
     for (TileOnMainPage listTile : listTiles) {
@@ -125,15 +126,15 @@ public class MainPage extends AnyPageAbs<MainPage> {
       String courseDate = getDate(allCoursesDate.get(i).getText());
       TileOnMainPage tileOnMainPage = new TileOnMainPage(currentName,courseDate);
       listTiles.add(tileOnMainPage);
-      System.out.println("Курс "+ tileOnMainPage.getTileName() + " стартует " + tileOnMainPage.getStartDate());
+      //System.out.println("Курс "+ tileOnMainPage.getTileName() + " стартует " + tileOnMainPage.getStartDate());
     }
-    assert allCoursesName.size() == allCoursesDate.size() && allCoursesDate.size() == listTiles.size();
+    assertTrue(allCoursesName.size() == allCoursesDate.size() && allCoursesDate.size() == listTiles.size());
   }
 
   private String getDate(String input) {
 
     String[] months = {"январ", "феврал", "март", "апрел", "ма", "июн", "июл", "август", "сентябр", "октябр", "ноябр", "декабр"};
-    HashMap<String, String> h = new HashMap<String, String>();
+    HashMap<String, String> h = new HashMap<>();
     for (int i = 1; i <= 12; i++) {
       if (i<10) {
         h.put(months[i - 1], "0"+ i);

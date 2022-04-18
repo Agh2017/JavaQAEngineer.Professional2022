@@ -1,4 +1,4 @@
-#Sun Apr 17 22:36:54 MSK 2022
+#Mon Apr 18 21:38:36 MSK 2022
 C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java\\annotations\\UrlPrefix.java=1650191394039
 C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java\\driver\\DriverFactory.java=1650191394054
 C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java\\waiters\\WaiterInt.java=1650191394086
@@ -10,20 +10,20 @@ C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java
 C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java\\driver\\impl\\FFWebDriver.java=1650191394054
 C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java\\extensions\\GetPropertiesExtension.java=1650191394070
 C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java\\listeners\\MouseListener.java=1650191394070
-C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java\\pages\\MainPage.java=1650223862926
+C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java\\pages\\MainPage.java=1650304508956
 C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\test\\resources\\test.properties=1650191394086
 configuration*?=EC9F7688EDB90E7F6D093CD25B709535ED5736A6
 C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java\\annotations\\Driver.java=1650191394039
 C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java\\driver\\impl\\SafariWebDriver.java=1650191394070
-C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\test\\java\\ui\\courses\\FavouriteCourseTile_Test.java=1650201776992
+C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\test\\java\\ui\\courses\\FavouriteCourseTile_Test.java=1650301871991
 C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java\\waiters\\StandartWaiter.java=1650191394086
-C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java\\components\\AnyComponentAbs.java=1650191394054
-C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\test\\java\\base\\page\\tests\\MainPage_Test.java=1650223659673
+C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java\\components\\AnyComponentAbs.java=1650304250417
+C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\test\\java\\base\\page\\tests\\MainPage_Test.java=1650302380446
 C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java\\actions\\CommonActions.java=1650191394039
 C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java\\annotations\\Component.java=1650191394039
 C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java\\utils\\DateFromCalendar.java=1650216107009
 C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java\\driver\\impl\\IDriver.java=1650191394054
-C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java\\pages\\AnyPageAbs.java=1650191394070
+C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java\\pages\\AnyPageAbs.java=1650307052409
 C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java\\components\\popups\\AnyPopupAbs.java=1650191394054
 C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java\\components\\TileOnMainPage.java=1650213092567
 C\:\\Users\\Home\\IdeaProjects\\JavaQAEngineer.Professional2022\\src\\main\\java\\extensions\\UIExtension.java=1650191394070
