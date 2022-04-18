@@ -45,7 +45,7 @@ public abstract class AnyPageAbs<T> extends CommonActions<T> {
       e.printStackTrace();
     }
 
-    return null;
+    return convertInstanceOfObject(driver, clazz);
   }
 
   private static <T> T convertInstanceOfObject(Object o, Class<T> clazz) {
