@@ -15,7 +15,7 @@ public class FavouriteCourseTile_Test {
   public WebDriver driver;
 
   @Test
-  public void click_favourite_course_tile() {
+  public void clickFavouriteCourseTile() {
 
     new MainPage(driver)
             .open()

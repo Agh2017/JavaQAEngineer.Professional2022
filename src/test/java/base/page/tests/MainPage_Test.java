@@ -23,14 +23,14 @@ public class MainPage_Test {
   }
 
   @Test
-  public void check_open_mainPage() {
+  public void checkOpenMainPage() {
     mainPage
             .open()
             .checkH1ShouldBeSameAs();
   }
 
   @Test
-  public void move_mouse_actions() {
+  public void moveMouseActions() {
     mainPage
             .open()
             .moveMouseToTileCourse()
@@ -40,13 +40,13 @@ public class MainPage_Test {
   }
 
   @Test
-  public void search_course_for_name(){
+  public void searchCourseForName(){
     mainPage.open()
             .searchNameCourse();
   }
 
   @Test
-  public void choice_course_on_date(){
+  public void choiceCourseOnDate(){
     mainPage.open()
             .choiceCourseOnDate();
   }
