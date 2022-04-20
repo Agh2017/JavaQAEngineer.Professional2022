@@ -1,7 +1,7 @@
 package User.CreateUser;
 
-import dto.User1;
-import dto.User1Out;
+import dto.users.User1;
+import dto.users.User1Out;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;

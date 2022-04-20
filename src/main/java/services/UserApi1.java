@@ -1,6 +1,6 @@
 package services;
 
-import dto.User1;
+import dto.users.User1;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;

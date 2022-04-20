@@ -1,6 +1,6 @@
 package services;
 
-import dto.Pet;
+import dto.pet.Pet;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
