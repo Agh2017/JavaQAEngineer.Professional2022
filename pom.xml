@@ -111,28 +111,6 @@
             <version>${jackson.mapper.asl}</version>
         </dependency>
     </dependencies>
-
-    <profiles>
-        <profile>
-            <id>production</id>
-            <properties>
-                <webdriver.base.url>https://otus.ru</webdriver.base.url>
-            </properties>
-        </profile>
-        <profile>
-            <id>develop</id>
-            <properties>
-                <webdriver.base.url>https://test.otus.ru</webdriver.base.url>
-            </properties>
-        </profile>
-        <profile>
-            <id>demo</id>
-            <properties>
-                <webdriver.base.url>https://otus.ru</webdriver.base.url>
-            </properties>
-        </profile>
-    </profiles>
-
     <build>
         <plugins>
             <plugin>
