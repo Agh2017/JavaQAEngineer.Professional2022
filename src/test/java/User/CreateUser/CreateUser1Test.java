@@ -2,13 +2,14 @@ package User.CreateUser;
 
 import dto.User1;
 import dto.User1Out;
-import io.restassured.internal.common.assertion.Assertion;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import services.UserApi1;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.lessThan;
 
 public class CreateUser1Test {
   UserApi1 userApi1 = new UserApi1();
@@ -32,7 +33,9 @@ public class CreateUser1Test {
             .then()
             .log().all()
             .statusCode(200)
-            .body("type", equalTo("unknown")); // вложенность через точку
+            .time(lessThan(5000L))
+            .body("type", equalTo("unknown")) // вложенность через точку
+            .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema/CreateUser.json"));
     // Мачеры hamcrest проверки
 
     Response response = userApi1.createUser(user);

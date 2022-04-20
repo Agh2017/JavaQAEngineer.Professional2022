@@ -32,12 +32,17 @@
         <test.project.language>RU</test.project.language>
         <jackson.mapper.asl>1.9.13</jackson.mapper.asl>
         <webdriver.timeouts.implicitlywait>5000</webdriver.timeouts.implicitlywait>
-
         <surefire.plugin.version>2.22.2</surefire.plugin.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <json.schema.validator>4.3.1</json.schema.validator> <!-- эта версия не тормозит -->
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>${json.schema.validator}</version>
+        </dependency>
         <dependency>
             <groupId>net.jcip</groupId>
             <artifactId>jcip-annotations</artifactId>
@@ -65,7 +70,6 @@
             <artifactId>junit-bom</artifactId>
             <version>${junitBom.version}</version>
             <type>pom</type>
-            <!--<scope>import</scope> // это нужно использовать в  <dependencyManagement> ? -->
         </dependency>
         <dependency>
             <groupId>com.github.javafaker</groupId>
