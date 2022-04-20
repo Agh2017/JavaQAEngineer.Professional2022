@@ -1,78 +1,33 @@
-            
-README.MD
-
-
-Documentation
--------------
-
-The most up-to-date documentation can be found at no one..
 
 Release Notes
 -------------
 
-Rest-assured
+**Rest-assured**
 
-Написать тест кейсы в excel или в комментах к классу для двух произвольных методов.
-Для данных тест кейсов написать автотесты.
+Тест кейсы написаны в комментах к классу для двух методов.
 Описание API - https://petstore.swagger.io
+Так как проверяются только api методы, то фабрика браузеров не предусмотрена.
 
-Критерии оценки:
-+2 есть тест кейсы
-+2 используется RequestSpecification или ResponceSpecification
-+3 не менее 2-х тестов на первый метод
-+3 не менее 2-х тестов на второй метод
+В сервисе "PetApi" реализован "RequestSpecification".  
+Для проверки метода создания животного реализованы 3 тест-кейса:
+.
+.
+.
 
-В проекте использована  
+Для проверки метода удаления животного реализованы 3 тест кейса:
+.
+.
+.
 
-В окружение добавлены 
-
-В тесте "click_favourite_course_tile" реализована.
-
-В тесте "move_mouse_actions" реализовано 
-
-В тесте ""
-
-В тесте ""
-
-
-
-System Requirements
--------------------
-
-JDK:
-11 or above Memory:
-No minimum requirement. Disk:
-Approximately 10MB is required for the Maven installation itself. In addition to that, additional disk space will be
-used for your local Maven repository. The size of your local repository will vary depending on usage but expect at least
-500MB. Operating System:
-Windows:
-Windows 2000 or above. Unix based systems (Linux, Solaris and Mac OS X) and others:
-No minimum requirement.
 
 Installing and Start
 --------------------
-
 1. Открыть проект в среде разработки.
 2. Настроить maven и JAVA, запустить команду "mvn compile".
 3. Запустить в командной строке тесты предварительно указав тестовое окружение:
 Например: 
-mvn test -Pproduction -Dbrowser=chrome 
-mvn test -Pproduction -Dbrowser=firefox
-
+mvn clean test
 
 Licensing
 ---------
-
 Please dont see the file called LICENSE.
-
-Maven URLS
-----------
-
-Home Page:          https://maven.apache.org/
-Downloads:          https://maven.apache.org/download.html
-Release Notes:      https://maven.apache.org/docs/history.html
-Mailing Lists:      https://maven.apache.org/mailing-lists.html
-Source Code:        https://gitbox.apache.org/repos/asf/maven.git
-Issue Tracking:     https://issues.apache.org/jira/browse/MNG
-Wiki:               https://cwiki.apache.org/confluence/display/MAVEN/
-Available Plugins:  https://maven.apache.org/plugins/
