@@ -1,5 +1,6 @@
 package User.CreateUser;
 
+import com.github.javafaker.Faker;
 import dto.pet.Category;
 import dto.pet.Pet;
 import io.restassured.response.Response;
@@ -7,19 +8,22 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import services.PetApi;
 
+import java.util.Locale;
+
 import static org.hamcrest.Matchers.containsString;
 
 public class CreatePetTest {
 
+  private final Faker faker = new Faker();
   /*
 
   Спецификация "RequestSpecification" использована в сервисе "PetApi".
 
   Тест-кейсы по методу создания питомца:
 
-  1. Создать кота с кличкой "Vasya" с id = 001 и проверить его id
-  2. Создать собаку с кличкой "Masya" и таким образом проверить, что можно создать нескольких животных
-  3. Создать собаку с кличкой "Alii" и таким образом проверить, что можно создать нескольких животных в одной категории.
+  1. Создать кота и проверить его id
+  2. Создать собаку и таким образом проверить, что можно создать нескольких животных
+  3. Создать еще одну собаку и таким образом проверить, что можно создать нескольких животных в одной категории.
 
    */
 
@@ -27,26 +31,28 @@ public class CreatePetTest {
   PetApi petApi = new PetApi();
 
   @Test
-  public void createPet1(){
-
+  public void createRandomPet(){
+    String name = faker.cat().name();
+    int id = createRandomId();
     Pet pet = Pet.builder()
-            .id(001)
-            .name("Vasya")
-            .status("owner")
-            .category(new Category("Cats", 12))
+            .id(id)
+            .name(name)
+            .status("reserve")
+            .category(new Category("cat", 12))
             .build();
 
     Response response = petApi.createPet(pet);
     Integer responseId = response.jsonPath().get("id");
-    Assertions.assertEquals(1, responseId);
+    Assertions.assertEquals(id, responseId);
   }
 
   @Test
   public void createPet2(){
 
+    String name = faker.dog().name();
     Pet pet2 = Pet.builder()
-            .id(002)
-            .name("Masya")
+            .id(createRandomId())
+            .name(name)
             .status("free")
             .category(new Category("Dogs", 15))
             .build();
@@ -55,14 +61,14 @@ public class CreatePetTest {
             .createPet(pet2)
             .then()
             .statusCode(200)
-            .body(containsString("Masya"));
+            .body(containsString(name));
   }
   @Test
   public void createPetInOneCategory(){
 
     Pet pet2 = Pet.builder()
-            .id(003)
-            .name("Alii")
+            .id(createRandomId())
+            .name(faker.animal().name())
             .status("free")
             .category(new Category("Dogs", 15))
             .build();
@@ -70,5 +76,9 @@ public class CreatePetTest {
     Response response = petApi.createPet(pet2);
     String responseId = response.jsonPath().get("category.name");
     Assertions.assertEquals("Dogs", responseId);
+  }
+
+  private int createRandomId() {
+    return faker.number().numberBetween(1, 99999);
   }
 }

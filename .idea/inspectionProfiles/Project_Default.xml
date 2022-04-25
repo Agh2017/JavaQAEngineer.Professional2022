@@ -9,6 +9,7 @@
           <option value="org.junit:junit-bom" />
           <option value="com.github.javafaker:javafaker" />
           <option value="org.junit.jupiter:junit-jupiter" />
+          <option value="io.rest-assured:json-schema-validator" />
         </list>
       </option>
     </inspection_tool>

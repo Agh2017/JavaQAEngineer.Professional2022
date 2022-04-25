@@ -15,7 +15,7 @@
         <junit.version>5.8.1</junit.version>
         <maven.checkstyle>3.1.0</maven.checkstyle>
         <junitBom.version>5.8.1</junitBom.version>
-        <faker.version>1.0.1</faker.version>
+        <faker.version>1.0.2</faker.version>
         <findbugs.maven>3.0.5</findbugs.maven>
         <rest.assured>4.4.0</rest.assured>
         <lombok>1.18.22</lombok>
