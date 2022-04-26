@@ -1,9 +1,14 @@
 package dto.pet;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class TagsItem{
+    @Getter
     private String name;
+    @Getter
     private int id;
 }

@@ -1,19 +1,21 @@
 package dto.store;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order{
+	@Getter
 	private int petId;
+	@Getter
 	private int quantity;
+	@Getter
 	private int id;
+	@Getter
 	private String shipDate;
+	@Getter
 	private boolean complete;
+	@Getter
 	private String status;
 }

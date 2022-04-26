@@ -2,20 +2,22 @@ package dto.pet;
 
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Pet {
+    @Getter
     private List<String> photoUrls;
+    @Getter
     private String name;
+    @Getter
     private int id;
+    @Getter
     private Category category;
+    @Getter
     private List<TagsItem> tags;
+    @Getter
     private String status;
 }

@@ -1,21 +1,20 @@
 
 package dto.users;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-@Data
 @Builder
 @AllArgsConstructor
 @JsonSerialize
 @NoArgsConstructor
 public class User1Out {
 
+    @Getter
     private Long code;
+    @Getter
     private String message;
+    @Getter
     private String type;
 
 }
