@@ -1,4 +1,6 @@
-package User.CreateUser;
+package pets;
+
+import static org.hamcrest.Matchers.containsString;
 
 import com.github.javafaker.Faker;
 import dto.pet.Category;
@@ -7,10 +9,6 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import services.PetApi;
-
-import java.util.Locale;
-
-import static org.hamcrest.Matchers.containsString;
 
 public class CreatePetTest {
 
@@ -31,7 +29,7 @@ public class CreatePetTest {
   PetApi petApi = new PetApi();
 
   @Test
-  public void createRandomPet(){
+  public void createRandomPet() {
     String name = faker.cat().name();
     int id = createRandomId();
     Pet pet = Pet.builder()
@@ -47,7 +45,7 @@ public class CreatePetTest {
   }
 
   @Test
-  public void createPet2(){
+  public void createPet2() {
 
     String name = faker.dog().name();
     Pet pet2 = Pet.builder()
@@ -63,8 +61,9 @@ public class CreatePetTest {
             .statusCode(200)
             .body(containsString(name));
   }
+
   @Test
-  public void createPetInOneCategory(){
+  public void createPetInOneCategory() {
 
     Pet pet2 = Pet.builder()
             .id(createRandomId())

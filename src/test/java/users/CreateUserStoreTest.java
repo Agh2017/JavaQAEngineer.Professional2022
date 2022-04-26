@@ -1,4 +1,7 @@
-package User.CreateUser;
+package users;
+
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.lessThan;
 
 import dto.users.UserStore;
 import dto.users.UserStoreOut;
@@ -7,9 +10,6 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import services.UserStoreApi;
-
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.lessThan;
 
 public class CreateUserStoreTest {
   UserStoreApi userStoreApi = new UserStoreApi();
@@ -44,7 +44,7 @@ public class CreateUserStoreTest {
     Assertions.assertEquals("111", actualResult);
 
     UserStoreOut user1Out = response.then().extract().as(UserStoreOut.class);
-    Assertions.assertEquals ("unknown", user1Out.getType());
+    Assertions.assertEquals("unknown", user1Out.getType());
   }
 
 

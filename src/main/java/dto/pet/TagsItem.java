@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public class TagsItem{
-    @Getter
-    private String name;
-    @Getter
-    private int id;
+public class TagsItem {
+  @Getter
+  private String name;
+  @Getter
+  private int id;
 }
