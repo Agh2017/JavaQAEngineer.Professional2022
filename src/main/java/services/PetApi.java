@@ -6,16 +6,21 @@ import dto.pet.Pet;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.apache.commons.lang3.StringUtils;
 
 public class PetApi {
 
-  public final static String BASE_URL = "https://petstore.swagger.io/v2";
-  public final static String PATH = "/pet";
+  public final static String PATH = "pet";
   private final RequestSpecification spec;
+
+  //TODO вынести в абстрактный класс
+  private static String getBaseUrl() {
+    return StringUtils.stripEnd(System.getProperty("rest.base.url"), "/");
+  }
 
   public PetApi() {
     spec = given()
-            .baseUri(BASE_URL)
+            .baseUri(getBaseUrl())
             .contentType(ContentType.JSON);
   }
 

@@ -6,17 +6,21 @@ import dto.store.Order;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.apache.commons.lang3.StringUtils;
 
 public class StoreApi {
 
-  public final static String BASE_URL = "https://petstore.swagger.io/v2";
   public final static String PATH1 = "/store/order";
   public final static String PATH2 = "/store/order/2";
   private final RequestSpecification spec;
 
+  private static String getBaseUrl() {
+    return StringUtils.stripEnd(System.getProperty("rest.base.url"), "/");
+  }
+
   public StoreApi() {
     spec = given()
-            .baseUri(BASE_URL)
+            .baseUri(getBaseUrl())
             .contentType(ContentType.JSON);
   }
 

@@ -30,6 +30,7 @@
         <surefire.plugin.version>2.22.2</surefire.plugin.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <json.schema.validator>4.3.1</json.schema.validator> <!-- эта версия не тормозит -->
+        <rest.base.url>https://petstore.swagger.io/v2</rest.base.url>
     </properties>
 
     <dependencies>
@@ -76,6 +77,28 @@
             <version>${jackson.mapper.asl}</version>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>production</id>
+            <properties>
+                <rest.base.url>https://petstore.swagger.io/v2</rest.base.url>
+            </properties>
+        </profile>
+        <profile>
+            <id>develop</id>
+            <properties>
+                <webdriver.base.url>https://test.otus.ru</webdriver.base.url>
+            </properties>
+        </profile>
+        <profile>
+            <id>demo</id>
+            <properties>
+                <webdriver.base.url>https://otus.ru</webdriver.base.url>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <plugin>
@@ -91,11 +114,13 @@
                     <threadCountMethods>${thread.count}</threadCountMethods>
                     <argLine>-Dfile.encoding=UTF-8</argLine>
                     <systemPropertyVariables>
+                        <rest.base.url>${rest.base.url}</rest.base.url>
                         <test.project.status>test</test.project.status>
                         <test.project.language>${test.project.language}</test.project.language>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -106,6 +131,7 @@
                     <showDeprecation>true</showDeprecation>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -124,6 +150,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
@@ -148,6 +175,5 @@
         </plugins>
 
     </build>
-
 
 </project>

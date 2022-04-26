@@ -6,16 +6,20 @@ import dto.users.UserStore;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.apache.commons.lang3.StringUtils;
 
 public class UserStoreApi {
 
-  public final static String BASE_URL = "https://petstore.swagger.io/v2";
   public final static String PATH = "/user";
   private final RequestSpecification spec;
 
+  private static String getBaseUrl() {
+    return StringUtils.stripEnd(System.getProperty("rest.base.url"), "/");
+  }
+
   public UserStoreApi() {
     spec = given()
-            .baseUri(BASE_URL)
+            .baseUri(getBaseUrl())
             .contentType(ContentType.JSON);
   }
 
