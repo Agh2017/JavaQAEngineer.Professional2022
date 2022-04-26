@@ -1,23 +1,23 @@
 package User.CreateUser;
 
-import dto.users.User1;
-import dto.users.User1Out;
+import dto.users.UserStore;
+import dto.users.UserStoreOut;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import services.UserApi1;
+import services.UserStoreApi;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
 
-public class CreateUser1Test {
-  UserApi1 userApi1 = new UserApi1();
+public class CreateUserStoreTest {
+  UserStoreApi userStoreApi = new UserStoreApi();
 
   @Test
-  public void checkCreateUser() {
+  public void checkCreateUserStore() {
 
-    User1 user = User1.builder()
+    UserStore user = UserStore.builder()
             .userStatus(50555)
             .lastName("last name"
             )
@@ -29,7 +29,7 @@ public class CreateUser1Test {
             .phone("string")
             .build();
 
-    userApi1.createUser(user)
+    userStoreApi.createUser(user)
             .then()
             .log().all()
             .statusCode(200)
@@ -38,12 +38,12 @@ public class CreateUser1Test {
             .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema/CreateUser.json"));
     // Мачеры hamcrest проверки
 
-    Response response = userApi1.createUser(user);
+    Response response = userStoreApi.createUser(user);
     String actualResult = response.jsonPath().get("message"); //jsonPath() проверки
 
     Assertions.assertEquals("111", actualResult);
 
-    User1Out user1Out = response.then().extract().as(User1Out.class);
+    UserStoreOut user1Out = response.then().extract().as(UserStoreOut.class);
     Assertions.assertEquals ("unknown", user1Out.getType());
   }
 

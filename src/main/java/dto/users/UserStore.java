@@ -5,7 +5,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User1 {
+public class UserStore {
     @Getter
     private String firstName;
     @Getter

@@ -8,7 +8,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @AllArgsConstructor
 @JsonSerialize
 @NoArgsConstructor
-public class User1Out {
+public class UserStoreOut {
 
     @Getter
     private Long code;

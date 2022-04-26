@@ -4,19 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
+    <groupId>otus</groupId>
     <artifactId>StudyProject</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <assertj.core>3.22.0</assertj.core>
-        <webdriver.manager.version>4.2.0</webdriver.manager.version>
-        <selenium.java.version>3.141.59</selenium.java.version>
         <junit.version>5.8.1</junit.version>
-        <maven.checkstyle>3.1.0</maven.checkstyle>
+        <maven.checkstyle>3.1.0</maven.checkstyle> <!-- добавить -->
         <junitBom.version>5.8.1</junitBom.version>
         <faker.version>1.0.2</faker.version>
-        <findbugs.maven>3.0.5</findbugs.maven>
+        <findbugs.maven>3.0.5</findbugs.maven> <!-- добавить -->
         <rest.assured>4.4.0</rest.assured>
         <lombok>1.18.22</lombok>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,11 +25,8 @@
         <perCoreThreadCount>false</perCoreThreadCount>
         <useUnlimitedThreads>true</useUnlimitedThreads>
         <thread.count>32</thread.count>
-        <browser>chrome</browser>
-        <webdriver.base.url>https://otus.ru</webdriver.base.url>
         <test.project.language>RU</test.project.language>
         <jackson.mapper.asl>1.9.13</jackson.mapper.asl>
-        <webdriver.timeouts.implicitlywait>5000</webdriver.timeouts.implicitlywait>
         <surefire.plugin.version>2.22.2</surefire.plugin.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <json.schema.validator>4.3.1</json.schema.validator> <!-- эта версия не тормозит -->
@@ -42,11 +37,6 @@
             <groupId>io.rest-assured</groupId>
             <artifactId>json-schema-validator</artifactId>
             <version>${json.schema.validator}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>${webdriver.manager.version}</version>
         </dependency>
         <dependency>
             <groupId>org.junit</groupId>
@@ -101,10 +91,6 @@
                     <threadCountMethods>${thread.count}</threadCountMethods>
                     <argLine>-Dfile.encoding=UTF-8</argLine>
                     <systemPropertyVariables>
-                        <browser>${browser}</browser>
-                        <webdriver.timeouts.implicitlywait>${webdriver.timeouts.implicitlywait}
-                        </webdriver.timeouts.implicitlywait>
-                        <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
                         <test.project.status>test</test.project.status>
                         <test.project.language>${test.project.language}</test.project.language>
                     </systemPropertyVariables>
