@@ -33,7 +33,7 @@ public class CreateUserStoreTest {
             .then()
             .log().all()
             .statusCode(200)
-            .time(lessThan(5000L))
+            .time(lessThan(6500L))
             .body("type", equalTo("unknown")) // вложенность через точку
             .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema/CreateUser.json"));
     // Мачеры hamcrest проверки

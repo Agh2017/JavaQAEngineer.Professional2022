@@ -1,34 +1,19 @@
 package services;
 
+import static services.BaseApi.EndPoints.PATH_USER_STORE;
 import static io.restassured.RestAssured.given;
 
 import dto.users.UserStore;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-import org.apache.commons.lang3.StringUtils;
 
-public class UserStoreApi {
-
-  public final static String PATH = "/user";
-  private final RequestSpecification spec;
-
-  private static String getBaseUrl() {
-    return StringUtils.stripEnd(System.getProperty("rest.base.url"), "/");
-  }
-
-  public UserStoreApi() {
-    spec = given()
-            .baseUri(getBaseUrl())
-            .contentType(ContentType.JSON);
-  }
+public class UserStoreApi extends BaseApi{
 
   public Response createUser(UserStore user) {
 
-    return given(spec)
+    return given(getSpec())
             .log().all()
             .body(user)
             .when()
-            .post(PATH);
+            .post(PATH_USER_STORE.getValue());
   }
 }

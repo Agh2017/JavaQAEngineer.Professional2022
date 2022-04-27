@@ -33,7 +33,7 @@ public class CreateOrderTest {
     storeApi.createOrder(order)
             .then()
             .log().all()
-            .time(lessThan(5000L))
+            .time(lessThan(6500L))
             .statusCode(200)
             .body("status", equalTo("free"));
 
@@ -53,7 +53,7 @@ public class CreateOrderTest {
     storeApi.createOrder(order)
             .then()
             .log().all()
-            .time(lessThan(5000L))
+            .time(lessThan(6500L))
             .statusCode(200)
             .body("status", equalTo("placed"));
 
@@ -65,7 +65,7 @@ public class CreateOrderTest {
     storeApi.deleteOrder()
             .then()
             .log().all()
-            .time(lessThan(5000L))
+            .time(lessThan(6500L))
             .statusCode(200)
             .body("message", equalTo("2"));
 

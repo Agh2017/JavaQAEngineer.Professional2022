@@ -1,43 +1,28 @@
 package services;
 
+import static services.BaseApi.EndPoints.PATH_STORE;
 import static io.restassured.RestAssured.given;
 
 import dto.store.Order;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-import org.apache.commons.lang3.StringUtils;
 
-public class StoreApi {
-
-  public final static String PATH1 = "/store/order";
-  public final static String PATH2 = "/store/order/2";
-  private final RequestSpecification spec;
-
-  private static String getBaseUrl() {
-    return StringUtils.stripEnd(System.getProperty("rest.base.url"), "/");
-  }
-
-  public StoreApi() {
-    spec = given()
-            .baseUri(getBaseUrl())
-            .contentType(ContentType.JSON);
-  }
+public class StoreApi extends BaseApi{
 
   public Response createOrder(Order order) {
 
-    return given(spec)
+    return given(getSpec())
             .log().all()
             .body(order)
             .when()
-            .post(PATH1);
+            .post(PATH_STORE.getValue());
   }
 
+  //TODO прокинуть номер заказа
   public Response deleteOrder() {
 
-    return given(spec)
+    return given(getSpec())
             .log().all()
             .when()
-            .delete(PATH2);
+            .delete(PATH_STORE.getValue()+"/2");
   }
 }

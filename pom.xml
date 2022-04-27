@@ -31,6 +31,9 @@
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <json.schema.validator>4.3.1</json.schema.validator> <!-- эта версия не тормозит -->
         <rest.base.url>https://petstore.swagger.io/v2</rest.base.url>
+        <rest.pet.url>pet</rest.pet.url>
+        <rest.store.url>store/order</rest.store.url>
+        <rest.user.store.url>user</rest.user.store.url>
     </properties>
 
     <dependencies>
@@ -83,18 +86,18 @@
             <id>production</id>
             <properties>
                 <rest.base.url>https://petstore.swagger.io/v2</rest.base.url>
+                <rest.pet.url>pet</rest.pet.url>
+                <rest.store.url>store/order</rest.store.url>
+                <rest.user.store.url>user</rest.user.store.url>
             </properties>
         </profile>
         <profile>
             <id>develop</id>
             <properties>
-                <webdriver.base.url>https://test.otus.ru</webdriver.base.url>
-            </properties>
-        </profile>
-        <profile>
-            <id>demo</id>
-            <properties>
-                <webdriver.base.url>https://otus.ru</webdriver.base.url>
+                <rest.base.url>https://petstore.swagger.io/v2/dev</rest.base.url>
+                <rest.pet.url>pet/dev</rest.pet.url>
+                <rest.store.url>store/order/dev</rest.store.url>
+                <rest.user.store.url>user/dev</rest.user.store.url>
             </properties>
         </profile>
     </profiles>
@@ -115,6 +118,9 @@
                     <argLine>-Dfile.encoding=UTF-8</argLine>
                     <systemPropertyVariables>
                         <rest.base.url>${rest.base.url}</rest.base.url>
+                        <rest.pet.url>${rest.pet.url}</rest.pet.url>
+                        <rest.store.url>${rest.store.url}</rest.store.url>
+                        <rest.user.store.url>${rest.user.store.url}</rest.user.store.url>
                         <test.project.status>test</test.project.status>
                         <test.project.language>${test.project.language}</test.project.language>
                     </systemPropertyVariables>
