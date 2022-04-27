@@ -5,10 +5,12 @@ import static org.hamcrest.Matchers.lessThan;
 
 import dto.store.Order;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import services.StoreApi;
 
 public class CreateOrderTest {
 
+  private final StoreApi storeApi;
   /*
      Тест-кейсы по методу создания/удаления заказа:
 
@@ -18,7 +20,11 @@ public class CreateOrderTest {
   4. Попробовать удалить заказ 2 снова, проверить что заказ 2 не найден (параметр "message")
    */
 
-  StoreApi storeApi = new StoreApi();
+  @Autowired(required=false) //TODO не работает не фига вообще
+  public CreateOrderTest(StoreApi storeApi) {
+    System.out.println("CreateOrderTest bean is created");
+    this.storeApi = storeApi;
+  }
 
   @Test
   public void createOrder() {

@@ -5,7 +5,9 @@ import static io.restassured.RestAssured.given;
 
 import dto.store.Order;
 import io.restassured.response.Response;
+import org.springframework.stereotype.Component;
 
+@Component
 public class StoreApi extends BaseApi{
 
   public Response createOrder(Order order) {

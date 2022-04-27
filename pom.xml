@@ -34,9 +34,20 @@
         <rest.pet.url>pet</rest.pet.url>
         <rest.store.url>store/order</rest.store.url>
         <rest.user.store.url>user</rest.user.store.url>
+        <spring>5.2.20.RELEASE</spring>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring}</version>
+        </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>json-schema-validator</artifactId>
