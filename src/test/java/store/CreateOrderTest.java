@@ -4,13 +4,21 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
 
 import dto.store.Order;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import services.StoreApi;
 
+@DisplayName("DI for constructors")
+@TestInstance(TestInstance.Lifecycle.PER_METHOD)
 public class CreateOrderTest {
 
-  private final StoreApi storeApi;
+  private StoreApi storeApi;
   /*
      Тест-кейсы по методу создания/удаления заказа:
 
@@ -19,16 +27,14 @@ public class CreateOrderTest {
   3. Удалить заказ 2, проверить значение параметра "message"
   4. Попробовать удалить заказ 2 снова, проверить что заказ 2 не найден (параметр "message")
    */
-
-  @Autowired(required=false) //TODO не работает не фига вообще
-  public CreateOrderTest(StoreApi storeApi) {
-    System.out.println("CreateOrderTest bean is created");
-    this.storeApi = storeApi;
+  @Autowired
+  public CreateOrderTest(TestInfo testInfo) {
+    String actual = testInfo.getDisplayName();
+    assert("DI for constructors".equals(actual));
   }
 
   @Test
   public void createOrder() {
-
     Order order = Order.builder()
             .id(1)
             .petId(15)
@@ -66,7 +72,7 @@ public class CreateOrderTest {
   }
 
   @Test
-  public void deleteOrder2() {
+  void deleteOrder2() {
 
     storeApi.deleteOrder()
             .then()

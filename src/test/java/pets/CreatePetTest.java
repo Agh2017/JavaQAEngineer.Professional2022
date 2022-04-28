@@ -1,16 +1,16 @@
 package pets;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.github.javafaker.Faker;
 import dto.pet.Category;
 import dto.pet.Pet;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import services.PetApi;
 
-public class CreatePetTest {
+class CreatePetTest {
 
   private final Faker faker = new Faker();
 
@@ -28,7 +28,7 @@ public class CreatePetTest {
   PetApi petApi = new PetApi();
 
   @Test
-  public void createRandomPet() {
+  void createRandomPet() {
     String name = faker.cat().name();
     int id = createRandomId();
     Pet pet = Pet.builder()
@@ -40,11 +40,11 @@ public class CreatePetTest {
 
     Response response = petApi.createPet(pet);
     Integer responseId = response.jsonPath().get("id");
-    Assertions.assertEquals(id, responseId);
+    assertEquals(id, responseId, () -> "id is wrong");
   }
 
   @Test
-  public void createPet2() {
+  void createPet2() {
 
     String name = faker.dog().name();
     Pet pet2 = Pet.builder()
@@ -62,7 +62,7 @@ public class CreatePetTest {
   }
 
   @Test
-  public void createPetInOneCategory() {
+  void createPetInOneCategory() {
 
     Pet pet2 = Pet.builder()
             .id(createRandomId())
@@ -73,7 +73,7 @@ public class CreatePetTest {
 
     Response response = petApi.createPet(pet2);
     String responseId = response.jsonPath().get("category.name");
-    Assertions.assertEquals("Dogs", responseId);
+    assertEquals("Dogs", responseId);
   }
 
   private int createRandomId() {
