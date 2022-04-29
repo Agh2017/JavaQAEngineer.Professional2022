@@ -9,10 +9,17 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import paramresolver.UserServiceParamResolver;
 import services.UserStoreApi;
 
+@ExtendWith({UserServiceParamResolver.class})
 public class CreateUserStoreTest {
-  UserStoreApi userStoreApi = new UserStoreApi();
+  private final UserStoreApi userStoreApi;
+
+  public CreateUserStoreTest(UserStoreApi userStoreApi) {
+    this.userStoreApi = userStoreApi;
+  }
 
   @Test
   public void checkCreateUserStore() {

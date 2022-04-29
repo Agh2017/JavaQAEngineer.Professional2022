@@ -24,11 +24,11 @@ public class UserServiceParamResolver implements ParameterResolver {
     Object object = new StoreApi();
     Object currentObject = parameterContext.getParameter().getType();
     if (StoreApi.class.equals(currentObject)) {
-      return object = new StoreApi();
+      object = new StoreApi();
     } else if (PetApi.class.equals(currentObject)) {
-      return object = new PetApi();
+      object = new PetApi();
     } else if (UserStoreApi.class.equals(currentObject)) {
-      return object = new UserStoreApi();
+      object = new UserStoreApi();
     }
     return object;
   }

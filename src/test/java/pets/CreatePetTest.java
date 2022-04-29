@@ -8,8 +8,11 @@ import dto.pet.Category;
 import dto.pet.Pet;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import paramresolver.UserServiceParamResolver;
 import services.PetApi;
 
+@ExtendWith({UserServiceParamResolver.class})
 class CreatePetTest {
 
   private final Faker faker = new Faker();
@@ -25,7 +28,11 @@ class CreatePetTest {
    */
 
 
-  PetApi petApi = new PetApi();
+  private final PetApi petApi;
+
+  public CreatePetTest(PetApi petApi) {
+    this.petApi = petApi;
+  }
 
   @Test
   void createRandomPet() {
