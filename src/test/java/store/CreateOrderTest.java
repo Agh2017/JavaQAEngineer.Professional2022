@@ -4,21 +4,15 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
 
 import dto.store.Order;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInfo;
-import org.junit.jupiter.api.TestInstance;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+import org.junit.jupiter.api.extension.ExtendWith;
+import paramresolver.UserServiceParamResolver;
 import services.StoreApi;
 
-@DisplayName("DI for constructors")
-@TestInstance(TestInstance.Lifecycle.PER_METHOD)
-public class CreateOrderTest {
+@ExtendWith({UserServiceParamResolver.class})
+class CreateOrderTest {
 
-  private StoreApi storeApi;
+  private final StoreApi storeApi;
   /*
      Тест-кейсы по методу создания/удаления заказа:
 
@@ -27,14 +21,12 @@ public class CreateOrderTest {
   3. Удалить заказ 2, проверить значение параметра "message"
   4. Попробовать удалить заказ 2 снова, проверить что заказ 2 не найден (параметр "message")
    */
-  @Autowired
-  public CreateOrderTest(TestInfo testInfo) {
-    String actual = testInfo.getDisplayName();
-    assert("DI for constructors".equals(actual));
+  CreateOrderTest(StoreApi storeApi) {
+    this.storeApi = storeApi;
   }
 
   @Test
-  public void createOrder() {
+  void createOrder() {
     Order order = Order.builder()
             .id(1)
             .petId(15)
@@ -52,7 +44,7 @@ public class CreateOrderTest {
   }
 
   @Test
-  public void createOrder2() {
+  void createOrder2() {
 
     Order order = Order.builder()
             .id(2)
@@ -84,7 +76,7 @@ public class CreateOrderTest {
   }
 
   @Test
-  public void isDeleted() {
+  void isDeleted() {
 
     storeApi.deleteOrder()
             .then()
