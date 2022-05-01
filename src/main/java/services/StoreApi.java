@@ -6,7 +6,7 @@ import static io.restassured.RestAssured.given;
 import dto.store.Order;
 import io.restassured.response.Response;
 
-public class StoreApi extends BaseApi{
+public class StoreApi extends BaseApi {
 
   public Response createOrder(Order order) {
 
@@ -18,11 +18,19 @@ public class StoreApi extends BaseApi{
   }
 
   //TODO прокинуть номер заказа
-  public Response deleteOrder() {
+  public Response deleteOrder(String number) {
 
     return given(getSpec())
             .log().all()
             .when()
-            .delete(PATH_STORE.getValue()+"/2");
+            .delete(PATH_STORE.getValue() + "/" + number);
+  }
+
+  public Response getOrderByNumber(String number) {
+
+    return given(getSpec())
+            .log().all()
+            .when()
+            .get(PATH_STORE.getValue() + "/" + number);
   }
 }

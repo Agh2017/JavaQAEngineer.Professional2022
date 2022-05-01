@@ -13,14 +13,7 @@ import services.StoreApi;
 class CreateOrderTest {
 
   private final StoreApi storeApi;
-  /*
-     Тест-кейсы по методу создания/удаления заказа:
 
-  1. Создать заказ и проверить что статус заказа "placed"
-  2. Проверить что можно создать несколько заказов
-  3. Удалить заказ 2, проверить значение параметра "message"
-  4. Попробовать удалить заказ 2 снова, проверить что заказ 2 не найден (параметр "message")
-   */
   CreateOrderTest(StoreApi storeApi) {
     this.storeApi = storeApi;
   }
@@ -62,29 +55,4 @@ class CreateOrderTest {
             .body("status", equalTo("placed"));
 
   }
-
-  @Test
-  void deleteOrder2() {
-
-    storeApi.deleteOrder()
-            .then()
-            .log().all()
-            .time(lessThan(6500L))
-            .statusCode(200)
-            .body("message", equalTo("2"));
-
-  }
-
-  @Test
-  void isDeleted() {
-
-    storeApi.deleteOrder()
-            .then()
-            .log().all()
-            .time(lessThan(5000L))
-            .statusCode(404)
-            .body("message", equalTo("Order Not Found"));
-
-  }
-
 }
