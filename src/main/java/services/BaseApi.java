@@ -23,7 +23,9 @@ public abstract class BaseApi {
   }
 
   protected enum EndPoints  {
-    PATH_PET(System.getProperty("rest.pet.url")), PATH_STORE(System.getProperty("rest.store.url")), PATH_USER_STORE(System.getProperty("rest.user.store.url"));
+    PATH_PET(System.getProperty("rest.pet.url")),
+    PATH_STORE(System.getProperty("rest.store.url")),
+    PATH_USER_STORE(System.getProperty("rest.user.store.url"));
 
     @Getter
     private final String value;
