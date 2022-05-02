@@ -19,13 +19,10 @@ class CreatePetTest {
 
   /*
   Спецификация "RequestSpecification" использована в сервисе "PetApi".
-
   Тест-кейсы по методу создания питомца:
-
-  1. Создать кота и проверить его id
-  2. Создать собаку и таким образом проверить, что можно создать нескольких животных
-  3. Создать еще одну собаку и таким образом проверить, что можно создать нескольких животных в одной категории.
-   */
+  - Создаем 2-х питомцев в разной категории -> проверяем через апишку, что ордеры создались (не поля проверяем, а делаем вызов метода апи listOrders и проверяем, что в списке ордеров есть нужные нам ордера)
+  - Создаем 2-х питомцев в одной категории -> проверяем через апишку, что ордеры создались
+  */
 
 
   private final PetApi petApi;
@@ -35,41 +32,37 @@ class CreatePetTest {
   }
 
   @Test
-  void createRandomPet() {
+  void create2RandomPets() {
     String name = faker.cat().name();
     int id = createRandomId();
-    Pet pet = Pet.builder()
+    Pet cat = Pet.builder()
             .id(id)
             .name(name)
             .status("reserve")
             .category(new Category("cat", 12))
             .build();
 
-    Response response = petApi.createPet(pet);
-    Integer responseId = response.jsonPath().get("id");
-    assertEquals(id, responseId, () -> "id is wrong");
-  }
+    Response response1 = petApi.createPet(cat);
+    assertEquals("200", String.valueOf(response1.getStatusCode()), "StatusCode is wrong");
 
-  @Test
-  void createPet2() {
-
-    String name = faker.dog().name();
-    Pet pet2 = Pet.builder()
-            .id(createRandomId())
+    name = faker.dog().name();
+    Pet dog = Pet.builder()
+            .id(id)
             .name(name)
             .status("free")
             .category(new Category("Dogs", 15))
             .build();
 
     petApi
-            .createPet(pet2)
+            .createPet(dog)
             .then()
             .statusCode(200)
             .body(containsString(name));
+    //TODO сделать проверки
   }
 
   @Test
-  void createPetInOneCategory() {
+  void create2PetInOneCategory() {
 
     Pet pet2 = Pet.builder()
             .id(createRandomId())
