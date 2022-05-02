@@ -24,6 +24,15 @@ public class PetApi extends BaseApi{
             .when()
             .get(PATH_PET.getValue()+"/" + id);
   }
+
+  public Response deletePetFromBase(int id) {
+
+    return given(getSpec())
+            .log().all()
+            .when()
+            .delete(PATH_PET.getValue()+"/" + id);
+  }
+
 }
 
 

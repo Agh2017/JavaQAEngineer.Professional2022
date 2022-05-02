@@ -7,6 +7,7 @@ import com.github.javafaker.Faker;
 import dto.pet.Category;
 import dto.pet.NewPet;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import paramresolver.UserServiceParamResolver;
@@ -21,7 +22,7 @@ class CreatePetTest {
 
   private final Faker faker = new Faker();
   private final PetApi petApi;
-
+  private final List<Integer> listId = new ArrayList<>();
   /*
   Тест-кейсы по методу создания питомца:
   create2RandomPets - Создаем 2-х питомцев в разной категории -> проверяем через  API правильность нескольких полей в полученных ответах.
@@ -35,11 +36,10 @@ class CreatePetTest {
   @Test
   void create2RandomPets() {
     String name1 = faker.cat().name();
-    int id = faker.number().numberBetween(1, 99999);
+    listId.add(faker.number().numberBetween(1, 99999));
     NewPet cat = NewPet.builder()
-            .id(id)
+            .id(listId.get(0))
             .name(name1)
-            .status("reserve")
             .category(new Category("cat", 12))
             .build();
 
@@ -47,14 +47,15 @@ class CreatePetTest {
     assertAll(
         () -> assertEquals("200", (String.valueOf(response1.getStatusCode())), "Status code is missing"),
         () -> assertEquals(name1, response1.jsonPath().get("name").toString(), "Name is missing"),
-        () -> assertEquals(String.valueOf(id), response1.jsonPath().get("id").toString(), "Id is missing")
+        () -> assertEquals(String.valueOf(listId.get(0)), response1.jsonPath().get("id").toString(), "Id is missing")
     );
 
+    listId.add(listId.get(0)+1);
+    int id = listId.get(listId.size()-1);
     String name2 = faker.dog().name();
     NewPet dog = NewPet.builder()
-            .id(id + 1)
+            .id(id)
             .name(name2)
-            .status("free")
             .category(new Category("Dogs", 15))
             .build();
 
@@ -62,7 +63,7 @@ class CreatePetTest {
     assertAll(
         () -> assertEquals("200", (String.valueOf(response2.getStatusCode())), "Status code is missing"),
         () -> assertEquals(name2, response2.jsonPath().get("name").toString(), "Name is missing"),
-        () -> assertEquals(String.valueOf(id + 1), response2.jsonPath().get("id").toString(), "Id is missing")
+        () -> assertEquals(String.valueOf(id), response2.jsonPath().get("id").toString(), "Id is missing")
     );
   }
 
@@ -71,10 +72,10 @@ class CreatePetTest {
     List<NewPet> petList = new ArrayList<>();
 
     IntStream.range(0, 3).forEach(i -> {
-      int id = faker.number().numberBetween(1, 10);
+      listId.add(faker.number().numberBetween(10, 10000));
       String name = faker.animal().name();
       NewPet dog = NewPet.builder()
-              .id(id)
+              .id(listId.get(listId.size()-1))
               .name(name)
               .status("free")
               .category(new Category("Dogs", 15))
@@ -99,5 +100,13 @@ class CreatePetTest {
           () -> assertEquals(expectedStatus, response.jsonPath().get("status"), "Status is missing")
       );
     });
+  }
+
+  @AfterEach
+  void tearDown() {
+    for (Integer integer : listId) {
+      petApi.deletePetFromBase(integer);
+    }
+    System.out.println("=== Питомцы удалены ===");
   }
 }

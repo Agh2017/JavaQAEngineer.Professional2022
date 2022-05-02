@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.github.javafaker.Faker;
 import dto.store.Order;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import paramresolver.UserServiceParamResolver;
@@ -68,6 +69,10 @@ class CreateOrderTest {
         () -> assertEquals("unknown", getOrder.jsonPath().get("type"), "Type is missing"),
         () -> assertEquals("Order not found", getOrder.jsonPath().get("message"), "Message is missing")
     );
+  }
 
+  @AfterEach
+  void tearDown() {
+    System.out.println("=== Ордер и так уже удален ===");
   }
 }

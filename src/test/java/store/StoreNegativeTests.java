@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.github.javafaker.Faker;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -51,6 +52,12 @@ class StoreNegativeTests {
         () -> assertEquals("unknown", response.jsonPath().get("type"), "Type is missing"),
         () -> assertEquals("Order not found", response.jsonPath().get("message"), "Message is missing")
     );
+  }
+
+
+  @AfterEach
+  void tearDown() {
+    System.out.println("=== Удалять нечего ===");
   }
 }
 

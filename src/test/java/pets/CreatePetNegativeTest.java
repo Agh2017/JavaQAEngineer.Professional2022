@@ -7,6 +7,8 @@ import com.github.javafaker.Faker;
 import dto.pet.Category;
 import dto.pet.NewPet;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import paramresolver.UserServiceParamResolver;
@@ -19,10 +21,13 @@ class CreatePetNegativeTest {
 
   /*
   Негативные тест-кейсы по методу создания питомца:
-  negativeCreate2RandomPetsWithSomeId - Пытаемся создать 2-х питомцев c одним ID-> проверяем что приходит ошибка при создании 2-го питомца c помощью этого эндпойнта. Найден баг.
+  negativeCreate2RandomPetsWithSomeId
+  - Пытаемся создать 2-х питомцев c одним ID.
+  - Проверяем что приходит ошибка при создании 2-го питомца c помощью этого эндпойнта.
   */
 
   private final PetApi petApi;
+  private int id;
 
   public CreatePetNegativeTest(PetApi petApi) {
     this.petApi = petApi;
@@ -31,7 +36,7 @@ class CreatePetNegativeTest {
   @Test
   void negativeCreate2RandomPetsWithSomeId() {
     String name = faker.cat().name();
-    int id = faker.number().numberBetween(1, 99999);
+    id = faker.number().numberBetween(1, 99999);
     NewPet cat = NewPet.builder()
             .id(id)
             .name(name)
@@ -55,7 +60,12 @@ class CreatePetNegativeTest {
             .then()
             .statusCode(200)
             .body(containsString(name));
-
     assertEquals("404", String.valueOf(response1.getStatusCode()), "StatusCode is wrong");
+  }
+
+  @AfterEach
+  void tearDown() {
+    petApi.deletePetFromBase(id);
+    System.out.println("=== Питомец удален ===");
   }
 }
