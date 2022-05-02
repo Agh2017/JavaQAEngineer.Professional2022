@@ -1,7 +1,5 @@
 package pets;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.in;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -47,14 +45,14 @@ class CreatePetTest {
 
     Response response1 = petApi.createNewPet(cat);
     assertAll(
-            () -> assertEquals("200",(String.valueOf(response1.getStatusCode())),"Status code is missing"),
-            () -> assertEquals(name1,response1.jsonPath().get("name").toString(), "Name is missing"),
-            () -> assertEquals(String.valueOf(id), response1.jsonPath().get("id").toString(), "Id is missing")
+        () -> assertEquals("200", (String.valueOf(response1.getStatusCode())), "Status code is missing"),
+        () -> assertEquals(name1, response1.jsonPath().get("name").toString(), "Name is missing"),
+        () -> assertEquals(String.valueOf(id), response1.jsonPath().get("id").toString(), "Id is missing")
     );
 
     String name2 = faker.dog().name();
     NewPet dog = NewPet.builder()
-            .id(id+1)
+            .id(id + 1)
             .name(name2)
             .status("free")
             .category(new Category("Dogs", 15))
@@ -62,9 +60,9 @@ class CreatePetTest {
 
     Response response2 = petApi.createNewPet(dog);
     assertAll(
-            () -> assertEquals("200",(String.valueOf(response2.getStatusCode())),"Status code is missing"),
-            () -> assertEquals(name2,response2.jsonPath().get("name").toString(), "Name is missing"),
-            () -> assertEquals(String.valueOf(id+1), response2.jsonPath().get("id").toString(), "Id is missing")
+        () -> assertEquals("200", (String.valueOf(response2.getStatusCode())), "Status code is missing"),
+        () -> assertEquals(name2, response2.jsonPath().get("name").toString(), "Name is missing"),
+        () -> assertEquals(String.valueOf(id + 1), response2.jsonPath().get("id").toString(), "Id is missing")
     );
   }
 
@@ -95,10 +93,10 @@ class CreatePetTest {
 
       Response response = petApi.getPetFromBase(expectedId);
       assertAll(
-              () -> assertEquals("200",(String.valueOf(response.getStatusCode())),"Status code is missing"),
-              () -> assertEquals(expectedName,response.jsonPath().get("name").toString(), "Name is missing"),
-              () -> assertEquals(expectedCategory, response.jsonPath().get("category.name").toString(), "Category is missing"),
-              () -> assertEquals(expectedStatus, response.jsonPath().get("status"), "Status is missing")
+          () -> assertEquals("200", (String.valueOf(response.getStatusCode())), "Status code is missing"),
+          () -> assertEquals(expectedName, response.jsonPath().get("name").toString(), "Name is missing"),
+          () -> assertEquals(expectedCategory, response.jsonPath().get("category.name").toString(), "Category is missing"),
+          () -> assertEquals(expectedStatus, response.jsonPath().get("status"), "Status is missing")
       );
     });
   }

@@ -17,7 +17,6 @@ public class StoreApi extends BaseApi {
             .post(PATH_STORE.getValue());
   }
 
-  //TODO прокинуть номер заказа
   public Response deleteOrder(String number) {
 
     return given(getSpec())

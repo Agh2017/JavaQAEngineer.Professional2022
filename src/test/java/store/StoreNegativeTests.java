@@ -46,8 +46,8 @@ class StoreNegativeTests {
     //часто приходят неправильные ответы типа: Order Not found и т.п.
 
     assertAll(
-        () -> assertEquals("404",(String.valueOf(response.getStatusCode())),"Status code is missing"),
-        () -> assertEquals("404",response.jsonPath().get("code").toString(), "Code is missing"),
+        () -> assertEquals("404", (String.valueOf(response.getStatusCode())), "Status code is missing"),
+        () -> assertEquals("404", response.jsonPath().get("code").toString(), "Code is missing"),
         () -> assertEquals("unknown", response.jsonPath().get("type"), "Type is missing"),
         () -> assertEquals("Order not found", response.jsonPath().get("message"), "Message is missing")
     );
