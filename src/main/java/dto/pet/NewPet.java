@@ -7,7 +7,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Pet {
+public class NewPet {
   @Getter
   private List<String> photoUrls;
   @Getter

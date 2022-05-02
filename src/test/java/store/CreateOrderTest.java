@@ -14,12 +14,19 @@ class CreateOrderTest {
 
   private final StoreApi storeApi;
 
+  /*
+  Тест-кейсы по методу создания заказа:
+   createOrderAndDelete
+  - Создаем ордер -> проверяем через "Find purchase order by ID", что ордер создан.
+  - Удаляем ордер и проверяем через "Find purchase order by ID", что ордер удален.
+  */
+
   CreateOrderTest(StoreApi storeApi) {
     this.storeApi = storeApi;
   }
 
   @Test
-  void createOrder() {
+  void createOrderAndDelete() {
     Order order = Order.builder()
             .id(1)
             .petId(15)
@@ -34,25 +41,6 @@ class CreateOrderTest {
             .statusCode(200)
             .body("status", equalTo("free"));
 
-  }
-
-  @Test
-  void createOrder2() {
-
-    Order order = Order.builder()
-            .id(2)
-            .status("placed")
-            .quantity(2)
-            .petId(12)
-            .complete(true)
-            .build();
-
-    storeApi.createOrder(order)
-            .then()
-            .log().all()
-            .time(lessThan(6500L))
-            .statusCode(200)
-            .body("status", equalTo("placed"));
-
+    //TODO
   }
 }

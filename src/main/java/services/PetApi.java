@@ -3,18 +3,26 @@ package services;
 import static io.restassured.RestAssured.given;
 import static services.BaseApi.EndPoints.PATH_PET;
 
-import dto.pet.Pet;
+import dto.pet.NewPet;
 import io.restassured.response.Response;
 
 public class PetApi extends BaseApi{
 
-  public Response createPet(Pet pet) {
+  public Response createNewPet(NewPet pet) {
 
     return given(getSpec())
             .log().all()
             .body(pet)
             .when()
             .post(PATH_PET.getValue());
+  }
+
+  public Response getPetFromBase(int id) {
+
+    return given(getSpec())
+            .log().all()
+            .when()
+            .get(PATH_PET.getValue()+"/" + id);
   }
 }
 

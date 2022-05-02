@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.github.javafaker.Faker;
 import dto.pet.Category;
-import dto.pet.Pet;
+import dto.pet.NewPet;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,12 +18,9 @@ class CreatePetNegativeTest {
     private final Faker faker = new Faker();
 
   /*
-  Спецификация "RequestSpecification" использована в сервисе "PetApi".
-  Тест-кейсы по методу создания питомца:
-  - Создаем 2-х питомцев c одним ID-> проверяем что нельзя создать еще одного ( или изменить) питомца с одинаковым ID
-  c помощью этого эндпойнта
+  Негативные тест-кейсы по методу создания питомца:
+  negativeCreate2RandomPetsWithSomeId - Пытаемся создать 2-х питомцев c одним ID-> проверяем что приходит ошибка при создании 2-го питомца c помощью этого эндпойнта. Найден баг.
   */
-
 
     private final PetApi petApi;
 
@@ -31,23 +28,22 @@ class CreatePetNegativeTest {
         this.petApi = petApi;
     }
 
-
     @Test
-    void create2RandomPets() {
+    void negativeCreate2RandomPetsWithSomeId() {
         String name = faker.cat().name();
         int id = faker.number().numberBetween(1, 99999);
-        Pet cat = Pet.builder()
+        NewPet cat = NewPet.builder()
                 .id(id)
                 .name(name)
                 .status("reserve")
                 .category(new Category("cat", 12))
                 .build();
 
-        Response response1 = petApi.createPet(cat);
+        Response response1 = petApi.createNewPet(cat);
         assertEquals("200", String.valueOf(response1.getStatusCode()), "StatusCode is wrong");
 
         name = faker.dog().name();
-        Pet dog = Pet.builder()
+        NewPet dog = NewPet.builder()
                 .id(id)
                 .name(name)
                 .status("free")
@@ -55,10 +51,11 @@ class CreatePetNegativeTest {
                 .build();
 
         petApi
-                .createPet(dog)
+                .createNewPet(dog)
                 .then()
                 .statusCode(200)
                 .body(containsString(name));
-        //TODO сделать проверки
+
+        assertEquals("404", String.valueOf(response1.getStatusCode()), "StatusCode is wrong");
     }
 }

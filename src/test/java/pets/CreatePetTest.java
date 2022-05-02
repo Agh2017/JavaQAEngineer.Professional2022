@@ -1,31 +1,34 @@
 package pets;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.in;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.github.javafaker.Faker;
 import dto.pet.Category;
-import dto.pet.Pet;
+import dto.pet.NewPet;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import paramresolver.UserServiceParamResolver;
 import services.PetApi;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
+
 @ExtendWith({UserServiceParamResolver.class})
 class CreatePetTest {
 
   private final Faker faker = new Faker();
+  private final PetApi petApi;
 
   /*
-  Спецификация "RequestSpecification" использована в сервисе "PetApi".
   Тест-кейсы по методу создания питомца:
-  - Создаем 2-х питомцев в разной категории -> проверяем через апишку, что ордеры создались (не поля проверяем, а делаем вызов метода апи listOrders и проверяем, что в списке ордеров есть нужные нам ордера)
-  - Создаем 2-х питомцев в одной категории -> проверяем через апишку, что ордеры создались
+  create2RandomPets - Создаем 2-х питомцев в разной категории -> проверяем через  API правильность нескольких полей в полученных ответах.
+  create3PetInOneCategory - Создаем 3-х питомцев в одной категории -> проверяем через API, что питомцы есть в базе и создались правильно.
   */
-
-
-  private final PetApi petApi;
 
   public CreatePetTest(PetApi petApi) {
     this.petApi = petApi;
@@ -33,50 +36,70 @@ class CreatePetTest {
 
   @Test
   void create2RandomPets() {
-    String name = faker.cat().name();
-    int id = createRandomId();
-    Pet cat = Pet.builder()
+    String name1 = faker.cat().name();
+    int id = faker.number().numberBetween(1, 99999);
+    NewPet cat = NewPet.builder()
             .id(id)
-            .name(name)
+            .name(name1)
             .status("reserve")
             .category(new Category("cat", 12))
             .build();
 
-    Response response1 = petApi.createPet(cat);
-    assertEquals("200", String.valueOf(response1.getStatusCode()), "StatusCode is wrong");
+    Response response1 = petApi.createNewPet(cat);
+    assertAll(
+            () -> assertEquals("200",(String.valueOf(response1.getStatusCode())),"Status code is missing"),
+            () -> assertEquals(name1,response1.jsonPath().get("name").toString(), "Name is missing"),
+            () -> assertEquals(String.valueOf(id), response1.jsonPath().get("id").toString(), "Id is missing")
+    );
 
-    name = faker.dog().name();
-    Pet dog = Pet.builder()
-            .id(id)
-            .name(name)
+    String name2 = faker.dog().name();
+    NewPet dog = NewPet.builder()
+            .id(id+1)
+            .name(name2)
             .status("free")
             .category(new Category("Dogs", 15))
             .build();
 
-    petApi
-            .createPet(dog)
-            .then()
-            .statusCode(200)
-            .body(containsString(name));
-    //TODO сделать проверки
+    Response response2 = petApi.createNewPet(dog);
+    assertAll(
+            () -> assertEquals("200",(String.valueOf(response2.getStatusCode())),"Status code is missing"),
+            () -> assertEquals(name2,response2.jsonPath().get("name").toString(), "Name is missing"),
+            () -> assertEquals(String.valueOf(id+1), response2.jsonPath().get("id").toString(), "Id is missing")
+    );
   }
 
   @Test
-  void create2PetInOneCategory() {
+  void create3PetInOneCategory() {
+    List<NewPet> petList = new ArrayList<>();
 
-    Pet pet2 = Pet.builder()
-            .id(createRandomId())
-            .name(faker.animal().name())
-            .status("free")
-            .category(new Category("Dogs", 15))
-            .build();
+    IntStream.range(0, 3).forEach(i -> {
+      int id = faker.number().numberBetween(1, 10);
+      String name = faker.animal().name();
+      NewPet dog = NewPet.builder()
+              .id(id)
+              .name(name)
+              .status("free")
+              .category(new Category("Dogs", 15))
+              .build();
+      petList.add(i, dog);
+      petApi.createNewPet(dog);
+    });
 
-    Response response = petApi.createPet(pet2);
-    String responseId = response.jsonPath().get("category.name");
-    assertEquals("Dogs", responseId);
-  }
+    IntStream.range(0, 3).forEach(i -> {
 
-  private int createRandomId() {
-    return faker.number().numberBetween(1, 99999);
+      NewPet currentPet = petList.get(i);
+      int expectedId = currentPet.getId();
+      String expectedName = currentPet.getName();
+      String expectedCategory = currentPet.getCategory().getName();
+      String expectedStatus = currentPet.getStatus();
+
+      Response response = petApi.getPetFromBase(expectedId);
+      assertAll(
+              () -> assertEquals("200",(String.valueOf(response.getStatusCode())),"Status code is missing"),
+              () -> assertEquals(expectedName,response.jsonPath().get("name").toString(), "Name is missing"),
+              () -> assertEquals(expectedCategory, response.jsonPath().get("category.name").toString(), "Category is missing"),
+              () -> assertEquals(expectedStatus, response.jsonPath().get("status"), "Status is missing")
+      );
+    });
   }
 }
