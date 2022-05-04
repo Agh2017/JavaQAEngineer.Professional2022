@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="listeners" />
         <module name="StudyProject" />
+        <module name="rest assured" />
       </profile>
     </annotationProcessing>
   </component>

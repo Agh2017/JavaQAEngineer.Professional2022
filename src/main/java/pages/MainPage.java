@@ -22,7 +22,7 @@ public class MainPage extends AnyPageAbs<MainPage> {
   private static final String YEAR = "2022";
   private static final String REGEX_DATA = "(.*?(январ|феврал|март|апрел|ма|июн|июл|август|сентябр|октябр|ноябр|декабр))";
   private static final String NAME_COURSE_FOR_SEARCH = "Специализация Administrator Linux";
-  private ArrayList<TileOnMainPage> listTiles = new ArrayList<>();
+  private final ArrayList<TileOnMainPage> listTiles = new ArrayList<>();
   private int sourceDate = -1;
 
   public MainPage(WebDriver driver) {
@@ -55,23 +55,13 @@ public class MainPage extends AnyPageAbs<MainPage> {
     assertThat(actualValue).isEqualTo(expectedValue);
   }
 
-  public MainPage moveMouseToTileCourse() {
-    JavascriptExecutor js = (JavascriptExecutor)driver;
-    js.executeScript("window.scrollBy(0,600)");
-    actions
-            .moveToElement(justCourse)
-            .clickAndHold()
-            .moveByOffset(0, 50) // scroll down
-            .release()
-            .build().perform();
-    return new MainPage(driver);
-  }
-
-  public void clickMouse() {
+  public void moveMouseToTileCourseAndClick() {
     standartWaiter.waitForCondition(ExpectedConditions
             .elementToBeClickable(justCourse));
     actions
-            .click(justCourse)
+            .moveToElement(justCourse)
+            .click()
+            .release()
             .build().perform();
   }
 
@@ -79,14 +69,10 @@ public class MainPage extends AnyPageAbs<MainPage> {
 
     prepareCoursesData();
 
-    boolean courseIsPresent = listTiles.stream()
+    assertTrue(listTiles.stream()
             .map(TileOnMainPage::getTileName)
-            .anyMatch(name -> name.contains(NAME_COURSE_FOR_SEARCH));
-
-    assertTrue(courseIsPresent);
-
+            .anyMatch(name -> name.contains(NAME_COURSE_FOR_SEARCH)));
     System.out.println("Курс: \"" + NAME_COURSE_FOR_SEARCH + "\" найден");
-
   }
 
   public void choiceCourseOnDate() {

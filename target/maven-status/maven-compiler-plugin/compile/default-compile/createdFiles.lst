@@ -13,6 +13,7 @@ driver\DriverFactory.class
 driver\impl\IDriver.class
 driver\impl\FFWebDriver.class
 annotations\Component.class
+utils\DateFromCalendar.class
 waiters\StandartWaiter.class
 exceptions\DriverTypeNotSupported.class
 listeners\MouseListener.class
