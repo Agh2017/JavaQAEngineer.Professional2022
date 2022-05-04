@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import pages.MainPage;
 
 @ExtendWith(UIExtension.class)
-public class MainPage_Test {
+public class MainPageTest {
 
   private MainPage mainPage;
 
@@ -32,8 +32,7 @@ public class MainPage_Test {
   public void moveMouseActions() {
     mainPage
             .open()
-            .moveMouseToTileCourse()
-            .clickMouse();
+            .moveMouseToTileCourseAndClick();
     mainPage
             .open();
   }
