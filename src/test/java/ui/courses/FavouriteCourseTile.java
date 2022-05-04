@@ -21,7 +21,7 @@ public class FavouriteCourseTile {
 
     new MainPage(driver)
             .open()
-            .closeCookiePopup(); //закрываем попап чтобы не мешал кликать по цели
+            .closeCookiePopup();
 
     new FavouriteCourses(driver)
             .clickLessonItems()

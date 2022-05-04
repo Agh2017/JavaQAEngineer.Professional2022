@@ -44,9 +44,14 @@ public class MainPageTest {
   }
 
   @Test
-  public void choiceCourseOnDate(){
+  public void choiceCourseOnMaxDate(){
     mainPage.open()
-            .choiceCourseOnDate();
+            .choiceCourseOnDate(); //TODO
   }
 
+  @Test
+  public void choiceCourseOnMinDate(){
+    mainPage.open()
+            .choiceCourseOnDate(); //TODO
+  }
 }

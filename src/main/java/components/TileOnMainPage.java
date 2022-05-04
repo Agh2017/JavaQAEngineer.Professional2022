@@ -1,11 +1,13 @@
 package components;
 
+import java.time.LocalDate;
+
 public class TileOnMainPage {
 
-  private String tileName;
-  private String startDate;
+  private final String tileName;
+  private final LocalDate startDate;
 
-  public TileOnMainPage(String tileName, String startDate) {
+  public TileOnMainPage(String tileName, LocalDate startDate) {
     this.tileName = tileName;
     this.startDate = startDate;
   }
@@ -14,6 +16,13 @@ public class TileOnMainPage {
     return tileName;
   }
 
-  public String getStartDate() { return startDate; }
+  public LocalDate getStartDate() {
+    return startDate;
+  }
 
+  @Override
+  public String toString() {
+    return "\"" + tileName
+            + "\"";
+  }
 }
