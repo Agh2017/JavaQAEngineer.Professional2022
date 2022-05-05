@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
-    <artifactId>listeners</artifactId>
+    <groupId>otus</groupId>
+    <artifactId>homework_1</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -14,7 +14,8 @@
         <selenium.java.version>3.141.59</selenium.java.version>
         <junit.version>5.8.1</junit.version>
         <maven.checkstyle>3.1.0</maven.checkstyle>
-        <junitBom.version>5.8.1</junitBom.version>
+        <junitBom.version>5.8.2</junitBom.version>
+        <junit.platform>1.6.2</junit.platform>
         <faker.version>1.0.1</faker.version>
         <findbugs.maven>3.0.5</findbugs.maven>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -52,21 +53,26 @@
             <version>${selenium.java.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>${junit.platform}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.junit</groupId>
             <artifactId>junit-bom</artifactId>
             <version>${junitBom.version}</version>
             <type>pom</type>
-            <!--<scope>import</scope> // это нужно использовать в  <dependencyManagement> ? -->
         </dependency>
         <dependency>
             <groupId>com.github.javafaker</groupId>
             <artifactId>javafaker</artifactId>
             <version>${faker.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${junit.version}</version>
         </dependency>
     </dependencies>
 
@@ -98,7 +104,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire.plugin.version}</version>
                 <configuration>
-                    <redirectTestOutputToFile>true</redirectTestOutputToFile>
                     <forkCount>${forkCount}</forkCount>
                     <reuseForks>${reuseForks}</reuseForks>
                     <parallel>${parallel}</parallel>

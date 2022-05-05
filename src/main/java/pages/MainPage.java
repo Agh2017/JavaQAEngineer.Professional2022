@@ -12,6 +12,7 @@ import utils.DateFromCalendar;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.function.UnaryOperator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -68,11 +69,29 @@ public class MainPage extends AnyPageAbs<MainPage> {
 
     saveNameAndDateCourses();
 
-    assertThat(listTiles.toString()).contains(NAME_COURSE_FOR_SEARCH);
+    assertThat(listTiles.toString()).contains(NAME_COURSE_FOR_SEARCH+45);
     System.out.println("Курс: \"" + NAME_COURSE_FOR_SEARCH + "\" найден");
   }
 
-  public void choiceCourseOnDate() {
+  public void searchCourseOnMinDate() {
+
+    saveNameAndDateCourses();
+    int minDate = getMinDate();
+    String date ="";
+    assertNotEquals(0, minDate);
+    String nameCourseStarts = "не найден";
+    for (TileOnMainPage listTile : listTiles) {
+      Object currentTile = (listTile.getStartDate().toString()).replaceAll("-","");
+      if (currentTile.equals(String.valueOf(minDate))) {
+        nameCourseStarts = listTile.getTileName();
+        date = listTile.getStartDate().toString();
+      }
+    }
+
+    System.out.println("курс, стартующий раньше всех: " + date + "  " + nameCourseStarts);
+  }
+
+  public void searchCourseOnMaxDate() {
 
     saveNameAndDateCourses();
     int maxDate = getMaxDate();
@@ -98,6 +117,14 @@ public class MainPage extends AnyPageAbs<MainPage> {
             .reduce(Math::max).orElse(0);
   }
 
+  private int getMinDate() {
+    return listTiles.stream()
+            .map(TileOnMainPage::getStartDate)
+            .mapToInt(s -> Integer.parseInt((s.toString()).replaceAll("-", "")))
+            .distinct()
+            .reduce(Math::min).orElse(0);
+  }
+
   private void saveNameAndDateCourses() {
 
     for (int i = 0; i < allCoursesName.size(); i++) {
@@ -105,7 +132,7 @@ public class MainPage extends AnyPageAbs<MainPage> {
       LocalDate courseDate = getDateFromTile(allCoursesDate.get(i).getText());
       TileOnMainPage tileOnMainPage = new TileOnMainPage(currentName, courseDate);
       listTiles.add(tileOnMainPage);
-      System.out.println("Курс " + tileOnMainPage.getTileName() + " стартует " + tileOnMainPage.getStartDate());
+      //System.out.println("Курс " + tileOnMainPage.getTileName() + " стартует " + tileOnMainPage.getStartDate());
     }
     assertTrue(allCoursesName.size() == allCoursesDate.size() && allCoursesDate.size() == listTiles.size());
   }

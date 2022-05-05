@@ -46,12 +46,12 @@ public class MainPageTest {
   @Test
   public void choiceCourseOnMaxDate(){
     mainPage.open()
-            .choiceCourseOnDate(); //TODO
+            .searchCourseOnMaxDate();
   }
 
   @Test
   public void choiceCourseOnMinDate(){
     mainPage.open()
-            .choiceCourseOnDate(); //TODO
+            .searchCourseOnMinDate();
   }
 }
