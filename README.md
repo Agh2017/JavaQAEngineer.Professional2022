@@ -45,9 +45,7 @@ Installing and Start
 2. Настроить maven и JAVA, запустить команду "mvn compile".
 3. Запустить в командной строке тесты предварительно указав тестовое окружение:
 Например: 
-mvn test -Pproduction -Dbrowser=chrome 
-mvn test -Pproduction -Dbrowser=firefox
-
+mvn clean test -Pproduction -Dbrowser=chrome 
 
 Licensing
 ---------
