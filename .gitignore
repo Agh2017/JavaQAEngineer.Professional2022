@@ -4,7 +4,6 @@
 .settings/
 
 # Intellij
-.idea/
 *.iml
 *.iws
 
@@ -12,5 +11,6 @@
 .DS_Store
 
 # Maven
-log/
-target/
+/.idea/
+/log/
+/target/
