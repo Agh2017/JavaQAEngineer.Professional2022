@@ -1,0 +1,8 @@
+//Scroll vertically down by 1000 pixels
+((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
+
+// scroll till the bottom of the page
+((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
+
+//This will scroll the page Horizontally till the element is found (in full view)
+je.executeScript("arguments[0].scrollIntoView(true);",element);
