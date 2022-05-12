@@ -5,6 +5,7 @@ import static services.BaseApi.EndPoints.PATH_PET;
 
 import dto.pet.NewPet;
 import io.restassured.response.Response;
+import paramresolver.ApiClass;
 
 public class PetApi extends BaseApi{
 
