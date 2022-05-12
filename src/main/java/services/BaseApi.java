@@ -6,9 +6,7 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
-import paramresolver.ApiClass;
 
-@ApiClass()
 public abstract class BaseApi {
 
   @Getter
