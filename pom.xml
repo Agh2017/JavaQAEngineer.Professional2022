@@ -34,6 +34,8 @@
         <rest.pet.url>pet</rest.pet.url>
         <rest.store.url>store/order</rest.store.url>
         <rest.user.store.url>user</rest.user.store.url>
+        <rest.response.code.custom>302</rest.response.code.custom>
+        <rest.time.less.than.long>6500000</rest.time.less.than.long>
         <spring>5.2.20.RELEASE</spring>
     </properties>
 
@@ -59,11 +61,6 @@
             <artifactId>junit-jupiter</artifactId>
             <version>${junit.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.assertj</groupId>-->
-<!--            <artifactId>assertj-core</artifactId>-->
-<!--            <version>${assertj.core}</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
@@ -122,8 +119,12 @@
                         <rest.pet.url>${rest.pet.url}</rest.pet.url>
                         <rest.store.url>${rest.store.url}</rest.store.url>
                         <rest.user.store.url>${rest.user.store.url}</rest.user.store.url>
+                        <rest.user.store.url>${rest.response.code.custom}</rest.user.store.url>
+                        <rest.time.less.than.long>${rest.time.less.than.long}</rest.time.less.than.long>
                         <test.project.status>test</test.project.status>
                         <test.project.language>${test.project.language}</test.project.language>
+
+
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

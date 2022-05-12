@@ -12,11 +12,10 @@ import java.util.List;
 
 public class UserServiceParamResolver implements ParameterResolver {
 
-  private final List<Class<?>> classes = ClassFinder.find("services");
-
   @Override
   public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
 
+    final List<Class<?>> classes = ClassFinder.find("services");
     boolean isUserServiceClass = false;
     Class<?> type = parameterContext.getParameter().getType();
 
@@ -29,8 +28,8 @@ public class UserServiceParamResolver implements ParameterResolver {
   public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
 
     Class<?> currentClass = parameterContext.getParameter().getType();
-    String name = currentClass.getName(); //services.PetApi
+    String name = currentClass.getName();
     Class<?> clazz = Class.forName(name);
-    return clazz.newInstance();
+    return clazz.getDeclaredConstructor().newInstance();
   }
 }

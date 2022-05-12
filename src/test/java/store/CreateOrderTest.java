@@ -3,6 +3,7 @@ package store;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
 import static org.junit.jupiter.api.Assertions.*;
+import static utils.Constants.*;
 
 import com.github.javafaker.Faker;
 import dto.store.Order;
@@ -46,13 +47,13 @@ class CreateOrderTest {
     storeApi.createOrder(order)
             .then()
             .log().all()
-            .time(lessThan(6500L))
-            .statusCode(200)
+            .time(lessThan(RESPONSE_TIME.getLongValue()))
+            .statusCode(CODE_200.getIntValue())
             .body("status", equalTo(status));
 
     Response getThisOrder = storeApi.getOrderByNumber(String.valueOf(id));
     assertAll(
-        () -> assertEquals("200", (String.valueOf(getThisOrder.getStatusCode())), "Status code is missing"),
+        () -> assertEquals(CODE_200.getValue(), (String.valueOf(getThisOrder.getStatusCode())), "Status code is missing"),
         () -> assertEquals(String.valueOf(id), getThisOrder.jsonPath().get("id").toString(), "ID order is missing"),
         () -> assertEquals(String.valueOf(petId), getThisOrder.jsonPath().get("petId").toString(), "PetId is missing"),
         () -> assertEquals(status, getThisOrder.jsonPath().get("status"), "Status is missing"),
@@ -60,11 +61,11 @@ class CreateOrderTest {
     );
 
     Response deleteResponse = storeApi.deleteOrder(String.valueOf(id));
-    assertEquals(200, deleteResponse.getStatusCode(), "delete order error");
+    assertEquals(CODE_200.getIntValue(), deleteResponse.getStatusCode(), "delete order error");
 
     Response getOrder = storeApi.getOrderByNumber(String.valueOf(id));
     assertAll(
-        () -> assertEquals("404", (String.valueOf(getOrder.getStatusCode())), "Status code is missing"),
+        () -> assertEquals(CODE_404.getValue(), (String.valueOf(getOrder.getStatusCode())), "Status code is missing"),
         () -> assertEquals("1", getOrder.jsonPath().get("code").toString(), "Code is missing"),
         () -> assertEquals("unknown", getOrder.jsonPath().get("type"), "Type is missing"),
         () -> assertEquals("Order not found", getOrder.jsonPath().get("message"), "Message is missing")
