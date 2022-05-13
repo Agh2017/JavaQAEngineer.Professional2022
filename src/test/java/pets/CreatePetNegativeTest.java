@@ -2,6 +2,7 @@ package pets;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static utils.Constants.*;
 
 import com.github.javafaker.Faker;
 import dto.pet.Category;
@@ -35,32 +36,32 @@ class CreatePetNegativeTest {
 
   @Test
   void negativeCreate2RandomPetsWithSomeId() {
-    String name = faker.cat().name();
+    String name = String.format("testName-%S",  faker.cat().name());
     id = faker.number().numberBetween(1, 99999);
     NewPet cat = NewPet.builder()
             .id(id)
             .name(name)
-            .status("reserve")
-            .category(new Category("cat", 12))
+            .status(PARAMETER_STATUS_RESERVE.getValue())
+            .category(new Category(CATEGORY_CATS.getValue(), 12))
             .build();
 
     Response response1 = petApi.createNewPet(cat);
-    assertEquals("200", String.valueOf(response1.getStatusCode()), "StatusCode is wrong");
+    assertEquals(CODE_200.getValue(), String.valueOf(response1.getStatusCode()), "StatusCode is wrong");
 
-    name = faker.dog().name();
+    name = String.format("testName-%S",  faker.dog().name());
     NewPet dog = NewPet.builder()
             .id(id)
             .name(name)
-            .status("free")
-            .category(new Category("Dogs", 15))
+            .status(PARAMETER_STATUS_FREE.getValue())
+            .category(new Category(CATEGORY_DOGS.getValue(), 15))
             .build();
 
     petApi
             .createNewPet(dog)
             .then()
-            .statusCode(200)
+            .statusCode(CODE_200.getIntValue())
             .body(containsString(name));
-    assertEquals("404", String.valueOf(response1.getStatusCode()), "StatusCode is wrong");
+    assertEquals(CODE_404.getValue(), String.valueOf(response1.getStatusCode()), "StatusCode is wrong");
   }
 
   @AfterEach

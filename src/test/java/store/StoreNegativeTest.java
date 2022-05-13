@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static utils.Constants.*;
 
-
 import com.github.javafaker.Faker;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterEach;
@@ -42,7 +41,7 @@ class StoreNegativeTest {
             .log().all()
             .time(lessThan(RESPONSE_TIME.getLongValue()))
             .statusCode(CODE_200.getIntValue())
-            .body("message", equalTo(EXPECTED_NOT_FOUND.getValue()));
+            .body(PARAMETER_MESSAGE.getValue(), equalTo(EXPECTED_NOT_FOUND.getValue()));
 
     Response response = storeApi.deleteOrder(numberOrder);
 
@@ -50,10 +49,11 @@ class StoreNegativeTest {
 
     assertAll(
         () -> assertEquals(CODE_404.getValue(), (String.valueOf(response.getStatusCode())), Constants.SERVER_MESSAGE.getValue()),
-        () -> assertEquals(CODE_404.getValue(), response.jsonPath().get("code").toString(), Constants.SERVER_MESSAGE.getValue()),
-        () -> assertEquals(EXPECTED_TYPE_DELETE, response.jsonPath().get("type"), "Type is missing"),
-        () -> assertEquals(EXPECTED_NOT_FOUND.getValue(), response.jsonPath().get("message"), "Message is missing")
+        () -> assertEquals(CODE_404.getValue(), response.jsonPath().get(PARAMETER_CODE.getValue()).toString(), Constants.SERVER_MESSAGE.getValue()),
+        () -> assertEquals(EXPECTED_TYPE_DELETE, response.jsonPath().get(PARAMETER_TYPE.getValue()), RESPONSE_PARAMETER_TYPE.getValue()),
+        () -> assertEquals(EXPECTED_NOT_FOUND.getValue(), response.jsonPath().get(PARAMETER_MESSAGE.getValue()), RESPONSE_PARAMETER_MESSAGE.getValue())
     );
+    System.out.println(PARAMETER_CODE.getValue());
   }
 
   @AfterEach

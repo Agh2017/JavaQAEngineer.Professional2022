@@ -49,15 +49,15 @@ class CreateOrderTest {
             .log().all()
             .time(lessThan(RESPONSE_TIME.getLongValue()))
             .statusCode(CODE_200.getIntValue())
-            .body("status", equalTo(status));
+            .body(PARAMETER_STATUS.getValue(), equalTo(status));
 
     Response getThisOrder = storeApi.getOrderByNumber(String.valueOf(id));
     assertAll(
         () -> assertEquals(CODE_200.getValue(), (String.valueOf(getThisOrder.getStatusCode())), "Status code is missing"),
-        () -> assertEquals(String.valueOf(id), getThisOrder.jsonPath().get("id").toString(), "ID order is missing"),
-        () -> assertEquals(String.valueOf(petId), getThisOrder.jsonPath().get("petId").toString(), "PetId is missing"),
-        () -> assertEquals(status, getThisOrder.jsonPath().get("status"), "Status is missing"),
-        () -> assertEquals(String.valueOf(quantity), getThisOrder.jsonPath().get("quantity").toString(), "Quantity is missing")
+        () -> assertEquals(String.valueOf(id), getThisOrder.jsonPath().get(PARAMETER_ID.getValue()).toString(), "ID order is missing"),
+        () -> assertEquals(String.valueOf(petId), getThisOrder.jsonPath().get(PARAMETER_PET_ID.getValue()).toString(), "PetId is missing"),
+        () -> assertEquals(status, getThisOrder.jsonPath().get(PARAMETER_STATUS.getValue()), "Status is missing"),
+        () -> assertEquals(String.valueOf(quantity), getThisOrder.jsonPath().get(PARAMETER_QUANTITY.getValue()).toString(), "Quantity is missing")
     );
 
     Response deleteResponse = storeApi.deleteOrder(String.valueOf(id));
@@ -66,9 +66,9 @@ class CreateOrderTest {
     Response getOrder = storeApi.getOrderByNumber(String.valueOf(id));
     assertAll(
         () -> assertEquals(CODE_404.getValue(), (String.valueOf(getOrder.getStatusCode())), "Status code is missing"),
-        () -> assertEquals("1", getOrder.jsonPath().get("code").toString(), "Code is missing"),
-        () -> assertEquals("unknown", getOrder.jsonPath().get("type"), "Type is missing"),
-        () -> assertEquals("Order not found", getOrder.jsonPath().get("message"), "Message is missing")
+        () -> assertEquals(EXPECTED_TYPE_CODE.getValue(), getOrder.jsonPath().get(PARAMETER_CODE.getValue()).toString(), "Code is missing"),
+        () -> assertEquals(EXPECTED_TYPE_DELETE.getValue(), getOrder.jsonPath().get(PARAMETER_TYPE.getValue()), "Type is missing"),
+        () -> assertEquals(EXPECTED_NOT_FOUND, getOrder.jsonPath().get(PARAMETER_MESSAGE.getValue()), "Message is missing")
     );
   }
 
