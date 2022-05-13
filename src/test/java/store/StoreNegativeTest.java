@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import paramresolver.UserServiceParamResolver;
 import services.StoreApi;
+import utils.Constants;
 
 @ExtendWith({UserServiceParamResolver.class})
 class StoreNegativeTest {
@@ -48,8 +49,8 @@ class StoreNegativeTest {
     //часто приходят неправильные ответы типа: Order Not found и т.п.
 
     assertAll(
-        () -> assertEquals(CODE_404.getValue(), (String.valueOf(response.getStatusCode())), "Status code is missing"),
-        () -> assertEquals(CODE_404.getValue(), response.jsonPath().get("code").toString(), "Code is missing"),
+        () -> assertEquals(CODE_404.getValue(), (String.valueOf(response.getStatusCode())), Constants.SERVER_MESSAGE.getValue()),
+        () -> assertEquals(CODE_404.getValue(), response.jsonPath().get("code").toString(), Constants.SERVER_MESSAGE.getValue()),
         () -> assertEquals(EXPECTED_TYPE_DELETE, response.jsonPath().get("type"), "Type is missing"),
         () -> assertEquals(EXPECTED_NOT_FOUND.getValue(), response.jsonPath().get("message"), "Message is missing")
     );
