@@ -1,6 +1,5 @@
 package pages;
 
-import static java.util.function.Predicate.isEqual;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,19 +12,16 @@ import utils.DateFromCalendar;
 
 import java.time.LocalDate;
 import java.util.*;
-import java.util.function.UnaryOperator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 
 @UrlPrefix("/")
-public class MainPage extends AnyPageAbs<MainPage> {
+public class MainPage extends BasePage<MainPage> {
 
 
   private static final String REGEX_DATA = "(.*?(январ|феврал|март|апрел|ма|июн|июл|август|сентябр|октябр|ноябр|декабр))";
-  private static final String NAME_COURSE_FOR_SEARCH = "Специализация Administrator Linux";
   private final ArrayList<TileOnMainPage> listTiles = new ArrayList<>();
 
   public MainPage(WebDriver driver) {
@@ -68,12 +64,12 @@ public class MainPage extends AnyPageAbs<MainPage> {
             .build().perform();
   }
 
-  public void searchNameCourse() {
+  public void searchNameCourse(String nameCourse) {
 
     saveNameAndDateCourses();
 
-    assertThat(listTiles.toString()).contains(NAME_COURSE_FOR_SEARCH);
-    System.out.println("Курс: \"" + NAME_COURSE_FOR_SEARCH + "\" найден");
+    assertThat(listTiles.toString()).contains(nameCourse);
+    System.out.println("Курс: \"" + nameCourse + "\" найден");
   }
 
   public void searchCourseOnMinDate() {

@@ -12,7 +12,7 @@ import java.util.Locale;
 public class DriverFactory implements IDriverFactory {
 
   private static String browserName;
-  private String browserType = System.getProperty("browser").toLowerCase(Locale.ROOT);
+  private final String browserType = System.getProperty("browser").toLowerCase(Locale.ROOT);
 
   public static String getBrowserName() {
     return browserName;
