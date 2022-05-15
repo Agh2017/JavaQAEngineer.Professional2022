@@ -10,9 +10,9 @@ import org.openqa.selenium.support.PageFactory;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-public abstract class AnyPageAbs<T> extends CommonActions<T> {
+public abstract class BasePage<T> extends CommonActions<T> {
 
-  public AnyPageAbs(WebDriver driver) {
+  public BasePage(WebDriver driver) {
     super(driver);
   }
 
@@ -31,29 +31,6 @@ public abstract class AnyPageAbs<T> extends CommonActions<T> {
 
   public T open() {
     driver.get(getBaseUrl() + getUrlPrefix());
-
-    return (T) page(getClass());
+    return (T) this;
   }
-
-  public <T> T page(Class<T> clazz) {
-    try {
-      Constructor constructor = clazz.getConstructor(WebDriver.class);
-
-      return convertInstanceOfObject(constructor.newInstance(driver), clazz);
-
-    } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
-      e.printStackTrace();
-    }
-
-    return convertInstanceOfObject(driver, clazz);
-  }
-
-  private static <T> T convertInstanceOfObject(Object o, Class<T> clazz) {
-    try {
-      return clazz.cast(o);
-    } catch (ClassCastException e) {
-      return null;
-    }
-  }
-
 }
