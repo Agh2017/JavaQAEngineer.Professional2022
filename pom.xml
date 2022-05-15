@@ -36,7 +36,9 @@
         <rest.user.store.url>user</rest.user.store.url>
         <rest.response.code.custom>302</rest.response.code.custom>
         <rest.time.less.than.long>6500000</rest.time.less.than.long>
-        <spring>5.2.20.RELEASE</spring>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
     </properties>
 
     <dependencies>
