@@ -1,6 +1,7 @@
 package base.page.tests;
 
 import annotations.Driver;
+import extensions.ThrowableExtension;
 import extensions.UIExtension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,7 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import pages.MainPage;
 
-@ExtendWith(UIExtension.class)
+@ExtendWith({UIExtension.class, ThrowableExtension.class})
 public class MainPageTest {
 
   private MainPage mainPage;
@@ -40,7 +41,7 @@ public class MainPageTest {
   @Test
   public void searchCourseForName(){
     mainPage.open()
-            .searchNameCourse();
+            . searchNameCourse("Специализация Administrator Linux");
   }
 
   @Test

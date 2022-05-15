@@ -2,6 +2,7 @@ package ui.courses;
 
 import annotations.Driver;
 import components.FavouriteCourses;
+import extensions.ThrowableExtension;
 import extensions.UIExtension;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import pages.MainPage;
 
-@ExtendWith(UIExtension.class)
+@ExtendWith({UIExtension.class, ThrowableExtension.class})
 public class FavouriteCourseTile {
 
   @Driver

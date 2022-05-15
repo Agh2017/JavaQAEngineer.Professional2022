@@ -4,7 +4,9 @@ import static org.assertj.core.api.Assertions.*;
 
 import actions.CommonActions;
 import annotations.UrlPrefix;
+import extensions.ThrowableExtension;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import java.lang.reflect.Constructor;

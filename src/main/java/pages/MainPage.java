@@ -22,7 +22,6 @@ public class MainPage extends BasePage<MainPage> {
 
 
   private static final String REGEX_DATA = "(.*?(январ|феврал|март|апрел|ма|июн|июл|август|сентябр|октябр|ноябр|декабр))";
-  private static final String NAME_COURSE_FOR_SEARCH = "Специализация Administrator Linux";
   private final ArrayList<TileOnMainPage> listTiles = new ArrayList<>();
 
   public MainPage(WebDriver driver) {
@@ -65,12 +64,12 @@ public class MainPage extends BasePage<MainPage> {
             .build().perform();
   }
 
-  public void searchNameCourse() {
+  public void searchNameCourse(String nameCourse) {
 
     saveNameAndDateCourses();
 
-    assertThat(listTiles.toString()).contains(NAME_COURSE_FOR_SEARCH);
-    System.out.println("Курс: \"" + NAME_COURSE_FOR_SEARCH + "\" найден");
+    assertThat(listTiles.toString()).contains(nameCourse);
+    System.out.println("Курс: \"" + nameCourse + "\" найден");
   }
 
   public void searchCourseOnMinDate() {
