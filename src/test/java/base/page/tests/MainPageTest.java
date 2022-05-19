@@ -44,6 +44,7 @@ public class MainPageTest {
             . searchNameCourse("Специализация Administrator Linux");
   }
 
+  //TODO проверить результаты
   @Test
   public void choiceCourseOnMaxDate(){
     mainPage.open()
