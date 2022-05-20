@@ -1,38 +1,36 @@
 package pages;
 
-import static org.assertj.core.api.Assertions.*;
-
-import actions.CommonActions;
-import annotations.UrlPrefix;
-import extensions.ThrowableExtension;
-import org.apache.commons.lang3.StringUtils;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.apache.hc.core5.util.Asserts;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
+import support.GuiceScoped;
 
-public abstract class BasePage<T> extends CommonActions<T> {
+public abstract class BasePage<T> {
 
-  public BasePage(WebDriver driver) {
-    super(driver);
+  protected GuiceScoped guiceScoped;
+  private String path;
+
+  public BasePage(GuiceScoped guiceScoped, String path) {
+    this.guiceScoped = guiceScoped;
+    this.path = path;
+    PageFactory.initElements(guiceScoped.driver, this);
   }
 
-  private String getBaseUrl() {
-    return StringUtils.stripEnd(System.getProperty("webdriver.base.url"), "/");
-  }
-
-  private String getUrlPrefix() {
-    UrlPrefix urlAnnotation = getClass().getAnnotation(UrlPrefix.class);
-    if (urlAnnotation != null) {
-      return urlAnnotation.value();
-    }
-
-    return "";
-  }
+  @FindBy(tagName = "h1")
+  private WebElement header;
 
   public T open() {
-    driver.get(getBaseUrl() + getUrlPrefix());
+    guiceScoped.driver.get(System.getProperty("base.url"));
+
     return (T) this;
   }
+
+  public T pageHeaderShouldBeSameAs(String header) {
+    assert this.header.getText().equals(header): "Error: Заголовок на странице не корректный";
+
+    return (T) this;
+  }
+
 }

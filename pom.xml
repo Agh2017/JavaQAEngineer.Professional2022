@@ -9,22 +9,18 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <surefire.plugin.version>2.22.2</surefire.plugin.version>
-        <maven.checkstyle>3.1.0</maven.checkstyle>
-        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <assertj.core>3.22.0</assertj.core>
-        <webdriver.manager.version>4.2.0</webdriver.manager.version>
-        <selenium.java.version>3.141.59</selenium.java.version>
 
         <junit.version>5.8.1</junit.version>
         <junitBom.version>5.8.2</junitBom.version>
-        <junit.platform>5.5.0</junit.platform>
+        <junit.platform>1.6.2</junit.platform>
+
+        <webdriver.manager.version>4.2.0</webdriver.manager.version>
+        <selenium.java.version>3.141.59</selenium.java.version>
+        <test.project.language>RU</test.project.language>
+        <webdriver.timeouts.implicitlywait>5000</webdriver.timeouts.implicitlywait>
+
+        <assertj.core>3.22.0</assertj.core>
         <faker.version>1.0.1</faker.version>
-        <findbugs.maven>3.0.5</findbugs.maven>
 
         <forkCount>1</forkCount>
         <reuseForks>true</reuseForks>
@@ -34,20 +30,41 @@
         <thread.count>32</thread.count>
 
         <browser>chrome</browser>
+        <webdriver.base.url>https://otus.ru</webdriver.base.url>
+        <base.url>https://otus.ru</base.url>
+        <cucumber>5.5.0</cucumber>
 
-        <webdriver.base.url/>
-        <test.project.language>RU</test.project.language>
-        <webdriver.timeouts.implicitlywait>5000</webdriver.timeouts.implicitlywait>
+        <maven.checkstyle>3.1.0</maven.checkstyle>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <findbugs.maven>3.0.5</findbugs.maven>
+        <surefire.plugin.version>2.22.2</surefire.plugin.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     </properties>
 
     <dependencies>
 
         <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>${assertj.core}</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.junit</groupId>
+            <artifactId>junit-bom</artifactId>
+            <version>${junitBom.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>${junit.platform}</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
@@ -58,32 +75,11 @@
             <artifactId>selenium-java</artifactId>
             <version>${selenium.java.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${junit.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.junit</groupId>
-            <artifactId>junit-bom</artifactId>
-            <version>${junit.version}</version>
-            <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>com.github.javafaker</groupId>
-            <artifactId>javafaker</artifactId>
-            <version>${faker.version}</version>
-        </dependency>
 
         <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <version>5.5.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-guice</artifactId>
-            <version>5.5.0</version>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.core}</version>
         </dependency>
         <dependency>
             <groupId>com.google.inject</groupId>
@@ -91,9 +87,30 @@
             <version>5.1.0</version>
         </dependency>
         <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>${faker.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.sun.xml.security</groupId>
             <artifactId>xml-security-impl</artifactId>
             <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <version>${cucumber}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-guice</artifactId>
+            <version>${cucumber}</version>
         </dependency>
 
     </dependencies>
@@ -138,6 +155,7 @@
                         <webdriver.timeouts.implicitlywait>${webdriver.timeouts.implicitlywait}
                         </webdriver.timeouts.implicitlywait>
                         <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
+                        <base.url>${base.url}</base.url>
                         <test.project.status>test</test.project.status>
                         <test.project.language>${test.project.language}</test.project.language>
                     </systemPropertyVariables>
