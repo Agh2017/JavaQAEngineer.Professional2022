@@ -5,16 +5,17 @@ import com.otus.components.NavigationMenuComponent;
 import com.otus.driver.DriverFactory;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import io.cucumber.java.ru.Если;
-import io.cucumber.java.ru.Пусть;
-import io.cucumber.java.ru.Тогда;
+import io.cucumber.java.ru.*;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import pages.MainPage;
 import support.GuiceScoped;
 
 import java.sql.Time;
 
 public class MainPageSteps {
+
+  private WebElement foundedElement = null;
 
   @Inject
   private DriverFactory driverFactory; //инжектим фабрику чтобы можно было изменить значение браузера
@@ -23,10 +24,15 @@ public class MainPageSteps {
   @Inject
   private MainPage mainPage;
 
-  @Пусть("^Открыта главная страница otus в браузере$")
-  public void openMainPage() {
-    guiceScoped.browserName = "chrome"; //TODO прокинуть из файла feature
+  @Когда("Пользователь использует браузер: \"([^\"]*)\"")
+  public WebDriver chooseBrowser(String browserName) {
+    guiceScoped.browserName = browserName;
     guiceScoped.driver = driverFactory.getDriver();
+    return guiceScoped.driver;
+  }
+
+  @Пусть("^Открыта главная страница otus в браузере")
+  public void openMainPage() {
     mainPage.open();
   }
 
@@ -35,4 +41,26 @@ public class MainPageSteps {
     mainPage.pageHeaderShouldBeSameAs(expectedHeader);
   }
 
+
+  @То("^Навести курсор на раздел \"([^\"]*)\" и выбрать в выпадающем списке селектор \"([^\"]*)\"")
+          public void navigateCourseOnDropdown() {
+    // найти и кликнуть (selector = div.header2-menu.header2-menu_main > div:nth-child(1)  +++ hover),
+    //проверить тайтл (<a href="/online/" title="Подготовительные курсы")
+  }
+
+  @И("^В списке курсов есть курс: \"([^\"]*)\"")
+  public void isCourse(String courseName) {
+    // фильтруем по названию и сохраняем селектор найденного курса
+  }
+
+  @Тогда("^Переходим на страницу курса")
+  public void openCoursePage() {
+    assert foundedElement!=null;
+    if (foundedElement.isDisplayed()) foundedElement.click();
+  }
+
+  @Когда("^В списке курсов есть курсы с датой \"15.05.2022\" или позже")
+  public void searchListCoursesOnDate() {
+    System.out.println("Список курсов: +выводим лист курсов >= даты + даты");
+  }
 }
