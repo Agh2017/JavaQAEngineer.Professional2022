@@ -16,6 +16,8 @@ import java.sql.Time;
 public class MainPageSteps {
 
   private WebElement foundedElement = null;
+  private WebDriver driver = null;
+
 
   @Inject
   private DriverFactory driverFactory; //инжектим фабрику чтобы можно было изменить значение браузера
@@ -25,15 +27,17 @@ public class MainPageSteps {
   private MainPage mainPage;
 
   @Когда("Пользователь использует браузер: \"([^\"]*)\"")
-  public WebDriver chooseBrowser(String browserName) {
+  public void chooseBrowser(String browserName) {
     guiceScoped.browserName = browserName;
     guiceScoped.driver = driverFactory.getDriver();
-    return guiceScoped.driver;
+    mainPage.open();
   }
 
-  @Пусть("^Открыта главная страница otus в браузере")
+  @Пусть("^Открыта главная страница otus в браузере$")
   public void openMainPage() {
+    guiceScoped.driver = driverFactory.getDriver();
     mainPage.open();
+
   }
 
   @Тогда("Главная страница открыта и заголовок {string}")

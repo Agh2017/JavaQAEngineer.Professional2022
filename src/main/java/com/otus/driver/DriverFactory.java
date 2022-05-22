@@ -20,20 +20,23 @@ public class DriverFactory implements IDriverFactory {
 
   @Override
   public WebDriver getDriver() {
+    if (guiceScoped.browserName==null) guiceScoped.browserName ="";
     switch (guiceScoped.browserName) {
-      case "chrome": {
+      case "chrome":
+      case "": {
         return new ChromeWebDriver().newDriver();
       }
       case "safari": {
         return new SafariDriver();
       }
-      default:
+      default: {
         try {
           throw new DriverTypeNotSupported(guiceScoped.browserName);
         } catch (DriverTypeNotSupported ex) {
           ex.printStackTrace();
-          return null;
         }
+      }
     }
+    return null;
   }
 }
