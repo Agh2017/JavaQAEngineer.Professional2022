@@ -1,10 +1,6 @@
 package pages;
 
 import com.google.inject.Inject;
-import io.cucumber.guice.ScenarioScoped;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import support.GuiceScoped;
 
 //в каждом тесте будет свой объект вебдрайвера, вейтера и т.п так как в GuiceScoped аннотация @ScenarioScoped - аналог синглтон?
@@ -14,5 +10,4 @@ public class MainPage extends BasePage<MainPage> {
   public MainPage(GuiceScoped guiceScoped) {
     super(guiceScoped, "/");
   }
-
 }

@@ -2,7 +2,6 @@ package com.otus.hooks;
 
 import com.google.inject.Inject;
 import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import support.GuiceScoped;
 
 public class Hooks {
@@ -16,5 +15,6 @@ public class Hooks {
       guiceScoped.driver.close();
       guiceScoped.driver.quit();
     }
+    System.out.println("Scenario completed," + this.getClass().getName());
   }
 }

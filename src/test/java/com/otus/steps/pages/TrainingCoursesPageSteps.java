@@ -1,6 +1,7 @@
 package com.otus.steps.pages;
 
 import com.google.inject.Inject;
+import io.cucumber.java.AfterStep;
 import io.cucumber.java.ru.И;
 import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Пусть;
@@ -44,5 +45,10 @@ public class TrainingCoursesPageSteps {
   public void searchExpensiveOrCheapCourse() {
     //определяем какой ищем дорогой/дешевый
     //сохраняем селектор или данные курса
+  }
+
+  @AfterStep
+  public void tearDown() {
+    System.out.println("Step completed," + this.getClass().getName());
   }
 }

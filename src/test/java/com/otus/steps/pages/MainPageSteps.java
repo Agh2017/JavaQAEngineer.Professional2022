@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.otus.components.NavigationMenuComponent;
 import com.otus.driver.DriverFactory;
 import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.ru.*;
 import org.openqa.selenium.WebDriver;
@@ -37,7 +38,6 @@ public class MainPageSteps {
   public void openMainPage() {
     guiceScoped.driver = driverFactory.getDriver();
     mainPage.open();
-
   }
 
   @Тогда("Главная страница открыта и заголовок {string}")
@@ -66,5 +66,10 @@ public class MainPageSteps {
   @Когда("^В списке курсов есть курсы с датой \"15.05.2022\" или позже")
   public void searchListCoursesOnDate() {
     System.out.println("Список курсов: +выводим лист курсов >= даты + даты");
+  }
+
+  @AfterStep
+  public void tearDown() {
+    System.out.println("Step completed," + this.getClass().getName());
   }
 }
