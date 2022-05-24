@@ -47,8 +47,4 @@ public class TrainingCoursesPageSteps {
     //сохраняем селектор или данные курса
   }
 
-  @AfterStep
-  public void tearDown() {
-    System.out.println("Step completed," + this.getClass().getName());
-  }
 }

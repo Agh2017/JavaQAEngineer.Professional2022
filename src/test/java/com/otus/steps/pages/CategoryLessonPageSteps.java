@@ -15,8 +15,5 @@ public class CategoryLessonPageSteps {
     categoryLessonsPage.pageHeaderShouldBeSameAs(expectedHeader);
   }
 
-  @AfterStep
-  public void tearDown() {
-    System.out.println("Step completed," + this.getClass().getName());
-  }
+
 }

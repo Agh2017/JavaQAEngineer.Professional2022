@@ -68,8 +68,4 @@ public class MainPageSteps {
     System.out.println("Список курсов: +выводим лист курсов >= даты + даты");
   }
 
-  @AfterStep
-  public void tearDown() {
-    System.out.println("Step completed," + this.getClass().getName());
-  }
 }

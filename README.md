@@ -30,41 +30,16 @@ Release Notes
 
 В тесте "searchCourseOnMinDate" реализован метод выбора курса стартующего раньше всех с использованием фильтра из библиотеки "Stream".
 
-System Requirements
--------------------
-
-JDK:
-11 or above Memory:
-No minimum requirement. Disk:
-Approximately 10MB is required for the Maven installation itself. In addition to that, additional disk space will be
-used for your local Maven repository. The size of your local repository will vary depending on usage but expect at least
-500MB. Operating System:
-Windows:
-Windows 2000 or above. Unix based systems (Linux, Solaris and Mac OS X) and others:
-No minimum requirement.
-
 Installing and Start
 --------------------
 
 1. Открыть проект в среде разработки.
 2. Настроить maven и JAVA, запустить команду "mvn compile".
 3. Запустить в командной строке тесты предварительно указав тестовое окружение:
-Например: 
-mvn clean test -Pproduction -Dbrowser=chrome 
+Например: mvn clean test -Pproduction -Dbrowser=chrome
+4. Запустить тесты также можно через runner: RunnerTest 
 
 Licensing
 ---------
 
 Please don't see the file called LICENSE.
-
-Maven URLS
-----------
-
-Home Page:          https://maven.apache.org/
-Downloads:          https://maven.apache.org/download.html
-Release Notes:      https://maven.apache.org/docs/history.html
-Mailing Lists:      https://maven.apache.org/mailing-lists.html
-Source Code:        https://gitbox.apache.org/repos/asf/maven.git
-Issue Tracking:     https://issues.apache.org/jira/browse/MNG
-Wiki:               https://cwiki.apache.org/confluence/display/MAVEN/
-Available Plugins:  https://maven.apache.org/plugins/

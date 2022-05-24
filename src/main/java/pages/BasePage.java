@@ -22,7 +22,7 @@ public abstract class BasePage<T> {
   private WebElement header;
 
   public T open() {
-    guiceScoped.driver.get(System.getProperty("base.url"));
+    guiceScoped.driver.get(System.getProperty("webdriver.base.url"));
 
     return (T) this;
   }
