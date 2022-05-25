@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.otus.driver.impl.ChromeWebDriver;
 import com.otus.exceptions.DriverTypeNotSupported;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import support.GuiceScoped;
 
@@ -28,6 +29,9 @@ public class DriverFactory implements IDriverFactory {
       }
       case "safari": {
         return new SafariDriver();
+      }
+      case "firefox": {
+        return new FirefoxDriver(); //TODO system property
       }
       default: {
         try {

@@ -22,7 +22,9 @@ public abstract class BasePage<T> {
   private WebElement header;
 
   public T open() {
-    guiceScoped.driver.get(System.getProperty("webdriver.base.url"));
+    String url = System.getProperty("base.url");
+    if (url==null) url = "https://otus.ru"; // для запуска тестов через file.feature
+    guiceScoped.driver.get(url);
 
     return (T) this;
   }

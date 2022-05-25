@@ -27,7 +27,7 @@ public class MainPageSteps {
   @Inject
   private MainPage mainPage;
 
-  @Когда("Пользователь использует браузер: \"([^\"]*)\"")
+  @Когда("Пользователь использует браузер: \"([^\"]*)\"$")
   public void chooseBrowser(String browserName) {
     guiceScoped.browserName = browserName;
     guiceScoped.driver = driverFactory.getDriver();
