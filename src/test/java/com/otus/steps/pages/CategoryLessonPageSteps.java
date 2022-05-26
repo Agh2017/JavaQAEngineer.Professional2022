@@ -1,9 +1,8 @@
 package com.otus.steps.pages;
 
 import com.google.inject.Inject;
-import io.cucumber.java.AfterStep;
 import io.cucumber.java.ru.Тогда;
-import pages.CategoryLessonsPage;
+import com.otus.pages.CategoryLessonsPage;
 
 public class CategoryLessonPageSteps {
 

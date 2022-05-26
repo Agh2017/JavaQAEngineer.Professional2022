@@ -5,6 +5,7 @@ import com.otus.components.NavigationMenuComponent;
 import com.otus.dobj.Category;
 import io.cucumber.java.DataTableType;
 import io.cucumber.java.ru.Если;
+import io.cucumber.java.ru.То;
 
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,11 @@ public class NavigationMenuSteps {
     for (Category category : categories) {
       navigationMenuComponent.clickNavItem(category.getName());
     }
+  }
+
+  @То("^Навести курсор на раздел \"курсы\" и выбрать в выпадающем списке селектор \"Подготовительные курсы\"$")
+  public void navigateCourseOnDropdown() {
+    navigationMenuComponent.openTrainingCoursesPageFromNavigationNenu();
   }
 
 }

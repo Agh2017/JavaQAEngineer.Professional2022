@@ -1,18 +1,12 @@
 package com.otus.steps.pages;
 
 import com.google.inject.Inject;
-import com.otus.components.NavigationMenuComponent;
 import com.otus.driver.DriverFactory;
-import io.cucumber.java.After;
-import io.cucumber.java.AfterStep;
-import io.cucumber.java.Before;
 import io.cucumber.java.ru.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import pages.MainPage;
+import com.otus.pages.MainPage;
 import support.GuiceScoped;
-
-import java.sql.Time;
 
 public class MainPageSteps {
 
@@ -46,11 +40,7 @@ public class MainPageSteps {
   }
 
 
-  @То("^Навести курсор на раздел \"([^\"]*)\" и выбрать в выпадающем списке селектор \"([^\"]*)\"")
-          public void navigateCourseOnDropdown() {
-    // найти и кликнуть (selector = div.header2-menu.header2-menu_main > div:nth-child(1)  +++ hover),
-    //проверить тайтл (<a href="/online/" title="Подготовительные курсы")
-  }
+
 
   @И("^В списке курсов есть курс: \"([^\"]*)\"")
   public void isCourse(String courseName) {

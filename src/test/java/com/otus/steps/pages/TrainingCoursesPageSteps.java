@@ -1,13 +1,15 @@
 package com.otus.steps.pages;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import com.google.inject.Inject;
-import io.cucumber.java.AfterStep;
 import io.cucumber.java.ru.И;
 import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Пусть;
 import io.cucumber.java.ru.Тогда;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import pages.TrainingCoursesPage;
+import com.otus.pages.TrainingCoursesPage;
 import support.GuiceScoped;
 
 import java.util.Date;
@@ -38,7 +40,10 @@ public class TrainingCoursesPageSteps {
 
   @Тогда("^Открылась страница \"([^\"]*)\"")
   public void checkTitle() {
-    //до этого главная, а тут идет подгот страница (H1 = "Онлайн-курсы для подготовки к поступлению на основные курсы")
+    WebElement element = guiceScoped.driver.findElement(By.tagName("H1"));
+    String actualH1 = element.getText();
+    String expectedH1 = "Онлайн-курсы для подготовки к поступлению на основные курсы";
+    assertEquals(expectedH1, actualH1,  "заголовок H1 неверный");
   }
 
   @Когда("^Выбран самый \"([^\"]*)\" курс при помощи \"filter\"")

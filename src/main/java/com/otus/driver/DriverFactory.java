@@ -1,14 +1,11 @@
 package com.otus.driver;
 
 import com.google.inject.Inject;
-import com.otus.driver.impl.ChromeWebDriver;
+import com.otus.driver.impl.*;
 import com.otus.exceptions.DriverTypeNotSupported;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import support.GuiceScoped;
-
-import java.util.Locale;
 
 public class DriverFactory implements IDriverFactory {
 
@@ -27,11 +24,14 @@ public class DriverFactory implements IDriverFactory {
       case "": {
         return new ChromeWebDriver().newDriver();
       }
-      case "safari": {
-        return new SafariDriver();
-      }
       case "firefox": {
-        return new FirefoxDriver(); //TODO system property
+        return new EventFiringWebDriver(new FFWebDriver().newDriver());
+      }
+      case "opera": {
+        return new EventFiringWebDriver(new OperaWebDriver().newDriver());
+      }
+      case "safari": {
+        return new EventFiringWebDriver(new SafariWebDriver().newDriver());
       }
       default: {
         try {

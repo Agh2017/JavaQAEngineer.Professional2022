@@ -1,4 +1,4 @@
-package pages;
+package com.otus.pages;
 
 import org.apache.hc.core5.util.Asserts;
 import org.openqa.selenium.WebDriver;

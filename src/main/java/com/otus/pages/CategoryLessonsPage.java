@@ -1,7 +1,6 @@
-package pages;
+package com.otus.pages;
 
 import com.google.inject.Inject;
-import org.openqa.selenium.WebDriver;
 import support.GuiceScoped;
 
 public class CategoryLessonsPage extends BasePage<CategoryLessonsPage> {

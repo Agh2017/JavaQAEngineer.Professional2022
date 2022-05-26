@@ -1,4 +1,4 @@
-package pages;
+package com.otus.pages;
 
 import com.google.inject.Inject;
 import support.GuiceScoped;
