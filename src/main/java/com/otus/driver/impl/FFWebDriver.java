@@ -22,6 +22,8 @@ public class FFWebDriver implements IDriver {
     firefoxOptions.addArguments("--enable-extensions");
     firefoxOptions.addArguments("--homepage=about:blank");
     firefoxOptions.addArguments("--ignore-certificate-errors");
+    firefoxOptions.addArguments("-width=1024");
+    firefoxOptions.addArguments("-height=900");
     firefoxOptions.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
     firefoxOptions.setCapability(CapabilityType.VERSION, System.getProperty("browser.version", "firefox"));
     //firefoxOptions.setCapability("enableVNC", Boolean.parseBoolean(System.getProperty("enableVNC", "false")));

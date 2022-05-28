@@ -17,6 +17,7 @@ import java.util.Date;
 public class TrainingCoursesPageSteps {
 
   private WebElement foundedElement = null;
+  private final String expectedH1 = "Онлайн-курсы для подготовки к поступлению на основные курсы";
 
   @Inject
   private GuiceScoped guiceScoped;
@@ -28,25 +29,24 @@ public class TrainingCoursesPageSteps {
     System.out.println(url);
   }
 
-  @И("^в списке курсов есть курсы с датой (.*) или позже")
+  @И("^в списке курсов есть курсы с датой (.*) или позже$")
   public void searchCoursesOnDate(Date date) {
     //фильтруем и сохраняем лист курсов с датой >= date
   }
 
-  @Тогда("^Выводим название и дату старта курса в консоль")
+  @Тогда("^Выводим название и дату старта курса в консоль$")
   public void printNameCourse() {
     System.out.println("Курс: название, дата: дата");
   }
 
-  @Тогда("^Открылась страница \"([^\"]*)\"")
+  @Тогда("^Открылась страница \"Подготовительные курсы\"$")
   public void checkTitle() {
     WebElement element = guiceScoped.driver.findElement(By.tagName("H1"));
     String actualH1 = element.getText();
-    String expectedH1 = "Онлайн-курсы для подготовки к поступлению на основные курсы";
     assertEquals(expectedH1, actualH1,  "заголовок H1 неверный");
   }
 
-  @Когда("^Выбран самый \"([^\"]*)\" курс при помощи \"filter\"")
+  @Когда("^Выбран самый \"([^\"]*)\" курс при помощи \"filter\"$")
   public void searchExpensiveOrCheapCourse() {
     //определяем какой ищем дорогой/дешевый
     //сохраняем селектор или данные курса

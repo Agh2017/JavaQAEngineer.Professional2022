@@ -11,8 +11,6 @@ import support.GuiceScoped;
 public class MainPageSteps {
 
   private WebElement foundedElement = null;
-  private WebDriver driver = null;
-
 
   @Inject
   private DriverFactory driverFactory; //инжектим фабрику чтобы можно было изменить значение браузера
@@ -25,12 +23,12 @@ public class MainPageSteps {
   public void chooseBrowser(String browserName) {
     guiceScoped.browserName = browserName;
     guiceScoped.driver = driverFactory.getDriver();
-    mainPage.open();
+    //mainPage.open();
   }
 
   @Пусть("^Открыта главная страница otus в браузере$")
   public void openMainPage() {
-    guiceScoped.driver = driverFactory.getDriver();
+    //guiceScoped.driver = driverFactory.getDriver();
     mainPage.open();
   }
 
