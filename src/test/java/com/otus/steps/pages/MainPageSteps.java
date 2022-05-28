@@ -10,8 +10,6 @@ import support.GuiceScoped;
 
 public class MainPageSteps {
 
-  private WebElement foundedElement = null;
-
   @Inject
   private DriverFactory driverFactory; //инжектим фабрику чтобы можно было изменить значение браузера
   @Inject
@@ -23,12 +21,10 @@ public class MainPageSteps {
   public void chooseBrowser(String browserName) {
     guiceScoped.browserName = browserName;
     guiceScoped.driver = driverFactory.getDriver();
-    //mainPage.open();
   }
 
   @Пусть("^Открыта главная страница otus в браузере$")
   public void openMainPage() {
-    //guiceScoped.driver = driverFactory.getDriver();
     mainPage.open();
   }
 
@@ -38,17 +34,9 @@ public class MainPageSteps {
   }
 
 
-
-
   @И("^В списке курсов есть курс: \"([^\"]*)\"")
   public void isCourse(String courseName) {
     // фильтруем по названию и сохраняем селектор найденного курса
-  }
-
-  @Тогда("^Переходим на страницу курса")
-  public void openCoursePage() {
-    assert foundedElement!=null;
-    if (foundedElement.isDisplayed()) foundedElement.click();
   }
 
   @Когда("^В списке курсов есть курсы с датой \"15.05.2022\" или позже")

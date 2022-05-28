@@ -2,15 +2,12 @@ package com.otus.components;
 
 import com.google.inject.Inject;
 import com.otus.pages.TrainingCoursesPage;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import com.otus.pages.CategoryLessonsPage;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import support.GuiceScoped;
 
 
@@ -39,6 +36,8 @@ public class NavigationMenuComponent extends BaseComponent<NavigationMenuCompone
   @FindBy(xpath = "//div[@class='header2-menu__full']//a[@href='/online/'][@title='Подготовительные курсы']")
   private WebElement trainingCourseSelectInDrawer;
 
+  private final By locatorCoursesInDrawer = By.cssSelector(".header2-menu__full > div:nth-child(2)");
+
   @Inject
   public NavigationMenuComponent(GuiceScoped guiceScoped) {
     super(guiceScoped);
@@ -50,16 +49,10 @@ public class NavigationMenuComponent extends BaseComponent<NavigationMenuCompone
     return new CategoryLessonsPage(guiceScoped);
   }
 
-  public TrainingCoursesPage openTrainingCoursesPageFromNavigationNenu() {
-
-
+  public TrainingCoursesPage openTrainingCoursesPageFromNavigationMenu() {
     //для стандартного окна браузера (не max)
     if (drawerButton.isEnabled()) drawerButton.click();
-
-    //WebDriverWait wait = new WebDriverWait(driver, 4);
-
-    By locator = By.cssSelector(".header2-menu__full > div:nth-child(2)");
-    driver.findElement(locator).click();
+    driver.findElement(locatorCoursesInDrawer).click();
 
     try {
       wait.until(ExpectedConditions.elementToBeClickable(trainingCourseSelectInDrawer));
@@ -69,6 +62,5 @@ public class NavigationMenuComponent extends BaseComponent<NavigationMenuCompone
     trainingCourseSelectInDrawer.click();
 
     return new TrainingCoursesPage(guiceScoped);
-
   }
 }

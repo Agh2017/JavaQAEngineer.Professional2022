@@ -36,7 +36,7 @@ public class NavigationMenuSteps {
 
   @То("^Навести курсор на раздел \"курсы\" и выбрать в выпадающем списке селектор \"Подготовительные курсы\"$")
   public void navigateCourseOnDropdown() {
-    navigationMenuComponent.openTrainingCoursesPageFromNavigationNenu();
+    navigationMenuComponent.openTrainingCoursesPageFromNavigationMenu();
   }
 
 }
