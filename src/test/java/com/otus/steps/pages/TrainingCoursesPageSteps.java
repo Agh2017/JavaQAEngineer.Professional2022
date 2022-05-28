@@ -18,9 +18,6 @@ import java.util.Date;
 
 public class TrainingCoursesPageSteps {
 
-  private WebElement foundedElement = null;
-
-
   @Inject
   private GuiceScoped guiceScoped;
   @Inject
@@ -48,21 +45,9 @@ public class TrainingCoursesPageSteps {
   }
 
 
-
-  @Когда("^Выбран самый \"([^\"]*)\" курс при помощи \"filter\"$")
+  @Когда("^Выбран самый \"([^\"]*)\" курс$")
   public void searchExpensiveOrCheapCourse(String parameter) {
-
-    if (parameter.equals("дорогой")) {
-      trainingCoursesPage.searchExpensiveCourse();
-
-    } else if (parameter.equals("дешевый")) {
-      trainingCoursesPage.searchCheapCourse();
-
-    } else {
-      System.out.println("Введен некорректный параметр");
-    }
-
-
+    assertTrue(parameter.equals("дорогой") || parameter.equals("дешевый"), "Введен некорректный параметр");
+    trainingCoursesPage.searchCheapOrExpensiveCourse(parameter);
   }
-
 }
