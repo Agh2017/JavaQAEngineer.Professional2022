@@ -23,7 +23,7 @@ public class SafariWebDriver implements IDriver{
     safariOptions.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
     safariOptions.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
     safariOptions.setCapability(CapabilityType.VERSION, System.getProperty("browser.version", ""));
-    safariOptions.setCapability("enableVNC", Boolean.parseBoolean(System.getProperty("enableVNC", "false")));
+    //safariOptions.setCapability("enableVNC", Boolean.parseBoolean(System.getProperty("enableVNC", "false")));
 
     LoggingPreferences logPrefs = new LoggingPreferences();
     logPrefs.enable(LogType.PERFORMANCE, Level.INFO);

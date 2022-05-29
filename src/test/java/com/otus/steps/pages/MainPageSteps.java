@@ -3,10 +3,10 @@ package com.otus.steps.pages;
 import com.google.inject.Inject;
 import com.otus.driver.DriverFactory;
 import io.cucumber.java.ru.*;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import com.otus.pages.MainPage;
 import support.GuiceScoped;
+
+import java.util.Date;
 
 public class MainPageSteps {
 
@@ -34,9 +34,9 @@ public class MainPageSteps {
   }
 
 
-  @И("^В списке курсов есть курс: \"([^\"]*)\"")
+  @И("^Переходим на страницу курса: \"([^\"]*)\"")
   public void isCourse(String courseName) {
-    // фильтруем по названию и сохраняем селектор найденного курса
+    mainPage.goToCourse(courseName);
   }
 
   @Когда("^В списке курсов есть курсы с датой \"15.05.2022\" или позже")
@@ -44,4 +44,8 @@ public class MainPageSteps {
     System.out.println("Список курсов: +выводим лист курсов >= даты + даты");
   }
 
+  @И("^в списке курсов есть курсы с датой (.*) или позже$")
+  public void searchCoursesOnDate(Date date) {
+    //фильтруем и сохраняем лист курсов с датой >= date
+  }
 }
