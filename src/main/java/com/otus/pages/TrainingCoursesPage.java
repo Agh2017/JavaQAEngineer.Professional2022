@@ -15,8 +15,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TrainingCoursesPage extends BaseComponent<TrainingCoursesPage> {
 
@@ -43,18 +42,31 @@ public class TrainingCoursesPage extends BaseComponent<TrainingCoursesPage> {
 
   public void searchCheapOrExpensiveCourse(String parameter) {
     saveTrainingCourseData();
+    String courseName = "";
 
     if (parameter.equals("дорогой")) {
       int maxPrice = getMaxPrice();
+
       assertTrue(maxPrice != -1, "something wrong with max price of training courses");
-      System.out.println("дорогой = " + maxPrice);
+      courseName = searchNameCourse(maxPrice);
+      System.out.println("Самый дорогой курс = " + courseName + "стоимость: " + maxPrice);
       //TODO передать стоимость и название далее
 
     } else {
       int minPrice = getMinPrice();
       assertTrue(minPrice != -1, "something wrong with min price of training courses");
+
+      courseName = searchNameCourse(minPrice);
+      System.out.println("Самый дорогой курс = " + courseName + "стоимость: " + minPrice);
       System.out.println("дешевый = " + minPrice);
     }
+  }
+
+  private String searchNameCourse(int price) {
+
+    TileOnTrainingCoursePage nameCourse = listTrainingCourseData.stream().filter(t -> t.getPriceCourse()==price).findAny().orElse(null);
+    assertNotNull(nameCourse);
+    return nameCourse.getNameCourse();
   }
 
   private void saveTrainingCourseData() {
