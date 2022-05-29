@@ -1,27 +1,43 @@
 package com.otus.pages;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import com.google.inject.Inject;
 import com.otus.components.BaseComponent;
 import com.otus.components.TileOnTrainingCoursePage;
-import io.cucumber.java.mn.Харин;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import support.GuiceScoped;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.IntStream;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class TrainingCoursesPage extends BaseComponent<TrainingCoursesPage> {
 
   private final String expectedH1 = "Онлайн-курсы для подготовки к поступлению на основные курсы";
   private final ArrayList<TileOnTrainingCoursePage> listTrainingCourseData = new ArrayList<>();
   private static final String REGEX_DATA_PRICE = "[^\\d.]";
+  private static String courseName;
+  private static int coursePrice;
+
+  public void setCourseName(String newCourseName) {
+    courseName = newCourseName;
+  }
+
+  public void setCoursePrice(int newCoursePrice) {
+    coursePrice = newCoursePrice;
+  }
+
+  public String getCourseName() {
+    return courseName;
+  }
+
+  public int getCoursePrice() {
+    return coursePrice;
+  }
 
   @FindBy(css = ".lessons__new-item-title.lessons__new-item-title_with-tags.lessons__new-item-title_with-bg.js-ellipse")
   List<WebElement> trainingCourseNamesList;
@@ -42,23 +58,17 @@ public class TrainingCoursesPage extends BaseComponent<TrainingCoursesPage> {
 
   public void searchCheapOrExpensiveCourse(String parameter) {
     saveTrainingCourseData();
-    String courseName = "";
+
 
     if (parameter.equals("дорогой")) {
-      int maxPrice = getMaxPrice();
-
-      assertTrue(maxPrice != -1, "something wrong with max price of training courses");
-      courseName = searchNameCourse(maxPrice);
-      System.out.println("Самый дорогой курс = " + courseName + "стоимость: " + maxPrice);
-      //TODO передать стоимость и название далее
+      setCoursePrice(getMaxPrice());
+      assertTrue(coursePrice != -1, "something wrong with max price of training courses");
+      setCourseName(searchNameCourse(coursePrice));
 
     } else {
-      int minPrice = getMinPrice();
-      assertTrue(minPrice != -1, "something wrong with min price of training courses");
-
-      courseName = searchNameCourse(minPrice);
-      System.out.println("Самый дорогой курс = " + courseName + "стоимость: " + minPrice);
-      System.out.println("дешевый = " + minPrice);
+      setCoursePrice(getMinPrice());
+      assertTrue(coursePrice != -1, "something wrong with min price of training courses");
+      setCourseName(searchNameCourse(coursePrice));
     }
   }
 
@@ -104,5 +114,10 @@ public class TrainingCoursesPage extends BaseComponent<TrainingCoursesPage> {
             .min(Comparator.comparing(price -> price)).orElse(-1);
   }
 
-
+  public void printCourseData() {
+    //assertTrue(coursePrice >=0 && !courseName.equals(""));
+    System.out.println("Найден курс = \"" + getCourseName() + "\", его стоимость: " + getCoursePrice());
+    setCoursePrice(-1);
+    setCourseName(null);
+  }
 }

@@ -3,15 +3,11 @@ package com.otus.steps.pages;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.google.inject.Inject;
-import io.cucumber.java.mn.Харин;
 import io.cucumber.java.ru.И;
 import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Пусть;
 import io.cucumber.java.ru.Тогда;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import com.otus.pages.TrainingCoursesPage;
-import org.openqa.selenium.support.FindBy;
 import support.GuiceScoped;
 
 import java.util.Date;
@@ -33,21 +29,21 @@ public class TrainingCoursesPageSteps {
     //фильтруем и сохраняем лист курсов с датой >= date
   }
 
-  @Тогда("^Выводим название и дату старта курса в консоль$")
-  public void printNameCourse() {
-    System.out.println("Курс: название, дата: дата");
-  }
-
   @Тогда("^Открылась страница \"Подготовительные курсы\"$")
   public void checkTitle() {
     trainingCoursesPage.isTitleTrue();
-
   }
 
 
   @Когда("^Выбран самый \"([^\"]*)\" курс$")
-  public void searchExpensiveOrCheapCourse(String parameter) {
+  public TrainingCoursesPage searchExpensiveOrCheapCourse(String parameter) {
     assertTrue(parameter.equals("дорогой") || parameter.equals("дешевый"), "Введен некорректный параметр");
     trainingCoursesPage.searchCheapOrExpensiveCourse(parameter);
+    return trainingCoursesPage;
+  }
+
+  @Тогда("^Выводим название и дату старта курса в консоль$")
+  public void printNameCourse() {
+    trainingCoursesPage.printCourseData();
   }
 }
