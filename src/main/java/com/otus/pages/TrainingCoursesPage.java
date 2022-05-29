@@ -20,7 +20,7 @@ public class TrainingCoursesPage extends BaseComponent<TrainingCoursesPage> {
   private final String expectedH1 = "Онлайн-курсы для подготовки к поступлению на основные курсы";
   private final ArrayList<TileOnTrainingCoursePage> listTrainingCourseData = new ArrayList<>();
   private static final String REGEX_DATA_PRICE = "[^\\d.]";
-  private static String courseName;
+  private static String courseName; //нашел 2 варианта передачи данных между степами, через статик поля или через инъекцию независимого объекта
   private static int coursePrice;
 
   public void setCourseName(String newCourseName) {
