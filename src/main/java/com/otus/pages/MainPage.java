@@ -20,13 +20,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.IntStream;
 
-//в каждом тесте будет свой объект вебдрайвера, вейтера и т.п так как в GuiceScoped аннотация @ScenarioScoped - аналог синглтон?
+
 public class MainPage extends BasePage<MainPage> {
 
   private static final String REGEX_DATA = "(.*?(январ|феврал|март|апрел|ма|июн|июл|август|сентябр|октябр|ноябр|декабр))";
   private final ArrayList<TileOnMainPage> listTiles = new ArrayList<>();
+  private static final ArrayList<TileOnMainPage> filteredTiles = new ArrayList<>();
   private static WebElement foundedCourseElement = null;
 
 
@@ -78,53 +78,26 @@ public class MainPage extends BasePage<MainPage> {
         threadEx.printStackTrace();
       }
     }
-
   }
 
-
-  public void searchCourseOnDate(LocalDate date) {
+  public void searchCourseOnDate(int day, int month, int year) {
+    LocalDate date = new DateFromCalendar(month, day, year).getDate();
 
     saveNameAndDateCourses();
 
-    TileOnMainPage nameCourseStarts = listTiles.stream().filter(t -> t.getStartDate().isEqual(date)).findAny().orElse(null);
-    assertNotNull(nameCourseStarts);
-
-    System.out.println("курс, стартующий раньше всех: " + date + "  " + nameCourseStarts);
-  }
-
-  public void searchCourseOnMaxDate() {
-
-    saveNameAndDateCourses();
-    LocalDate maxDate = getMaxDate();
-
-    listTiles.stream().reduce((t, tileOnMainPage) -> {
-      if (t.getStartDate().isEqual(maxDate)) return tileOnMainPage;
-      return t;
-    }).ifPresent(tile -> System.out.println("курс, стартующий позже всех: " + maxDate + "  " + tile.getTileName()));
-  }
-
-  private LocalDate getMaxDate() {
-
-    return listTiles.stream()
-            .map(TileOnMainPage::getStartDate)
-            .max(Comparator.comparing(date -> date)).orElse(LocalDate.now());
-  }
-
-  private LocalDate getMinDate() {
-
-    return listTiles.stream()
-            .map(TileOnMainPage::getStartDate)
-            .min(Comparator.comparing(date -> date)).orElse(LocalDate.now());
+    Comparator<LocalDate> comparator = Comparator.comparing(d -> d.isAfter(date.minusDays(1)));
+    listTiles.stream().filter(listTile -> comparator.compare(listTile.getStartDate(), date) == 0).forEach(filteredTiles::add);
   }
 
   private void saveNameAndDateCourses() {
 
-    IntStream.range(0, allCoursesName.size()).forEach(i -> {
+    int bound = allCoursesName.size();
+    for (int i = 0; i < bound; i++) {
       String currentName = allCoursesName.get(i).getText();
       LocalDate courseDate = getDateFromTile(allCoursesDate.get(i).getText());
       TileOnMainPage tileOnMainPage = new TileOnMainPage(currentName, courseDate);
       listTiles.add(tileOnMainPage);
-    });
+    }
     assertTrue(allCoursesName.size() == allCoursesDate.size() && allCoursesDate.size() == listTiles.size());
   }
 
@@ -160,5 +133,11 @@ public class MainPage extends BasePage<MainPage> {
     if (matcher.find()) result = matcher.group();
 
     return result;
+  }
+
+  public void printCourseData() {
+    for (TileOnMainPage filteredTile : filteredTiles) {
+      System.out.println("курс, стартующий c заданной даты : " + filteredTile.getTileName() + "  " + filteredTile.getStartDate());
+    }
   }
 }

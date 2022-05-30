@@ -11,13 +11,17 @@ public class DateFromCalendar {
 
   private final int month;
   private final int day;
+  private int year = 0;
 
   public DateFromCalendar(int month, int day) {
     this.month = month;
     this.day = day;
   }
-  private int getMonth() {
-    return month;
+
+  public DateFromCalendar(int month, int day, int year) {
+    this.month = month-1;
+    this.day = day;
+    this.year = year;
   }
 
   private int getDay() {
@@ -26,15 +30,20 @@ public class DateFromCalendar {
 
   public LocalDate getDate() {
 
-    Calendar now = Calendar.getInstance();
-    int currentMonth = now.get(Calendar.MONTH);
-    int year = now.get(Calendar.YEAR);
-    if (getMonth() < currentMonth) year = year+1;
 
-    Calendar calendar = new GregorianCalendar(year, getMonth(), getDay());
+    Calendar now = GregorianCalendar.getInstance();
+
+    int currentMonth = now.get(Calendar.MONTH);
+    if (year==0) {
+      year = now.get(Calendar.YEAR);
+      if (month < currentMonth) year = year+1;
+    }
+
+    Calendar calendar = new GregorianCalendar(year, month, day);
     Date date = calendar.getTime();
     SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd");
     String inActiveDate = newFormat.format(date);
+
     return LocalDate.parse(inActiveDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
   }
 }

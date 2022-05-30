@@ -7,7 +7,9 @@ import com.otus.pages.MainPage;
 import support.GuiceScoped;
 
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class MainPageSteps {
 
@@ -40,14 +42,13 @@ public class MainPageSteps {
     mainPage.goToCourse(courseName);
   }
 
-  @Когда("^В списке курсов есть курсы с датой \"(0?[1-9]|[12][0-9]|3[01]).(0?[1-9]|1[012]).((19|20)\\d\\d)\" или позже")
-  public void searchListCoursesOnDate(LocalDate date) {
-    mainPage.searchCourseOnDate(date);
+  @Когда("^В списке курсов есть курсы с датой \"(0?[1-9]|[12][0-9]|3[01]).(0?[1-9]|1[012]).(2022|2023)\" или позже")
+  public void searchListCoursesOnDate(int day, int month, int year) {
+    mainPage.searchCourseOnDate(day,month,year);
   }
 
   @И("^Выводим названия и даты старта курсов в консоль$")
   public void printNameCourse() {
-    //mainPage.printCourseData();
-    //System.out.println("Список курсов: +выводим лист курсов >= даты + даты");
+    mainPage.printCourseData();
   }
 }
