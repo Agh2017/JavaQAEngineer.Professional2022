@@ -6,6 +6,7 @@ import io.cucumber.java.ru.*;
 import com.otus.pages.MainPage;
 import support.GuiceScoped;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class MainPageSteps {
@@ -39,13 +40,14 @@ public class MainPageSteps {
     mainPage.goToCourse(courseName);
   }
 
-  @Когда("^В списке курсов есть курсы с датой \"15.05.2022\" или позже")
-  public void searchListCoursesOnDate() {
-    System.out.println("Список курсов: +выводим лист курсов >= даты + даты");
+  @Когда("^В списке курсов есть курсы с датой \"(0?[1-9]|[12][0-9]|3[01]).(0?[1-9]|1[012]).((19|20)\\d\\d)\" или позже")
+  public void searchListCoursesOnDate(LocalDate date) {
+    mainPage.searchCourseOnDate(date);
   }
 
-  @И("^в списке курсов есть курсы с датой (.*) или позже$")
-  public void searchCoursesOnDate(Date date) {
-    //фильтруем и сохраняем лист курсов с датой >= date
+  @И("^Выводим названия и даты старта курсов в консоль$")
+  public void printNameCourse() {
+    //mainPage.printCourseData();
+    //System.out.println("Список курсов: +выводим лист курсов >= даты + даты");
   }
 }

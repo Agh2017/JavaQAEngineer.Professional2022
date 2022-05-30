@@ -1,7 +1,9 @@
 package com.otus.pages;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import com.google.inject.Inject;
-import com.otus.components.BaseComponent;
 import com.otus.components.TileOnMainPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -19,10 +21,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 //в каждом тесте будет свой объект вебдрайвера, вейтера и т.п так как в GuiceScoped аннотация @ScenarioScoped - аналог синглтон?
 public class MainPage extends BasePage<MainPage> {
@@ -76,21 +74,22 @@ public class MainPage extends BasePage<MainPage> {
       try {
         Thread.sleep(500);
         popupCookieCloseButton.click();
-      } catch (Exception threadEx) {threadEx.printStackTrace();}
+      } catch (Exception threadEx) {
+        threadEx.printStackTrace();
+      }
     }
 
   }
 
 
-  public void searchCourseOnMinDate() {
+  public void searchCourseOnDate(LocalDate date) {
 
     saveNameAndDateCourses();
-    LocalDate minDate = getMinDate();
 
-    TileOnMainPage nameCourseStarts = listTiles.stream().filter(t -> t.getStartDate().isEqual(minDate)).findAny().orElse(null);
+    TileOnMainPage nameCourseStarts = listTiles.stream().filter(t -> t.getStartDate().isEqual(date)).findAny().orElse(null);
     assertNotNull(nameCourseStarts);
 
-    System.out.println("курс, стартующий раньше всех: " + minDate + "  " + nameCourseStarts);
+    System.out.println("курс, стартующий раньше всех: " + date + "  " + nameCourseStarts);
   }
 
   public void searchCourseOnMaxDate() {
@@ -98,15 +97,10 @@ public class MainPage extends BasePage<MainPage> {
     saveNameAndDateCourses();
     LocalDate maxDate = getMaxDate();
 
-    listTiles.stream()
-            .reduce((t, tileOnMainPage) -> {
-                      if (t.getStartDate().isEqual(maxDate)) return tileOnMainPage;
-                      return t;
-                    }
-            ).ifPresent(tile -> System.out.println("курс, стартующий позже всех: "
-                    + maxDate
-                    + "  "
-                    + tile.getTileName()));
+    listTiles.stream().reduce((t, tileOnMainPage) -> {
+      if (t.getStartDate().isEqual(maxDate)) return tileOnMainPage;
+      return t;
+    }).ifPresent(tile -> System.out.println("курс, стартующий позже всех: " + maxDate + "  " + tile.getTileName()));
   }
 
   private LocalDate getMaxDate() {
