@@ -8,6 +8,7 @@ import extensions.ThrowableExtension;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -33,6 +34,20 @@ public abstract class BasePage<T> extends CommonActions<T> {
 
   public T open() {
     driver.get(getBaseUrl() + getUrlPrefix());
+    return (T) this;
+  }
+
+  public T hardClickForAngrySelectors(WebElement element) {
+    try {
+      element.click();
+    } catch (Exception e) {
+      try {
+        Thread.sleep(500);
+        element.click();
+      } catch (Exception ex) {
+        ex.printStackTrace();
+      }
+    }
     return (T) this;
   }
 }

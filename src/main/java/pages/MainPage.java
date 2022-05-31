@@ -44,8 +44,9 @@ public class MainPage extends BasePage<MainPage> {
     WebElement popupCookieCloseButton = driver.findElement(By
             .cssSelector("button[class='js-cookie-accept cookies__button']"));
     standartWaiter.waitForCondition(ExpectedConditions
-            .attributeToBeNotEmpty(popupCookieCloseButton, "name"));
-    popupCookieCloseButton.click();
+            .elementToBeClickable(popupCookieCloseButton));
+
+    hardClickForAngrySelectors(popupCookieCloseButton);
   }
 
   public void checkH1ShouldBeSameAs() {
