@@ -26,7 +26,7 @@ public class MainPage extends BasePage<MainPage> {
 
   private static final String REGEX_DATA = "(.*?(январ|феврал|март|апрел|ма|июн|июл|август|сентябр|октябр|ноябр|декабр))";
   private final ArrayList<TileOnMainPage> listTiles = new ArrayList<>();
-  private static final ArrayList<TileOnMainPage> filteredTiles = new ArrayList<>();
+  private static final ArrayList<TileOnMainPage> FILTERED_TILES = new ArrayList<>();
   private static WebElement foundedCourseElement = null;
 
 
@@ -34,9 +34,9 @@ public class MainPage extends BasePage<MainPage> {
     return foundedCourseElement;
   }
 
-  @Inject // com.google.inject объект будет заинжектен через конструктор
+  @Inject
   public MainPage(GuiceScoped guiceScoped) {
-    super(guiceScoped, "");
+    super(guiceScoped, "/");
   }
 
   @FindBy(css = ".lessons__new-item-title,.lessons__new-item-title_with-bg")
@@ -86,7 +86,7 @@ public class MainPage extends BasePage<MainPage> {
     saveNameAndDateCourses();
 
     Comparator<LocalDate> comparator = Comparator.comparing(d -> d.isAfter(date.minusDays(1)));
-    listTiles.stream().filter(listTile -> comparator.compare(listTile.getStartDate(), date) == 0).forEach(filteredTiles::add);
+    listTiles.stream().filter(listTile -> comparator.compare(listTile.getStartDate(), date) == 0).forEach(FILTERED_TILES::add);
   }
 
   private void saveNameAndDateCourses() {
@@ -136,7 +136,7 @@ public class MainPage extends BasePage<MainPage> {
   }
 
   public void printCourseData() {
-    for (TileOnMainPage filteredTile : filteredTiles) {
+    for (TileOnMainPage filteredTile : FILTERED_TILES) {
       System.out.println("курс, стартующий c заданной даты : " + filteredTile.getTileName() + "  " + filteredTile.getStartDate());
     }
   }

@@ -23,7 +23,7 @@ public abstract class BasePage<T> {
 
   public T open() {
     String url = System.getProperty("base.url");
-    if (url==null) url = "https://otus.ru"; // для запуска тестов через file.feature
+    if (url == null) url = "https://otus.ru"; // для запуска тестов через file.feature
     guiceScoped.driver.get(url);
 
     return (T) this;

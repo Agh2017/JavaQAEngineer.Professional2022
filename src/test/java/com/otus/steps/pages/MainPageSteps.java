@@ -28,6 +28,7 @@ public class MainPageSteps {
 
   @Пусть("^Открыта главная страница otus в браузере$")
   public void openMainPage() {
+    if (guiceScoped.driver == null) guiceScoped.driver = driverFactory.getDriver();
     mainPage.open();
   }
 

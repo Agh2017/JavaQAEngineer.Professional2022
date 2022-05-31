@@ -9,8 +9,8 @@ import java.util.GregorianCalendar;
 
 public class DateFromCalendar {
 
-  private final int month;
-  private final int day;
+  private int month;
+  private int day;
   private int year = 0;
 
   public DateFromCalendar(int month, int day) {
@@ -24,12 +24,7 @@ public class DateFromCalendar {
     this.year = year;
   }
 
-  private int getDay() {
-    return day;
-  }
-
   public LocalDate getDate() {
-
 
     Calendar now = GregorianCalendar.getInstance();
 
