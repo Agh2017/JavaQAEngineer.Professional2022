@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   
-  <groupId>otus</groupId>
-  <artifactId>Citrus</artifactId>
+  <groupId>demo</groupId>
+  <artifactId>citrusHelpers</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>Citrus Integration Test</name>
   
@@ -43,6 +43,12 @@
     </dependency>
 
     <dependency>
+      <groupId>com.consol.citrus</groupId>
+      <artifactId>citrus-websocket</artifactId>
+      <version>${citrus.version}</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
       <version>${testng.version}</version>
@@ -63,6 +69,33 @@
       <artifactId>slf4j-log4j12</artifactId>
       <version>${slf4j.version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>jakarta.xml.ws</groupId>
+      <artifactId>jakarta.xml.ws-api</artifactId>
+      <version>2.3.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <version>3.9.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-surefire-plugin</artifactId>
+      <version>3.0.0-M5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.2.5</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ibm.mq</groupId>
+      <artifactId>com.ibm.mq.allclient</artifactId>
+      <version>9.2.4.0</version>
+    </dependency>
   </dependencies>
   
   <build>
@@ -71,14 +104,14 @@
         <groupId>com.consol.citrus.mvn</groupId>
         <artifactId>citrus-maven-plugin</artifactId>
         <version>${citrus.version}</version>
-        <configuration>
+<!--        <configuration>-->
 <!--            <targetPackage>demo</targetPackage>-->
-        </configuration>
+<!--        </configuration>-->
       </plugin>
 
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.6.1</version>
+        <version>3.9.0</version>
         <configuration>
           <encoding>${project.build.sourceEncoding}</encoding>
           <source>1.8</source>
@@ -88,7 +121,7 @@
 
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.20</version>
+        <version>3.0.0-M5</version>
         <configuration>
           <failIfNoTests>false</failIfNoTests>
           <workingDirectory>${project.build.directory}</workingDirectory>
@@ -109,6 +142,30 @@
           </execution>
         </executions>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-codegen-plugin</artifactId>
+        <version>3.3.4</version>
+        <executions>
+          <execution>
+            <id>generate-sources-api</id>
+            <phase>generate-sources</phase>
+            <configuration>
+              <sourceRoot>${basedir}/src/test/java/pojo/xml</sourceRoot>
+              <wsdlOptions>
+                <wsdlOption>
+                  <wsdl>https://www.dataaccess.com/webservicesserver/numberconversion.wso?WSDL</wsdl>
+                </wsdlOption>
+              </wsdlOptions>
+            </configuration>
+            <goals>
+              <goal>wsdl2java</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
 </project>
