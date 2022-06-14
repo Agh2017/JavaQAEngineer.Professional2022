@@ -13,6 +13,7 @@ import pojo.http.User;
 public class TestHelperHTTP extends TestNGCitrusTestRunner {
     private TestContext context;
 
+
     @Test(description = "Получение информации о пользователе", enabled=true)
     @CitrusTest
     public void getTestActions() {
@@ -31,7 +32,48 @@ public class TestHelperHTTP extends TestNGCitrusTestRunner {
         .payload(getJsonData(), "objectMapper"));
     }
 
+    @Test(testName = "Регистрация нового пользователя")
+    @CitrusTest
+    public void RegisterNewUserSuccess(){
+        http(httpActionBuilder -> httpActionBuilder
+                .client("httpHelperClient")
+                .send()
+                .post("register")
+                .payload("{\n" +
+                        "    \"email\": \"eve.holt@reqres.in\",\n" +
+                        "    \"password\": \"pistol\"\n" +
+                        "}")
+        );
 
+        http(httpActionBuilder -> httpActionBuilder
+                .client("httpHelperClient")
+                .receive()
+                .response(HttpStatus.valueOf(200))
+                .messageType(MessageType.JSON)
+        );
+    }
+
+
+    @Test(testName = "Негативный кейс. Регистрация нового пользователя")
+    @CitrusTest
+    public void postRegisterSuccessful(){
+        http(httpActionBuilder -> httpActionBuilder
+                .client("httpHelperClient")
+                .send()
+                .post("register")
+                .payload("{\n" +
+                        "    \"email\": \"test.mail@reqres.in\",\n" +
+                        "    \"password\": \"ghost123\"\n" +
+                        "}")
+        );
+
+        http(httpActionBuilder -> httpActionBuilder
+                .client("httpHelperClient")
+                .receive()
+                .response(HttpStatus.valueOf(400))
+                .messageType(MessageType.JSON)
+        );
+    }
 
     public User getJsonData() {
         User user = new User();
@@ -53,6 +95,7 @@ public class TestHelperHTTP extends TestNGCitrusTestRunner {
         return user;
 
     }
+
 
 
 }
