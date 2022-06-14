@@ -10,12 +10,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import support.DateFromCalendar;
+import support.DateFromLocalDate;
 import support.GuiceScoped;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -81,12 +80,14 @@ public class MainPage extends BasePage<MainPage> {
   }
 
   public void searchCourseOnDate(int day, int month, int year) {
-    LocalDate date = new DateFromCalendar(month, day, year).getDate();
-
+    LocalDate date = LocalDate.of(year, month, day);
+    System.out.println("date" + " " + date);
     saveNameAndDateCourses();
 
-    Comparator<LocalDate> comparator = Comparator.comparing(d -> d.isAfter(date.minusDays(1)));
-    listTiles.stream().filter(listTile -> comparator.compare(listTile.getStartDate(), date) == 0).forEach(FILTERED_TILES::add);
+    //Comparator<LocalDate> comparator = Comparator.comparing(d -> d.isAfter(date.minusDays(1)));
+    //listTiles.stream().filter(listTile -> comparator.compare == 0).forEach(FILTERED_TILES::add);
+    listTiles.stream().filter(listTiles -> listTiles.getStartDate().isAfter(date.minusDays(1))).forEach(FILTERED_TILES::add);
+    System.out.println("FILTERED_TILES" + FILTERED_TILES);
   }
 
   private void saveNameAndDateCourses() {
@@ -122,7 +123,7 @@ public class MainPage extends BasePage<MainPage> {
       month = "11";
       day = "31";
     }
-    return new DateFromCalendar(Integer.parseInt(month), Integer.parseInt(day)).getDate();
+    return new DateFromLocalDate(Integer.parseInt(month), Integer.parseInt(day)).getDate();
   }
 
   public String trimRegex(String input, String regex) {
@@ -140,4 +141,5 @@ public class MainPage extends BasePage<MainPage> {
       System.out.println("курс, стартующий c заданной даты : " + filteredTile.getTileName() + "  " + filteredTile.getStartDate());
     }
   }
+
 }
