@@ -17,7 +17,8 @@
        http://www.citrusframework.org/schema/ws/config http://www.citrusframework.org/schema/ws/config/citrus-ws-config.xsd
        http://www.citrusframework.org/schema/http/config http://www.citrusframework.org/schema/http/config/citrus-http-config.xsd
        http://www.citrusframework.org/schema/testcase http://www.citrusframework.org/schema/testcase/citrus-testcase.xsd
-       http://www.citrusframework.org/schema/websocket/config http://www.citrusframework.org/schema/websocket/config/citrus-websocket-config.xsd">
+       http://www.citrusframework.org/schema/websocket/config http://www.citrusframework.org/schema/websocket/config/citrus-websocket-config.xsd
+       http://schemas.xmlsoap.org/wsdl/">
 	
     <!-- Common settings -->
     <context:property-placeholder location="classpath:citrus.properties"/>
@@ -107,6 +108,13 @@
             request-url="${urlSOAP}"
             timeout="30000"/>
 
+
+    <citrus-ws:client
+            id="soapHelperMonetaClient"
+            request-url="${urlSOAP2}"
+            timeout="30000"/>
+
+
     <!--For SOAP 1.1-->
     <bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory">
         <property name="soapVersion">
@@ -124,6 +132,13 @@
     <citrus:schema-repository id="schemaRepositoryService">
         <citrus:schemas>
             <citrus:schema id="DATAACCESS" location="classpath:wsdl/numberconversion.wsdl" />
+        </citrus:schemas>
+    </citrus:schema-repository>
+
+
+    <citrus:schema-repository id="schemaRepositoryService2">
+        <citrus:schemas>
+            <citrus:schema id="DATAACCESS2" location="classpath:wsdl/services.wsdl" />
         </citrus:schemas>
     </citrus:schema-repository>
 </beans>

@@ -155,7 +155,7 @@
               <sourceRoot>${basedir}/src/test/java/pojo/xml</sourceRoot>
               <wsdlOptions>
                 <wsdlOption>
-                  <wsdl>https://www.dataaccess.com/webservicesserver/numberconversion.wso?WSDL</wsdl>
+                  <wsdl>https://moneta.ru/services.wsdl</wsdl>
                 </wsdlOption>
               </wsdlOptions>
             </configuration>
