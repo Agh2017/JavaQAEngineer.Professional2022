@@ -18,18 +18,20 @@ public class TestHelperMock extends TestNGCitrusTestRunner {
     public void getTestActions() {
         this.context = citrus.createTestContext();
 
+        // отправили на адрес localhost 5555
         http(httpActionBuilder -> httpActionBuilder
                 .client("restClientReqresMock")
                 .send()
                 .get("users/${userId}")
-                .fork(true)
+                .fork(true) //параметр обеспечивает асинхронное взаимодействие и заглушка дожидается запроса
                 );
-
+        //сервер забирает себе гет запрос
         http(httpActionBuilder -> httpActionBuilder
                 .server("restHelperServer")
                 .receive()
                 .get());
 
+        //сервер эмулируем ответ, отправляет клиенту payload (json для наглядности) что д.б. в контракте
         http(httpActionBuilder -> httpActionBuilder
                 .server("restHelperServer")
                 .send()
@@ -50,6 +52,7 @@ public class TestHelperMock extends TestNGCitrusTestRunner {
                         "}")
         );
 
+        // сериализация json
         http(httpActionBuilder -> httpActionBuilder
                 .client("restClientReqresMock")
                 .receive()
