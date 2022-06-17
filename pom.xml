@@ -155,7 +155,7 @@
               <sourceRoot>${basedir}/src/test/java/pojo/xml</sourceRoot>
               <wsdlOptions>
                 <wsdlOption>
-                  <wsdl>https://moneta.ru/services.wsdl</wsdl>
+                  <wsdl>http://webservices.oorsprong.org/websamples.countryinfo/CountryInfoService.wso?WSDL</wsdl>
                 </wsdlOption>
               </wsdlOptions>
             </configuration>

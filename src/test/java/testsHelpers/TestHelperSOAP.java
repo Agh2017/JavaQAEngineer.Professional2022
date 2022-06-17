@@ -5,10 +5,11 @@ import com.consol.citrus.context.TestContext;
 import com.consol.citrus.dsl.testng.TestNGCitrusTestRunner;
 import com.consol.citrus.ws.message.SoapMessage;
 import features.PojoToXML;
+import org.oorsprong.websamples.CurrencyName;
+import org.oorsprong.websamples.CurrencyNameResponse;
 import org.testng.annotations.Test;
 import com.dataaccess.webservicesserver.NumberToDollars;
 import com.dataaccess.webservicesserver.NumberToDollarsResponse;
-import ru.moneta.schemas.messages.AccountInfo;
 
 import java.math.BigDecimal;
 
@@ -53,52 +54,40 @@ public class TestHelperSOAP extends TestNGCitrusTestRunner {
         return numberToDollarsResponse;
     }
 
-    @Test(description = "Удаление пользователя")
+    @Test(description = "Получение названия валюты")
     @CitrusTest
-    public void convertFahrenheitToCelsius() {
+    public void getNameOfCurrency() {
 
         this.context = citrus.createTestContext();
 
-        PojoToXML<Class<ru.moneta.schemas.messages.AccountInfo>> convRequest = new PojoToXML<>();
-        PojoToXML<Class<NumberToDollarsResponse>> convResponse = new PojoToXML<>();
-        SoapMessage soapMessage = new SoapMessage();
-        soapMessage.soapAction("/HelloService/sayHello");
-        soapMessage.setPayload(
-                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-                        "<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
-                        "  <soap12:Body>\n" +
-                        "    <FahrenheitToCelsius xmlns=\"https://www.w3schools.com/xml/\">\n" +
-                        "      <Fahrenheit>75</Fahrenheit>\n" +
-                        "    </FahrenheitToCelsius>\n" +
-                        "  </soap12:Body>\n" +
-                        "</soap12:Envelope>");
+        PojoToXML<Class<CurrencyName>> convRequest = new PojoToXML<>();
+        PojoToXML<Class<CurrencyNameResponse>> convResponse = new PojoToXML<>();
 
         soap(soapActionBuilder -> soapActionBuilder
-                .client("soapHelperMonetaClient")
+                .client("soapHelperCountryInfoClient")
                 .send()
-                .payload(convRequest.convert(ru.moneta.schemas.messages.AccountInfo.class, getInfoOnNumberProfileRequest(),"https://demo.moneta.ru/services/",  "FindAccountByIdRequest"))
+                .payload(convRequest.convert(CurrencyName.class, getCurrencyNameRequest(), "http://www.oorsprong.org/", "websamples.countryinfo"))
         );
-        //TODO выяснить про localparts & namespace
         // продолжить на 0,57
         soap(soapActionBuilder -> soapActionBuilder
-                .client("soapHelperFahrenheitConversionClient")
+                .client("soapHelperCountryInfoClient")
                 .receive()
                 .xsdSchemaRepository("schemaRepositoryService2")
-                .payload(soapMessage.toString())
+                .payload(convResponse.convert(CurrencyNameResponse.class, getCurrencyNameResponse(), "http://www.oorsprong.org/", "websamples.countryinfo"))
         );
     }
 
     //готовим pojo для запроса
-    public ru.moneta.schemas.messages.AccountInfo getInfoOnNumberProfileRequest() {
-        ru.moneta.schemas.messages.AccountInfo accountInfo = new AccountInfo();
-        accountInfo.setId(12154);
-        return accountInfo;
+    public CurrencyName getCurrencyNameRequest() {
+        CurrencyName currencyName = new CurrencyName();
+        currencyName.setSCurrencyISOCode("DZD");
+        return currencyName;
     }
 
     //готовим эталон для валидации ответа
-    public ru.moneta.schemas.messages.AccountInfo getInfoOnNumberProfile() {
-        ru.moneta.schemas.messages.AccountInfo accountInfo = new AccountInfo();
-        accountInfo.setId(12154);
-        return accountInfo;
+    public CurrencyNameResponse getCurrencyNameResponse() {
+        CurrencyNameResponse currencyNameResponse = new CurrencyNameResponse();
+        currencyNameResponse.setCurrencyNameResult("Algeria Dinars");
+        return currencyNameResponse;
     }
 }

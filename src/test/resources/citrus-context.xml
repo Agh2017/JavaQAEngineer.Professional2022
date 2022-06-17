@@ -18,7 +18,7 @@
        http://www.citrusframework.org/schema/http/config http://www.citrusframework.org/schema/http/config/citrus-http-config.xsd
        http://www.citrusframework.org/schema/testcase http://www.citrusframework.org/schema/testcase/citrus-testcase.xsd
        http://www.citrusframework.org/schema/websocket/config http://www.citrusframework.org/schema/websocket/config/citrus-websocket-config.xsd
-       http://schemas.xmlsoap.org/wsdl/">
+       http://schemas.xmlsoap.org/soap/envelope/">
 	
     <!-- Common settings -->
     <context:property-placeholder location="classpath:citrus.properties"/>
@@ -110,9 +110,9 @@
 
 
     <citrus-ws:client
-            id="soapHelperMonetaClient"
+            id="soapHelperCountryInfoClient"
             request-url="${urlSOAP2}"
-            timeout="30000"/>
+            timeout="15000"/>
 
 
     <!--For SOAP 1.1-->
@@ -138,7 +138,7 @@
 
     <citrus:schema-repository id="schemaRepositoryService2">
         <citrus:schemas>
-            <citrus:schema id="DATAACCESS2" location="classpath:wsdl/services.wsdl" />
+            <citrus:schema id="DATAACCESS2" location="classpath:wsdl/CountryInfoService.xml" />
         </citrus:schemas>
     </citrus:schema-repository>
 </beans>
