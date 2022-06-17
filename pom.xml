@@ -5,7 +5,7 @@
   <groupId>demo</groupId>
   <artifactId>citrusHelpers</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>Citrus Integration Test</name>
+  <name>Citrus Tests</name>
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

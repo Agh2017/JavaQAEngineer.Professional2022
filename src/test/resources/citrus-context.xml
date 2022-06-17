@@ -19,7 +19,7 @@
        http://www.citrusframework.org/schema/testcase http://www.citrusframework.org/schema/testcase/citrus-testcase.xsd
        http://www.citrusframework.org/schema/websocket/config http://www.citrusframework.org/schema/websocket/config/citrus-websocket-config.xsd
        http://schemas.xmlsoap.org/soap/envelope/">
-	
+
     <!-- Common settings -->
     <context:property-placeholder location="classpath:citrus.properties"/>
 
@@ -87,23 +87,22 @@
     </bean>
 
     <!--For SOAP 1.2-->
-<!--        <bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory">-->
-<!--          <property name="soapVersion">-->
-<!--            <util:constant static-field="org.springframework.ws.soap.SoapVersion.SOAP_12"/>-->
-<!--          </property>-->
-<!--        </bean>-->
+    <!--        <bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory">-->
+    <!--          <property name="soapVersion">-->
+    <!--            <util:constant static-field="org.springframework.ws.soap.SoapVersion.SOAP_12"/>-->
+    <!--          </property>-->
+    <!--        </bean>-->
 
     <citrus:schema-repository id="schemaRepositoryService">
         <citrus:schemas>
-            <citrus:schema id="DATAACCESS" location="classpath:wsdl/numberconversion.wsdl" />
+            <citrus:schema id="DATAACCESS" location="classpath:wsdl/numberconversion.wsdl"/>
         </citrus:schemas>
     </citrus:schema-repository>
 
-    <!--
-        <citrus:schema-repository id="schemaRepositoryService2">
-            <citrus:schemas>
-                <citrus:schema id="COUNTRYINFO" location="classpath:wsdl/CountryInfoService.xml" />
-            </citrus:schemas>
-        </citrus:schema-repository>
-        -->
-    </beans>
+    <citrus:schema-repository id="schemaRepositoryService2">
+        <citrus:locations>
+            <citrus:location path="classpath:wsdl/countryInfoService.xml"/>
+        </citrus:locations>
+    </citrus:schema-repository>
+
+</beans>
