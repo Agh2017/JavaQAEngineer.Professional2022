@@ -1,6 +1,8 @@
 package stubs;
 
+import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import net.minidev.json.JSONObject;
+import org.junit.Rule;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +12,10 @@ import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 
 public class UserStub {
 
-    private final String basePath = "/user";
+    @Rule
+    public WireMockRule wireMockRule = new WireMockRule(8089);
+
+    private final String basePath = "/hello";
 
     {
         registerStubHello();
@@ -21,9 +26,9 @@ public class UserStub {
         map.put("name", "Sasha");
         map.put("age", "10");
 
-        stubFor(get(urlEqualTo(String.format("%s/create", basePath)))
+        stubFor(get(urlEqualTo(String.format("%s", basePath)))
                 .willReturn(aResponse()
-                        .withBody(new JSONObject(map).toJSONString())
+                        .withBody("Hello")
                         .withStatus(200)));
     }
 
