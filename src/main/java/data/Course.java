@@ -21,8 +21,8 @@ public class Course {
     @Override
     public String toString() {
         return "{ " +
-                "name:\"" + name + '\"' +
-                ", price:\"" + price + "\"" +
+                "\"name\":" + "\"" + name + '\"' +
+                ", \"price\":" + price +
                 " }";
     }
 }

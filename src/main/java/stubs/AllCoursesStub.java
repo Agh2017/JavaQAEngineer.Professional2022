@@ -9,7 +9,7 @@ import java.util.List;
 
 public class AllCoursesStub {
 
-    private final String basePath = "course/get/all";
+    private final String basePath = "/course/get/all";
 
     {
         registerStubAllCourses();

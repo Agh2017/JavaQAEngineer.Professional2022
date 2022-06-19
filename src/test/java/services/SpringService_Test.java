@@ -10,10 +10,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.junit.*;
-import stubs.AllUsersStub;
-import stubs.ScoreStub;
-import stubs.StoreStub;
-import stubs.UserStub;
+import stubs.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,6 +20,9 @@ public class SpringService_Test {
 
   private static final WireMockServer wireMockServer = new WireMockServer();
   private static final String LIST_USERS_MOCK = "[{ \"name\":\"Yuri N\", \"course\":\"QA java\", \"email\":\"dont@mail.me\", \"age\":\"77\" }, { \"name\":\"Test user\", \"course\":\"QA\", \"email\":\"test@test.test\", \"age\":\"23\" }]";
+
+  private static final String LIST_COURSES_MOCK = "[{ \"name\":\"QA java\", \"price\":15000 }, { \"name\":\"Java\", \"price\":12000 }]";
+
   private static final String USER_SCORE_MOCK_ID00001 = "{ \"name\":\"Test user Petroff\", \"score\":78 }";
   private static final String USER_SCORE_MOCK_ID00002 = "{ \"name\":\"Test user Ivanov\", \"score\":44 }";
 
@@ -45,6 +45,21 @@ public class SpringService_Test {
       throw new RuntimeException(e);
     }
     wireMockServer.stop();
+  }
+
+  //clean test -Dtest=SpringService_Test#list_courses_path_via_stub_wiremock
+  @Test
+  public void list_courses_path_via_stub_wiremock() throws IOException {
+    new AllCoursesStub();
+    CloseableHttpClient httpClient = HttpClients.createDefault();
+
+    HttpGet request = new HttpGet("http://localhost:8089/course/get/all");
+    HttpResponse httpResponse = httpClient.execute(request);
+    String responseString = convertResponseToString(httpResponse);
+
+    verify(getRequestedFor(urlEqualTo("/course/get/all")));
+    assertThat(httpResponse.getStatusLine().getStatusCode()).isEqualTo(200);
+    assertThat(responseString).isEqualTo(LIST_COURSES_MOCK);
   }
 
   //clean test -Dtest=SpringService_Test#users_score_path_via_stub_wiremock
