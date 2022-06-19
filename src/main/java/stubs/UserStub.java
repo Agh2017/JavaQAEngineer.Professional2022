@@ -12,9 +12,6 @@ import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 
 public class UserStub {
 
-    @Rule
-    public WireMockRule wireMockRule = new WireMockRule(8089);
-
     private final String basePath = "/hello";
 
     {

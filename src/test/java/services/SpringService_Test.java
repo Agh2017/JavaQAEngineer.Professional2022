@@ -5,13 +5,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.junit.*;
 import stubs.AllUsersStub;
+import stubs.ScoreStub;
 import stubs.StoreStub;
 import stubs.UserStub;
 
@@ -21,15 +21,10 @@ import java.util.Scanner;
 
 public class SpringService_Test {
 
-  //создаем mock end-points
-  {
-    //new UserStub();
-    new StoreStub();
-    //new AllUsersStub();
-  }
-
   private static final WireMockServer wireMockServer = new WireMockServer();
-  private static final String LIST_USERS_MOCK = "[{ name:\"Yuri N\", course:\"QA java\", email:\"dont@mail.me\", age:\"77\" }, { name:\"Test user\", course:\"QA\", email:\"test@test.test\", age:\"23\" }]";
+  private static final String LIST_USERS_MOCK = "[{ \"name\":\"Yuri N\", \"course\":\"QA java\", \"email\":\"dont@mail.me\", \"age\":\"77\" }, { \"name\":\"Test user\", \"course\":\"QA\", \"email\":\"test@test.test\", \"age\":\"23\" }]";
+  private static final String USER_SCORE_MOCK_ID00001 = "{ \"name\":\"Test user Petroff\", \"score\":78 }";
+  private static final String USER_SCORE_MOCK_ID00002 = "{ \"name\":\"Test user Ivanov\", \"score\":44 }";
 
   @Rule
   public WireMockRule wireMockRule = new WireMockRule(8089);
@@ -52,6 +47,31 @@ public class SpringService_Test {
     wireMockServer.stop();
   }
 
+  //clean test -Dtest=SpringService_Test#users_score_path_via_stub_wiremock
+  @Test
+  public void users_score_path_via_stub_wiremock() throws IOException {
+    new ScoreStub();
+    CloseableHttpClient httpClient = HttpClients.createDefault();
+
+    HttpGet request = new HttpGet("http://localhost:8089/user/get/00001");
+    HttpResponse httpResponse = httpClient.execute(request);
+    String responseString = convertResponseToString(httpResponse);
+
+    verify(getRequestedFor(urlEqualTo("/user/get/00001")));
+    assertThat(httpResponse.getStatusLine().getStatusCode()).isEqualTo(200);
+    assertThat(responseString).isEqualTo(USER_SCORE_MOCK_ID00001);
+
+
+    request = new HttpGet("http://localhost:8089/user/get/00002");
+    httpResponse = httpClient.execute(request);
+    responseString = convertResponseToString(httpResponse);
+
+    verify(getRequestedFor(urlEqualTo("/user/get/00002")));
+    assertThat(httpResponse.getStatusLine().getStatusCode()).isEqualTo(200);
+    assertThat(responseString).isEqualTo(USER_SCORE_MOCK_ID00002);
+
+  }
+
   @Test
   public void list_users_path_via_stub_wiremock() throws IOException {
     new AllUsersStub();
@@ -68,6 +88,7 @@ public class SpringService_Test {
 
   @Test
   public void hello_path_via_stub_wiremock() throws IOException {
+    //создаем mock end-points
     new UserStub();
     CloseableHttpClient httpClient = HttpClients.createDefault();
 
@@ -76,15 +97,15 @@ public class SpringService_Test {
     HttpResponse httpResponse = httpClient.execute(request);
     String responseString = convertResponseToString(httpResponse);
 
-    //для всех GET запросов на hello мы от
+    //для всех GET запросов на hello мы сверяем ответ и статус
     verify(getRequestedFor(urlEqualTo("/hello")));
     assertThat(responseString).isEqualTo("Hello");
     assertThat(httpResponse.getStatusLine().getStatusCode()).isEqualTo(200);
   }
 
-  //реальный запрос в приложение demo (д.б. запущено)
-  //тест запустим через мавен/wiremock Run, чтобы получить урл из пропертей: test -Dtest=SpringService_Test#hello_path_via_real
-  @Test @Ignore
+  //реальный запрос в приложение demo (оно д.б. запущено)
+  //тест запускать через строку мавен/wiremock Run, чтобы получить урл из пропертей: clean test -Dtest=SpringService_Test#hello_path_via_real
+  @Test
   public void hello_path_via_real() throws IOException {
     CloseableHttpClient httpClient = HttpClients.createDefault();
 

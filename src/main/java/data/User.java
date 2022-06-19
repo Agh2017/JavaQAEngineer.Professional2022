@@ -8,6 +8,7 @@ public class User {
 
     private int age;
     private int scope;
+    private String id;
 
     public User(String name, String course, String email, int age, int scope) {
         this.name = name;
@@ -15,6 +16,12 @@ public class User {
         this.email = email;
         this.age = age;
         this.scope = scope;
+    }
+
+    public User(String name, int scope, String id) {
+        this.name = name;
+        this.scope = scope;
+        this.id = id;
     }
 
     public String getName() {
@@ -37,13 +44,24 @@ public class User {
         return scope;
     }
 
+    public String getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
-        return "{ " +
-                "name:\"" + name + '\"' +
-                ", course:\"" + course + '\"' +
-                ", email:\"" + email + '\"' +
-                ", age:\"" + age + "\"" +
-                " }";
+        if (id == null) {
+            return "{ " +
+                    "\"name\":" + "\"" +  name + '\"' +
+                    ", \"course\":" + "\"" + course + '\"' +
+                    ", \"email\":" + "\"" + email + '\"' +
+                    ", \"age\":" + "\"" + age + "\"" +
+                    " }";
+        } else {
+            return "{ " +
+                    "\"name\":" + '\"' + name + '\"' +
+                    ", \"score\":" + scope +
+                    " }";
+        }
     }
 }
