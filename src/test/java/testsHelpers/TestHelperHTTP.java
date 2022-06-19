@@ -16,7 +16,7 @@ public class TestHelperHTTP extends TestNGCitrusTestRunner {
 
     @Test(description = "Получение информации о пользователе", enabled=true)
     @CitrusTest
-    public void getTestActions() {
+    public void getUserInfo() {
         this.context = citrus.createTestContext();
 
         http(httpActionBuilder -> httpActionBuilder
@@ -56,7 +56,7 @@ public class TestHelperHTTP extends TestNGCitrusTestRunner {
 
     @Test(testName = "Негативный кейс. Регистрация нового пользователя")
     @CitrusTest
-    public void postRegisterSuccessful(){
+    public void registerNewUserNegativeCase(){
         http(httpActionBuilder -> httpActionBuilder
                 .client("httpHelperClient")
                 .send()
