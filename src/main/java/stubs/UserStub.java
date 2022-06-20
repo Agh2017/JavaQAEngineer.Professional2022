@@ -1,9 +1,5 @@
 package stubs;
 
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
-import net.minidev.json.JSONObject;
-import org.junit.Rule;
-
 import java.util.HashMap;
 import java.util.Map;
 

@@ -4,47 +4,35 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
+import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.junit.*;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import stubs.*;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 
+@ExtendWith(MockitoExtension.class)
 public class SpringService_Test {
 
-  private static final WireMockServer wireMockServer = new WireMockServer();
+
   private static final String LIST_USERS_MOCK = "[{ \"name\":\"Yuri N\", \"course\":\"QA java\", \"email\":\"dont@mail.me\", \"age\":\"77\" }, { \"name\":\"Test user\", \"course\":\"QA\", \"email\":\"test@test.test\", \"age\":\"23\" }]";
-
   private static final String LIST_COURSES_MOCK = "[{ \"name\":\"QA java\", \"price\":15000 }, { \"name\":\"Java\", \"price\":12000 }]";
-
   private static final String USER_SCORE_MOCK_ID00001 = "{ \"name\":\"Test user Petroff\", \"score\":78 }";
   private static final String USER_SCORE_MOCK_ID00002 = "{ \"name\":\"Test user Ivanov\", \"score\":44 }";
 
-  @Rule
-  public WireMockRule wireMockRule = new WireMockRule(8089);
+  private static WireMockServer wireMockServer;
 
-  //запуск wire мок сервера надо бы заинжектить
-  @BeforeClass
+  @BeforeAll
   public static void startWireMock() {
+    wireMockServer = new WireMockServer(new WireMockConfiguration().port(8080));
     wireMockServer.start();
-    //configureFor(8089);
-    //configureFor(wireMockServer.port());
-  }
-
-  @AfterClass
-  public static void tearDown() {
-    try {
-      Thread.sleep(500);
-    } catch (InterruptedException e) {
-      throw new RuntimeException(e);
-    }
-    wireMockServer.stop();
   }
 
   //clean test -Dtest=SpringService_Test#list_courses_path_via_stub_wiremock
@@ -53,7 +41,7 @@ public class SpringService_Test {
     new AllCoursesStub();
     CloseableHttpClient httpClient = HttpClients.createDefault();
 
-    HttpGet request = new HttpGet("http://localhost:8089/course/get/all");
+    HttpGet request = new HttpGet("http://localhost:8080/course/get/all");
     HttpResponse httpResponse = httpClient.execute(request);
     String responseString = convertResponseToString(httpResponse);
 
@@ -84,7 +72,6 @@ public class SpringService_Test {
     verify(getRequestedFor(urlEqualTo("/user/get/00002")));
     assertThat(httpResponse.getStatusLine().getStatusCode()).isEqualTo(200);
     assertThat(responseString).isEqualTo(USER_SCORE_MOCK_ID00002);
-
   }
 
   @Test
@@ -132,7 +119,6 @@ public class SpringService_Test {
     assertThat(responseString).isEqualTo("Hello User");
   }
 
-
   private String convertResponseToString(HttpResponse response) throws IOException {
     InputStream responseStream = response.getEntity().getContent();
     Scanner scanner = new Scanner(responseStream, "UTF-8");
@@ -142,4 +128,13 @@ public class SpringService_Test {
     return responseString;
   }
 
+  @AfterAll
+  public static void tearDown() {
+    try {
+      Thread.sleep(500);
+    } catch (InterruptedException e) {
+      throw new RuntimeException(e);
+    }
+    wireMockServer.stop();
+  }
 }

@@ -11,18 +11,112 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-
+        <findbugs.maven>3.0.5</findbugs.maven> <!-- добавить -->
+        <maven.checkstyle>3.1.0</maven.checkstyle> <!-- добавить -->
         <surefire.plugin.version>2.22.2</surefire.plugin.version>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
 
-        <thread.count>5</thread.count>
-        <fork.count>0</fork.count>
+        <assertj.core>3.22.0</assertj.core>
+
+        <junit.version>5.8.1</junit.version>
+        <junitBom.version>5.8.1</junitBom.version>
+
+        <faker.version>1.0.2</faker.version>
+
+        <lombok>1.18.22</lombok>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <forkCount>1</forkCount>
+        <reuseForks>true</reuseForks>
+        <parallel>all</parallel>
+        <perCoreThreadCount>false</perCoreThreadCount>
+        <useUnlimitedThreads>true</useUnlimitedThreads>
+        <thread.count>32</thread.count>
+
+        <rest.assured>4.4.0</rest.assured>
+        <test.project.language>RU</test.project.language>
+        <jackson.mapper.asl>1.9.13</jackson.mapper.asl>
+        <json.schema.validator>4.3.1</json.schema.validator> <!-- эта версия не тормозит -->
+
+        <rest.base.url>https://petstore.swagger.io/v2</rest.base.url>
+        <rest.pet.url>pet</rest.pet.url>
+        <rest.store.url>store/order</rest.store.url>
+        <rest.user.store.url>user</rest.user.store.url>
+        <rest.response.code.custom>302</rest.response.code.custom>
+        <rest.time.less.than.long>6500000</rest.time.less.than.long>
+
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>1.6.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-engine</artifactId>
+            <version>1.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-commons</artifactId>
+            <version>1.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>${json.schema.validator}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit</groupId>
+            <artifactId>junit-bom</artifactId>
+            <version>${junitBom.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>${faker.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest.assured}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>${jackson.mapper.asl}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.22.0</version>
         </dependency>
 
         <!-- mock server -->
@@ -32,15 +126,15 @@
             <version>2.27.2</version>
         </dependency>
         <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>3.22.0</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>4.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>4.3.1</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -53,7 +147,7 @@
                 <configuration>
                     <parallel>classes</parallel>
                     <threadCount>${thread.count}</threadCount>
-                    <forkCount>${fork.count}</forkCount>
+                    <forkCount>${forkCount}</forkCount>
                     <trimStackTrace>false</trimStackTrace>
                     <systemProperties>
                         <wiremock.hostname>http://localhost:8080</wiremock.hostname>
