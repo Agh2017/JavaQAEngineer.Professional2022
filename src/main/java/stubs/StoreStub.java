@@ -1,12 +1,12 @@
 package stubs;
 
-import net.minidev.json.JSONObject;
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 
+import net.minidev.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 
 public class StoreStub {
 
@@ -21,9 +21,9 @@ public class StoreStub {
     map.put("status", "ok");
 
     stubFor(get(urlEqualTo(String.format("%s/create", basePath)))
-        .willReturn(aResponse()
-            .withBody(new JSONObject(map).toJSONString())
-            .withStatus(200)));
+            .willReturn(aResponse()
+                    .withBody(new JSONObject(map).toJSONString())
+                    .withStatus(200)));
   }
 
 }

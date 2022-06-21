@@ -18,10 +18,13 @@ import java.util.Scanner;
 
 public class SpringService_Test {
 
-  private static final WireMockServer wireMockServer = new WireMockServer();
-  private static final String LIST_USERS_MOCK = "[{ \"name\":\"Yuri N\", \"course\":\"QA java\", \"email\":\"dont@mail.me\", \"age\":\"77\" }, { \"name\":\"Test user\", \"course\":\"QA\", \"email\":\"test@test.test\", \"age\":\"23\" }]";
+  private static final WireMockServer WIRE_MOCK_SERVER = new WireMockServer();
+  private static final String LIST_USERS_MOCK =
+          "[{ \"name\":\"Yuri N\", \"course\":\"QA java\", \"email\":\"dont@mail.me\", \"age\":\"77\" }, "
+                  + "{ \"name\":\"Test user\", \"course\":\"QA\", \"email\":\"test@test.test\", \"age\":\"23\" }]";
 
-  private static final String LIST_COURSES_MOCK = "[{ \"name\":\"QA java\", \"price\":15000 }, { \"name\":\"Java\", \"price\":12000 }]";
+  private static final String LIST_COURSES_MOCK =
+          "[{ \"name\":\"QA java\", \"price\":15000 }, { \"name\":\"Java\", \"price\":12000 }]";
 
   private static final String USER_SCORE_MOCK_ID00001 = "{ \"name\":\"Test user Petroff\", \"score\":78 }";
   private static final String USER_SCORE_MOCK_ID00002 = "{ \"name\":\"Test user Ivanov\", \"score\":44 }";
@@ -32,9 +35,7 @@ public class SpringService_Test {
   //запуск wire мок сервера надо бы заинжектить
   @BeforeClass
   public static void startWireMock() {
-    wireMockServer.start();
-    //configureFor(8089);
-    //configureFor(wireMockServer.port());
+    WIRE_MOCK_SERVER.start();
   }
 
   @AfterClass
@@ -44,7 +45,7 @@ public class SpringService_Test {
     } catch (InterruptedException e) {
       throw new RuntimeException(e);
     }
-    wireMockServer.stop();
+    WIRE_MOCK_SERVER.stop();
   }
 
   //clean test -Dtest=SpringService_Test#list_courses_path_via_stub_wiremock

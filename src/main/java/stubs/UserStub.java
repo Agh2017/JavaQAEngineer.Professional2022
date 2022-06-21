@@ -1,32 +1,29 @@
 package stubs;
 
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
-import net.minidev.json.JSONObject;
-import org.junit.Rule;
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 
 public class UserStub {
 
-    private final String basePath = "/hello";
+  private final String basePath = "/hello";
 
-    {
-        registerStubHello();
-    }
+  {
+    registerStubHello();
+  }
 
-    private void registerStubHello() {
-        Map<String, String> map = new HashMap<>();
-        map.put("name", "Sasha");
-        map.put("age", "10");
+  private void registerStubHello() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", "Sasha");
+    map.put("age", "10");
 
-        stubFor(get(urlEqualTo(String.format("%s", basePath)))
-                .willReturn(aResponse()
-                        .withBody("Hello")
-                        .withStatus(200)));
-    }
+    stubFor(get(urlEqualTo(String.format("%s", basePath)))
+            .willReturn(aResponse()
+                    .withBody("Hello")
+                    .withStatus(200)));
+  }
 
 }
