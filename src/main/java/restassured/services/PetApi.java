@@ -1,9 +1,9 @@
-package services;
+package restassured.services;
 
 import static io.restassured.RestAssured.given;
-import static services.BaseApi.EndPoints.PATH_PET;
+import static restassured.services.BaseApi.EndPoints.PATH_PET;
 
-import dto.pet.NewPet;
+import restassured.dto.pet.NewPet;
 import io.restassured.response.Response;
 
 public class PetApi extends BaseApi{

@@ -1,5 +1,5 @@
 
-package dto.users;
+package restassured.dto.users;
 
 import lombok.*;
 import org.codehaus.jackson.map.annotate.JsonSerialize;

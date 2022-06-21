@@ -1,4 +1,4 @@
-package dto.pet;
+package restassured.dto.pet;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

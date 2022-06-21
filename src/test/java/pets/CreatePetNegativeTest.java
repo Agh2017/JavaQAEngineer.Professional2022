@@ -5,15 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static utils.Constants.*;
 
 import com.github.javafaker.Faker;
-import dto.pet.Category;
-import dto.pet.NewPet;
+import restassured.dto.pet.Category;
+import restassured.dto.pet.NewPet;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import paramresolver.UserServiceParamResolver;
-import services.PetApi;
+import restassured.services.PetApi;
 
 @ExtendWith({UserServiceParamResolver.class})
 class CreatePetNegativeTest {

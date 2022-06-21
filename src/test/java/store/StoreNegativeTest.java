@@ -12,7 +12,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import paramresolver.UserServiceParamResolver;
-import services.StoreApi;
+import restassured.services.StoreApi;
 import utils.Constants;
 
 @ExtendWith({UserServiceParamResolver.class})

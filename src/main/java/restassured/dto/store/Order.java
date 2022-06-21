@@ -1,4 +1,4 @@
-package dto.store;
+package restassured.dto.store;
 
 import lombok.*;
 

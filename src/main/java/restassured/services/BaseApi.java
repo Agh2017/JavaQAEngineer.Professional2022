@@ -1,4 +1,4 @@
-package services;
+package restassured.services;
 
 import static io.restassured.RestAssured.given;
 

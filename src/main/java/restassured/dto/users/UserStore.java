@@ -1,4 +1,4 @@
-package dto.users;
+package restassured.dto.users;
 
 import lombok.*;
 
