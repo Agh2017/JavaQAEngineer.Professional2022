@@ -15,7 +15,7 @@ public class UserServiceParamResolver implements ParameterResolver {
   @Override
   public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
 
-    final List<Class<?>> classes = ClassFinder.find("services");
+    final List<Class<?>> classes = ClassFinder.find("restassured");
     boolean isUserServiceClass = false;
     Class<?> type = parameterContext.getParameter().getType();
 
