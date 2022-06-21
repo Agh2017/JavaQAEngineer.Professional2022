@@ -33,7 +33,7 @@
         <parallel>all</parallel>
         <perCoreThreadCount>false</perCoreThreadCount>
         <useUnlimitedThreads>true</useUnlimitedThreads>
-        <thread.count>32</thread.count>
+        <thread.count>8</thread.count>
 
         <rest.assured>4.4.0</rest.assured>
         <test.project.language>RU</test.project.language>
