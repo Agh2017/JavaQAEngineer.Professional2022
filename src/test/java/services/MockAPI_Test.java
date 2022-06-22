@@ -7,11 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -25,7 +23,7 @@ import java.util.Scanner;
 
 
 @ExtendWith(MockitoExtension.class)
-public class SpringService_Test {
+public class MockAPI_Test {
 
   private static final String LIST_USERS_MOCK =
           "[{ \"name\":\"Yuri N\", \"course\":\"QA java\", \"email\":\"dont@mail.me\", \"age\":\"77\" }, "
@@ -41,7 +39,6 @@ public class SpringService_Test {
   @BeforeAll
   public static void startWireMock() {
     wireMockServer = new WireMockServer();
-    //new WireMockConfiguration().port(8080)
     wireMockServer.start();
   }
   @Test
