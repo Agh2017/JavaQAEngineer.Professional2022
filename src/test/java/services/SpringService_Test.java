@@ -30,9 +30,10 @@ public class SpringService_Test {
 
   private static final String USER_SCORE_MOCK_ID00001 = "{ \"name\":\"Test user Petroff\", \"score\":78 }";
   private static final String USER_SCORE_MOCK_ID00002 = "{ \"name\":\"Test user Ivanov\", \"score\":44 }";
+  private static final String PORT = System.getProperty("wiremock.port");
 
   @Rule
-  public WireMockRule wireMockRule = new WireMockRule(8089);
+  public WireMockRule wireMockRule = new WireMockRule(Integer.parseInt(PORT));
 
   //запуск wire мок сервера надо бы заинжектить
   @BeforeClass
@@ -55,7 +56,7 @@ public class SpringService_Test {
   public void list_courses_path_via_stub_wiremock() throws IOException {
     new AllCoursesStub();
 
-    String responseString = getResponseString("http://localhost:8089/course/get/all");
+    String responseString = getResponseString(String.format("http://localhost:%s/course/get/all", PORT));
 
     verify(getRequestedFor(urlEqualTo("/course/get/all")));
     assertThat(responseString).isEqualTo(LIST_COURSES_MOCK);
@@ -66,12 +67,12 @@ public class SpringService_Test {
   public void users_score_path_via_stub_wiremock() throws IOException {
     new ScoreStub();
 
-    String responseString = getResponseString("http://localhost:8089/user/get/00001");
+    String responseString = getResponseString(String.format("http://localhost:%s/user/get/00001", PORT));
 
     verify(getRequestedFor(urlEqualTo("/user/get/00001")));
     assertThat(responseString).isEqualTo(USER_SCORE_MOCK_ID00001);
 
-    responseString = getResponseString("http://localhost:8089/user/get/00002");
+    responseString = getResponseString(String.format("http://localhost:%s/user/get/00002", PORT));
 
     verify(getRequestedFor(urlEqualTo("/user/get/00002")));
     assertThat(responseString).isEqualTo(USER_SCORE_MOCK_ID00002);
@@ -82,7 +83,8 @@ public class SpringService_Test {
   @Test
   public void list_users_path_via_stub_wiremock() throws IOException {
     new AllUsersStub();
-    String responseString = getResponseString("http://localhost:8089/user/get/all");
+
+    String responseString = getResponseString(String.format("http://localhost:%s/user/get/all", PORT));
 
     verify(getRequestedFor(urlEqualTo("/user/get/all")));
     assertThat(responseString).isEqualTo(LIST_USERS_MOCK);
@@ -94,7 +96,7 @@ public class SpringService_Test {
     HttpGet request = new HttpGet(url);
     HttpResponse httpResponse = httpClient.execute(request);
 
-    assertTrue("response status code error, url:" + url, (httpResponse.getStatusLine().getStatusCode() == 200));
+    assertTrue("response status code error, url:" + url, (httpResponse.getStatusLine().getStatusCode()==200));
     return convertResponseToString(httpResponse);
   }
 
