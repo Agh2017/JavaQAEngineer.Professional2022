@@ -56,7 +56,7 @@
                     <forkCount>${fork.count}</forkCount>
                     <trimStackTrace>false</trimStackTrace>
                     <systemProperties>
-                        <wiremock.hostname>http://localhost:8080</wiremock.hostname>
+                        <wiremock.hostname>http://localhost:8089</wiremock.hostname>
                         <real.service.hostname>http://localhost:8190</real.service.hostname>
                     </systemProperties>
                 </configuration>
