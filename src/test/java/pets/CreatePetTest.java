@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static utils.Constants.*;
 
 import com.github.javafaker.Faker;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import restassured.dto.pet.Category;
 import restassured.dto.pet.NewPet;
 import io.restassured.response.Response;
@@ -18,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
+@Execution(ExecutionMode.CONCURRENT)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith({UserServiceParamResolver.class})
 class CreatePetTest {
 

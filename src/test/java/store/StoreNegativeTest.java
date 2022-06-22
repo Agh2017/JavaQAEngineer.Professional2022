@@ -10,11 +10,16 @@ import com.github.javafaker.Faker;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import paramresolver.UserServiceParamResolver;
 import restassured.services.StoreApi;
 import utils.Constants;
 
+@Execution(ExecutionMode.CONCURRENT)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith({UserServiceParamResolver.class})
 class StoreNegativeTest {
 

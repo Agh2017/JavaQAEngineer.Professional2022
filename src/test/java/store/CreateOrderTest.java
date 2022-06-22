@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static utils.Constants.*;
 
 import com.github.javafaker.Faker;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import restassured.dto.store.Order;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterEach;
@@ -14,6 +17,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import paramresolver.UserServiceParamResolver;
 import restassured.services.StoreApi;
 
+@Execution(ExecutionMode.CONCURRENT)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith({UserServiceParamResolver.class})
 class CreateOrderTest {
 
