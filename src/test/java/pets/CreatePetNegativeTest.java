@@ -16,11 +16,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import paramresolver.UserServiceParamResolver;
 import restassured.services.PetApi;
+import runner.RunnerParallelTests;
 
 @Execution(ExecutionMode.CONCURRENT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith({UserServiceParamResolver.class})
-class CreatePetNegativeTest {
+class CreatePetNegativeTest extends RunnerParallelTests {
 
   private final Faker faker = new Faker();
 
@@ -69,7 +70,7 @@ class CreatePetNegativeTest {
   }
 
   @AfterEach
-  void tearDown() {
+  void tearDownTests() {
     petApi.deletePetFromBase(id);
     System.out.println("=== Питомец удален ===");
   }

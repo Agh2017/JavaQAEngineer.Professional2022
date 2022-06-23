@@ -19,6 +19,7 @@ import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.mockito.junit.jupiter.MockitoExtension;
 import mock.stubs.*;
+import runner.RunnerParallelTests;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,7 +29,7 @@ import java.util.Scanner;
 @Execution(ExecutionMode.CONCURRENT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension.class)
-public class MockAPI_Test {
+public class MockAPI_Test extends RunnerParallelTests {
 
   private static final String LIST_USERS_MOCK =
           "[{ \"name\":\"Yuri N\", \"course\":\"QA java\", \"email\":\"dont@mail.me\", \"age\":\"77\" }, "
@@ -109,7 +110,7 @@ public class MockAPI_Test {
   }
 
   @AfterAll
-  public static void tearDown() {
+  public static void tearDownTests() {
     try {
       Thread.sleep(500);
     } catch (InterruptedException e) {

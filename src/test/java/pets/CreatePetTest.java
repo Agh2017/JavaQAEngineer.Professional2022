@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import paramresolver.UserServiceParamResolver;
 import restassured.services.PetApi;
+import runner.RunnerParallelTests;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ import java.util.stream.IntStream;
 @Execution(ExecutionMode.CONCURRENT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith({UserServiceParamResolver.class})
-class CreatePetTest {
+class CreatePetTest extends RunnerParallelTests {
 
   private final Faker faker = new Faker();
   private final PetApi petApi;
@@ -109,7 +110,7 @@ class CreatePetTest {
   }
 
   @AfterEach
-  void tearDown() {
+  void tearDownTests() {
     for (Integer integer : listId) {
       petApi.deletePetFromBase(integer);
     }

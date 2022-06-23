@@ -16,11 +16,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import paramresolver.UserServiceParamResolver;
 import restassured.services.StoreApi;
+import runner.RunnerParallelTests;
 
 @Execution(ExecutionMode.CONCURRENT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith({UserServiceParamResolver.class})
-class CreateOrderTest {
+class CreateOrderTest extends RunnerParallelTests {
 
   private final StoreApi storeApi;
   Faker faker = new Faker();
@@ -78,7 +79,7 @@ class CreateOrderTest {
   }
 
   @AfterEach
-  void tearDown() {
+  void tearDownTests() {
     System.out.println("=== Ордер и так уже удален ===");
   }
 }

@@ -16,12 +16,13 @@ import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 import paramresolver.UserServiceParamResolver;
 import restassured.services.StoreApi;
+import runner.RunnerParallelTests;
 import utils.Constants;
 
 @Execution(ExecutionMode.CONCURRENT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith({UserServiceParamResolver.class})
-class StoreNegativeTest {
+class StoreNegativeTest extends RunnerParallelTests {
 
   private final StoreApi storeApi;
   private final String numberOrder = String.valueOf(new Faker().number().numberBetween(0, 2147483647));
@@ -62,7 +63,7 @@ class StoreNegativeTest {
   }
 
   @AfterEach
-  void tearDown() {
+  void tearDownTests() {
     System.out.println("=== Удалять нечего ===");
   }
 }
