@@ -1,7 +1,7 @@
 timeout(60) {
     //agent any
     //указать ноду - сборщик
-    node('python-jenkins-slave') {
+    node('maven') {
         stage('Checkout') {
             checkout([
                 $class: 'GitSCM',
