@@ -12,5 +12,7 @@
 
 # Maven
 /.idea/
+/.allure/
 /log/
 /target/
+/allure-results/
