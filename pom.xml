@@ -13,6 +13,8 @@
         <junit.version>5.8.2</junit.version>
         <maven.checkstyle>3.1.0</maven.checkstyle> <!-- добавить -->
         <junitBom.version>5.8.2</junitBom.version>
+        <junit.platform>1.6.2</junit.platform>
+        <webdriver.manager.version>4.2.0</webdriver.manager.version>
         <faker.version>1.0.2</faker.version>
         <findbugs.maven>3.0.5</findbugs.maven> <!-- добавить -->
         <rest.assured>4.4.0</rest.assured>
@@ -52,6 +54,11 @@
             <artifactId>junit-bom</artifactId>
             <version>${junitBom.version}</version>
             <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${webdriver.manager.version}</version>
         </dependency>
 
         <dependency>
