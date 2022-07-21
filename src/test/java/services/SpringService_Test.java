@@ -31,8 +31,23 @@ public class SpringService_Test {
 
   @BeforeAll
   public static void startWireMock() {
-    wireMockServer = new WireMockServer(new WireMockConfiguration().port(8080));
+    wireMockServer = new WireMockServer(
+            new WireMockConfiguration()
+                    .port(8080));
     wireMockServer.start();
+  }
+
+
+  //clean test -Dtest=SpringService_Test#just_stub_wiremock
+  @Test
+  public void just_stub_wiremock() throws IOException {
+    //TODO мокаем http://localhost:8080, а надо как в приложенииbi
+    new MobileAppStub();
+    try {
+      Thread.sleep(20000);
+    } catch (InterruptedException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   //clean test -Dtest=SpringService_Test#list_courses_path_via_stub_wiremock

@@ -150,7 +150,8 @@
                     <forkCount>${forkCount}</forkCount>
                     <trimStackTrace>false</trimStackTrace>
                     <systemProperties>
-                        <wiremock.hostname>http://localhost:8080</wiremock.hostname>
+                        <wiremock.hostname>http://localhost:8095</wiremock.hostname>
+                        <wiremock.app.port>51200</wiremock.app.port>
                         <real.service.hostname>http://localhost:8190</real.service.hostname>
                     </systemProperties>
                 </configuration>
