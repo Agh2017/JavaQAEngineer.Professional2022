@@ -20,9 +20,25 @@ public class MobileAppStub {
         listCourses.add(new Course("QA java", 15000));
         listCourses.add(new Course("Java", 12000));
 
-        stubFor(get(urlEqualTo("/"))
+        stubFor(get(urlEqualTo("/all"))
                 .willReturn(aResponse()
                         .withBody(listCourses.toString())
                         .withStatus(200)));
     }
 }
+/*
+Сделать 2 стаба
+
+  @GetMapping(value = "/all")
+  public List<UserDto> getAllUsers() {
+    List<UserDto> userList = new ArrayList<>();
+    userList.add(new UserDto(1, "Thomas Shelby", "78", "St.Patrick's School", "Birmingham"));
+    userList.add(new UserDto(2, "John Shelby", "15", "Elementary School", "London"));
+    return userList;
+  }
+
+  @GetMapping(value = "/{id}")
+  public UserDto getSingleUser(@PathVariable("id") int id) {
+    return new UserDto(1, "Thomas Shelby", "78", "St.Patrick's School", "Birmingham");
+  }
+ */

@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
+import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -26,14 +27,11 @@ public class SpringService_Test {
   private static final String LIST_COURSES_MOCK = "[{ \"name\":\"QA java\", \"price\":15000 }, { \"name\":\"Java\", \"price\":12000 }]";
   private static final String USER_SCORE_MOCK_ID00001 = "{ \"name\":\"Test user Petroff\", \"score\":78 }";
   private static final String USER_SCORE_MOCK_ID00002 = "{ \"name\":\"Test user Ivanov\", \"score\":44 }";
-
   private static WireMockServer wireMockServer;
 
   @BeforeAll
   public static void startWireMock() {
-    wireMockServer = new WireMockServer(
-            new WireMockConfiguration()
-                    .port(8080));
+    wireMockServer = new WireMockServer();
     wireMockServer.start();
   }
 
@@ -44,7 +42,7 @@ public class SpringService_Test {
     //TODO мокаем http://localhost:8080, а надо как в приложенииbi
     new MobileAppStub();
     try {
-      Thread.sleep(20000);
+      Thread.sleep(50000);
     } catch (InterruptedException e) {
       throw new RuntimeException(e);
     }
