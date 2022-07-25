@@ -31,6 +31,7 @@ public class SpringService_Test {
 
   @BeforeAll
   public static void startWireMock() {
+    if (wireMockServer!=null) wireMockServer.stop();
     wireMockServer = new WireMockServer();
     wireMockServer.start();
   }
@@ -39,10 +40,9 @@ public class SpringService_Test {
   //clean test -Dtest=SpringService_Test#just_stub_wiremock
   @Test
   public void just_stub_wiremock() throws IOException {
-    //TODO мокаем http://localhost:8080, а надо как в приложенииbi
     new MobileAppStub();
     try {
-      Thread.sleep(50000);
+      Thread.sleep(500000);
     } catch (InterruptedException e) {
       throw new RuntimeException(e);
     }
