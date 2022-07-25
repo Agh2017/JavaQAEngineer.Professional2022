@@ -1,0 +1,32 @@
+apply plugin: 'java'
+
+defaultTasks 'clean', 'test'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.codeborne:selenide-appium:2.0.3'
+    implementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+    implementation 'commons-io:commons-io:2.11.0'
+    // https://mvnrepository.com/artifact/com.github.tomakehurst/wiremock
+    testImplementation group: 'com.github.tomakehurst', name: 'wiremock', version: '2.27.2', ext: 'pom'
+
+}
+
+[compileJava, compileTestJava]*.options.collect {options -> options.encoding = 'UTF-8'}
+[compileJava, compileTestJava]*.options.collect {options -> options.debug = true}
+[compileJava, compileTestJava]*.sourceCompatibility = 1.8
+[compileJava, compileTestJava]*.targetCompatibility = 1.8
+
+
+
+test {
+    useJUnitPlatform()
+    systemProperties = [
+            'file.encoding': 'UTF-8',
+//            'BUILD_URL': System.getenv()['BUILD_URL']
+    ]
+//    testLogging.showStandardStreams = true
+}
